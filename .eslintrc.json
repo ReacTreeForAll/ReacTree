@@ -1,0 +1,18 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  "rules": {
+    "keyword-spacing": "error",
+    "semi": ["error", "never"],
+    "quotes": ["error", "single"],
+    "arrow-spacing": "error",
+    "object-property-newline": "error",
+    "padded-blocks": ["error", { "blocks": "never" }],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "key-spacing": [2, { "beforeColon": true, "afterColon": true }],
+    "space-in-parens": ["error", "always"]
+  }
+}
