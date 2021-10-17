@@ -24,15 +24,15 @@ export default {
 export const Default = (args) => {
   const [visible, setVisible] = useState(false)
 
-  const handelModal = () => {
+  const handleModal = () => {
     setVisible(!visible)
   }
   return (
     <div>
-      <button onClick={handelModal}>Show Modal</button>
+      <button onClick={handleModal}>Show Modal</button>
       <ModalContainer visible={visible} {...args}>
         Hi!
-        <button onClick={handelModal}>X</button>
+        <button onClick={handleModal}>X</button>
       </ModalContainer>
     </div>
   )
