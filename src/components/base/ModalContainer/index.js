@@ -1,49 +1,47 @@
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useMemo, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 
 const ModalWrapper = styled.div`
   position: fixed;
-  display: flex;
   top: 0;
   left: 0;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 `
 
 const ModalInner = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 `
 
-const ModalContainer = ({ onClick, width, height, color, ...props }) => {
-  const [showModal, setShowModal] = useState(false)
-
-  const handelModal = () => {
-    setShowModal(!showModal)
-  }
-
+const ModalContainer = ({ width, height, color, visible = false, ...props }) => {
   const innerStyle = {
     width,
     height,
     backgroundColor: color,
   }
 
-  return (
-    <>
-      <button onClick={handelModal}>Modal</button>
-      {showModal ? (
-        <ModalWrapper onClick={handelModal}>
-          <ModalInner
-            {...props}
-            style={{ ...innerStyle, ...props.style }}
-            onClick={(e) => e.stopPropagation()}
-          />
-        </ModalWrapper>
-      ) : null}
-    </>
+  const el = useMemo(() => document.createElement('div'), [])
+  useEffect(() => {
+    document.body.appendChild(el)
+    return () => {
+      document.body.removeChild(el)
+    }
+  })
+
+  return ReactDOM.createPortal(
+    <ModalWrapper style={{ display: visible ? 'block' : 'none' }}>
+      <ModalInner {...props} style={{ ...props.style, ...innerStyle }} />
+    </ModalWrapper>,
+    el,
   )
 }
 
@@ -51,6 +49,7 @@ ModalContainer.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   color: PropTypes.string,
+  visible: PropTypes.bool,
 }
 
 export default ModalContainer

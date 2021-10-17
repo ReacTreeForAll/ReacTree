@@ -1,4 +1,5 @@
 import ModalContainer from '../../components/base/ModalContainer'
+import { useState } from 'react'
 
 /* eslint-disable */
 export default {
@@ -21,5 +22,18 @@ export default {
 }
 
 export const Default = (args) => {
-  return <ModalContainer {...args} />
+  const [visible, setVisible] = useState(false)
+
+  const handelModal = () => {
+    setVisible(!visible)
+  }
+  return (
+    <div>
+      <button onClick={handelModal}>Show Modal</button>
+      <ModalContainer visible={visible} {...args}>
+        Hi!
+        <button onClick={handelModal}>X</button>
+      </ModalContainer>
+    </div>
+  )
 }
