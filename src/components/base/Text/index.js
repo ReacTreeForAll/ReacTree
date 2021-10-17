@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const Text = ({
   children,
   fontSize = 24,
@@ -22,6 +24,16 @@ const Text = ({
       {children}
     </Tag>
   )
+}
+
+Text.propTypes = {
+  children: PropTypes.node.isRequired,
+  fontSize: PropTypes.number,
+  color: PropTypes.string,
+  fontWeight: PropTypes.bool,
+  underline: PropTypes.bool,
+  block: PropTypes.bool,
+  paragraph: PropTypes.bool,
 }
 
 export default Text
