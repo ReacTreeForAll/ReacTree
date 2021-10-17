@@ -1,5 +1,4 @@
 import Divider from '../../components/base/Divider'
-import PropTypes from 'prop-types'
 
 /* eslint-disable */
 export default {
@@ -38,9 +37,4 @@ export const Vertical = (args) => {
       <span>셋</span>
     </>
   )
-}
-
-Divider.propTypes = {
-  size: PropTypes.number,
-  color: PropTypes.string,
 }
