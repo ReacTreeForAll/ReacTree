@@ -1,5 +1,5 @@
 module.exports = {
-  printWidth: 100, // 코드 라인 길이 
+  printWidth: 100, // 코드 라인 길이
   tabWidth: 2, // 탭 간격, 스페이스 설정 시 2칸 띄어쓰기
   singleQuote: true, // '' 작은 따옴표 사용
   trailingComma: 'all', // , 자동으로 붙이기
@@ -9,4 +9,4 @@ module.exports = {
   endOfLine: 'auto',
   bracketSpacing: true, // 대괄호 {} 사이 공백
   jsxBracketSameLine: true, // JSX 요소 > 줄바꿈
-};
+}
