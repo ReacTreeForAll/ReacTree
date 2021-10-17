@@ -9,7 +9,6 @@
     "semi": ["error", "never"],
     "quotes": ["error", "single"],
     "arrow-spacing": "error",
-    "object-property-newline": "error",
     "padded-blocks": ["error", { "blocks": "never" }],
     "comma-spacing": ["error", { "before": false, "after": true }]
   }
