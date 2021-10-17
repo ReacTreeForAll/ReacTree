@@ -6,11 +6,11 @@ export default {
   component: ModalContainer,
   argTypes: {
     width: {
-      defaultValue: 100,
+      defaultValue: 300,
       control: { type: 'number' },
     },
     height: {
-      defaultValue: 100,
+      defaultValue: 300,
       control: { type: 'number' },
     },
     color: {
