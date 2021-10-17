@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import LogoPath from '../../../assets/Logo.png'
 
 const Logo = ({ size = 24, ...props }) => {
   const logoStyle = {
@@ -6,11 +7,7 @@ const Logo = ({ size = 24, ...props }) => {
     height: size,
   }
   return (
-    <img
-      src={process.env.PUBLIC_URL + '/images/Logo.png'}
-      alt="Logo_Error..."
-      style={{ ...logoStyle, ...props }}
-    />
+    <img src={LogoPath} alt="Logo_Error..." style={{ ...logoStyle, ...props.style }} {...props} />
   )
 }
 
