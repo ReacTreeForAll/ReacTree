@@ -23,13 +23,3 @@ export const Default = (args) => {
     </>
   )
 }
-
-Text.propTypes = {
-  children: PropTypes.node.isRequired,
-  fontSize: PropTypes.number,
-  color: PropTypes.string,
-  fontWeight: PropTypes.bool,
-  underline: PropTypes.bool,
-  block: PropTypes.bool,
-  paragraph: PropTypes.bool,
-}
