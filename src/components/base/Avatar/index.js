@@ -12,9 +12,17 @@ const AvatarWrapper = styled.div`
   display: inline-block;
   border-radius: ${({ shape }) => shapetoCssValue[shape]};
   overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 `
 
-const Avatar = ({ shape = 'circle', size = 50, src, mode = 'cover', alt, ...props }) => {
+const Avatar = ({
+  shape = 'circle',
+  size = 50,
+  src,
+  mode = 'cover',
+  alt = 'ImgError..',
+  ...props
+}) => {
   const avatarStyle = {
     width: size,
     height: size,
