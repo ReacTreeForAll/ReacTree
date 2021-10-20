@@ -1,5 +1,5 @@
 // import Question from '@components/base/Question'
-import Question from '../../components/base/Question'
+import Question from '../../components/domain/MainContentsContainer/Question'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {

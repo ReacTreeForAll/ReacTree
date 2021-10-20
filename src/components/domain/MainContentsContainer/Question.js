@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import Text from '../Text'
-import Image from '../Image'
+import Text from '../../base/Text'
+import Image from '../../base/Image'
 import imgPath from '../../../assets/leaf.png'
 import PropTypes from 'prop-types'
 
