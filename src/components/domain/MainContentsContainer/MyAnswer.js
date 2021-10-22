@@ -22,13 +22,12 @@ const Textarea = styled.textarea`
   width: 100%;
   height: 400px;
   padding: 24px;
-  margin-top: 100px;
+  margin-top: 60px;
+  font-size: 18px;
   outline: none;
   border: none;
   resize: none;
   box-sizing: border-box;
-  border-radius: 16px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 `
 
 const MyBtn = styled.button`
@@ -36,7 +35,7 @@ const MyBtn = styled.button`
   border: none;
   border-radius: 16px;
   padding: 24px;
-  margin-top: 48px;
+  margin-top: 60px;
   font-size: 16px;
   float: right;
   cursor: pointer;
