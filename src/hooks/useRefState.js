@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 
-const useRefState = (initialState) => {
+const useRafState = (initialState) => {
   const requestAnimationFrameId = useRef(0)
   const [state, setState] = useState(initialState)
 
@@ -15,4 +15,4 @@ const useRefState = (initialState) => {
   return [state, setRefState]
 }
 
-export default useRefState
+export default useRafState

@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
-import useRefState from './useRefState'
+import useRafState from './useRefState'
 
 const useScroll = () => {
-  const [state, setState] = useRefState({ x: 0, y: 0 })
+  const [state, setState] = useRafState({ x: 0, y: 0 })
   const ref = useRef(null)
 
   useEffect(() => {
