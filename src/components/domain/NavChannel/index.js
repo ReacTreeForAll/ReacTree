@@ -1,15 +1,15 @@
 import styled from '@emotion/styled'
 import { useEffect, useRef, useState, useCallback } from 'react'
+import Image from '../../base/Image'
+import ImgPath from '../../../assets/lock.png'
+import PropTypes from 'prop-types'
 
 const NavContainer = styled.div`
   min-width: 120px;
-  max-width: 250px;
-  /* flex-grow: 0;
-  flex-shrink: 0; */
-  /* display: flex; */
-  /* width: 300px; */
+  max-width: 200px;
   height: 100vh;
-  background-color: lightgray;
+  overflow-y: auto;
+  background-color: lightgray; //color
   position: relative;
   left: 0;
   top: 0;
@@ -22,18 +22,13 @@ const NavInner = styled.ul`
 
 const NavItem = styled.li`
   list-style: none;
-  padding: 8px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  :hover {
-    background-color: skyblue;
-  }
+  position: relative;
 `
 
 const NavA = styled.a`
   text-decoration: none;
-  color: black;
+  color: blue; //color
+  font-size: 16px; //font-size
   line-height: none;
   cursor: pointer;
 `
@@ -44,41 +39,134 @@ const NavDiv = styled.div`
 `
 
 const ResizeHandle = styled.div`
-  width: 3px;
+  width: 5px;
   height: 100%;
   position: absolute;
   top: 0;
   right: 0;
   cursor: col-resize;
   :hover {
-    background-color: red;
+    background-color: gray; //color
+  }
+`
+
+const MyBtn = styled.button`
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  margin: 8px 8px 0 0;
+  color: white; //color
+  background: none;
+  :hover {
+    background: gray;
+  }
+`
+
+const LockWrapper = styled.div`
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6); //color
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+  cursor: not-allowed;
+`
+
+const Awrapper = styled.div`
+  padding: 8px;
+  margin-top: 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  :hover {
+    background-color: skyblue; //color
   }
 `
 
 const MOCK_DATA = [
   {
     _id: 1,
-    name: '1-Context API',
+    name: 'Context API',
   },
   {
     _id: 2,
-    name: '2-useEffect',
+    name: 'useEffect',
   },
   {
     _id: 3,
-    name: '3-useFormLonglonglongdsdd',
+    name: 'useFormLongLongLongLongLong',
+  },
+  {
+    _id: 4,
+    name: '다슬다슬',
+  },
+  {
+    _id: 5,
+    name: '록꾸거록꾸거',
+  },
+  {
+    _id: 6,
+    name: 'Context API',
+  },
+  {
+    _id: 7,
+    name: 'useEffect',
+  },
+  {
+    _id: 8,
+    name: 'useFormLongLongLongLongLong',
+  },
+  {
+    _id: 9,
+    name: '다슬다슬',
+  },
+  {
+    _id: 10,
+    name: '록꾸거록꾸거',
+  },
+  {
+    _id: 11,
+    name: '록꾸거록꾸거',
+  },
+  {
+    _id: 12,
+    name: '록꾸거록꾸거',
+  },
+  {
+    _id: 13,
+    name: '록꾸거록꾸거',
+  },
+  {
+    _id: 14,
+    name: '록꾸거록꾸거',
+  },
+  {
+    _id: 15,
+    name: '록꾸거록꾸거',
   },
 ]
 
-const NavChannel = () => {
+const NavChannel = ({ viewport = 'browser', userstep }) => {
   const sidebarRef = useRef(null)
-  const [showNav, setShowNav] = useState(false)
+  const [showNav, setShowNav] = useState(() => {
+    if (viewport === 'browser') {
+      return true
+    }
+    return false
+  })
   const [isResizing, setIsResizing] = useState(false)
   const [sidebarWidth, setSidebarWidth] = useState(180)
 
   const handleNav = () => {
     setShowNav(!showNav)
   }
+
+  const userStepChecker = useCallback((userstep, index) => {
+    if (index + 1 <= userstep) {
+      return true
+    }
+    return false
+  }, [])
+
   const startResizing = useCallback((mouseDownEvent) => {
     setIsResizing(true)
   }, [])
@@ -107,29 +195,43 @@ const NavChannel = () => {
 
   return (
     <>
-      <button id="openBtn" style={{ display: showNav ? 'none' : 'block' }} onClick={handleNav}>
+      <MyBtn style={{ display: showNav ? 'none' : 'block' }} onClick={handleNav}>
         &gt;&gt;
-      </button>
+      </MyBtn>
       <NavContainer
         ref={sidebarRef}
         style={{ width: sidebarWidth, display: showNav ? 'block' : 'none' }}
         onMouseDown={(e) => e.preventDefault()}>
         <NavDiv>
-          <button id="closeBtn" onClick={handleNav}>
+          <MyBtn
+            style={{ visibility: viewport === 'browser' ? 'hidden' : 'visible' }}
+            onClick={handleNav}>
             &lt;&lt;
-          </button>
+          </MyBtn>
         </NavDiv>
         <NavInner>
-          {MOCK_DATA.map((channel) => (
-            <NavA key={channel.id}>
-              <NavItem>{channel.name}</NavItem>
-            </NavA>
+          {MOCK_DATA.map((channel, index) => (
+            <NavItem key={channel._id}>
+              <LockWrapper style={{ display: userStepChecker(userstep, index) ? 'none' : 'block' }}>
+                <Image src={ImgPath} width={30} height={30} />
+              </LockWrapper>
+              <Awrapper>
+                <NavA>
+                  {index + 1} - {channel.name}
+                </NavA>
+              </Awrapper>
+            </NavItem>
           ))}
         </NavInner>
         <ResizeHandle onMouseDown={startResizing} />
       </NavContainer>
     </>
   )
+}
+
+NavChannel.propTypes = {
+  viewport: PropTypes.string,
+  userstep: PropTypes.number.isRequired,
 }
 
 export default NavChannel
