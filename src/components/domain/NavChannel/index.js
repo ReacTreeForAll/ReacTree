@@ -25,17 +25,23 @@ const NavItem = styled.li`
   position: relative;
 `
 
-const NavA = styled.a`
+const Awrapper = styled.div`
+  padding: 8px;
+  margin-top: 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  :hover {
+    background-color: skyblue; //color
+  }
+`
+
+const A = styled.a`
   text-decoration: none;
   color: blue; //color
   font-size: 16px; //font-size
   line-height: none;
   cursor: pointer;
-`
-
-const NavDiv = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
 `
 
 const ResizeHandle = styled.div`
@@ -50,6 +56,11 @@ const ResizeHandle = styled.div`
   }
 `
 
+const BtnWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`
+
 const MyBtn = styled.button`
   padding: 8px;
   border-radius: 8px;
@@ -62,24 +73,13 @@ const MyBtn = styled.button`
   }
 `
 
-const LockWrapper = styled.div`
+const ImageWrapper = styled.div`
   text-align: center;
   background-color: rgba(0, 0, 0, 0.6); //color
   z-index: 99;
   position: absolute;
   width: 100%;
   cursor: not-allowed;
-`
-
-const Awrapper = styled.div`
-  padding: 8px;
-  margin-top: 4px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  :hover {
-    background-color: skyblue; //color
-  }
 `
 
 const MOCK_DATA = [
@@ -156,9 +156,9 @@ const NavChannel = ({ viewport = 'browser', userstep }) => {
   const [isResizing, setIsResizing] = useState(false)
   const [sidebarWidth, setSidebarWidth] = useState(180)
 
-  const handleNav = () => {
+  const handleNav = useCallback(() => {
     setShowNav(!showNav)
-  }
+  }, [showNav])
 
   const userStepChecker = useCallback((userstep, index) => {
     if (index + 1 <= userstep) {
@@ -202,23 +202,24 @@ const NavChannel = ({ viewport = 'browser', userstep }) => {
         ref={sidebarRef}
         style={{ width: sidebarWidth, display: showNav ? 'block' : 'none' }}
         onMouseDown={(e) => e.preventDefault()}>
-        <NavDiv>
+        <BtnWrapper>
           <MyBtn
             style={{ visibility: viewport === 'browser' ? 'hidden' : 'visible' }}
             onClick={handleNav}>
             &lt;&lt;
           </MyBtn>
-        </NavDiv>
+        </BtnWrapper>
         <NavInner>
           {MOCK_DATA.map((channel, index) => (
             <NavItem key={channel._id}>
-              <LockWrapper style={{ display: userStepChecker(userstep, index) ? 'none' : 'block' }}>
+              <ImageWrapper
+                style={{ display: userStepChecker(userstep, index) ? 'none' : 'block' }}>
                 <Image src={ImgPath} width={30} height={30} />
-              </LockWrapper>
+              </ImageWrapper>
               <Awrapper>
-                <NavA>
+                <A>
                   {index + 1} - {channel.name}
-                </NavA>
+                </A>
               </Awrapper>
             </NavItem>
           ))}
