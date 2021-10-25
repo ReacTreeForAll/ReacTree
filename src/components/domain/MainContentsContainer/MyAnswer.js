@@ -1,5 +1,7 @@
 import styled from '@emotion/styled'
 import Text from '../../base/Text'
+import Swal from 'sweetalert2'
+import ImgPath from '../../../assets/pageMove.png'
 
 const MyAnswerContainer = styled.div`
   width: 600px;
@@ -52,6 +54,25 @@ const MyAnswer = () => {
     paddingBottom: 16,
   }
 
+  const Alert = () => {
+    Swal.fire({
+      title: '저장 완료!!',
+      text: '피드페이지로 이동하시겠어요??',
+      imageUrl: ImgPath,
+      imageHeight: 100,
+      imageWidth: 100,
+      showCancelButton: true,
+      confirmButtonColor: 'gray',
+      cancelButtonColor: 'gray',
+      confirmButtonText: '이동하기',
+      cancelButtonText: '머무르기',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        alert('해당 영역에서 피드페이지로 이동시켜줘야 합니다.')
+      }
+    })
+  }
+
   return (
     <MyAnswerContainer>
       <Text block={true} style={{ ...textStyle }}>
@@ -62,7 +83,7 @@ const MyAnswer = () => {
           <label id="textarea"></label>
           <Textarea id="textarea" name="textarea" placeholder="textreaaaa" />
         </form>
-        <MyBtn>저장</MyBtn>
+        <MyBtn onClick={() => Alert()}>저장</MyBtn>
       </MyAnswerInner>
     </MyAnswerContainer>
   )
