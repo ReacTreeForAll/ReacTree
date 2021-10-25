@@ -1,5 +1,4 @@
 import ModalContainer from '../../components/base/ModalContainer'
-import { useState } from 'react'
 
 /* eslint-disable */
 export default {
@@ -18,22 +17,17 @@ export default {
       defaultValue: 'white',
       control: { type: 'color' },
     },
+    close: {
+      defaultValue: false,
+      control: { type: 'boolean' },
+    },
   },
 }
 
 export const Default = (args) => {
-  const [visible, setVisible] = useState(false)
-
-  const handleModal = () => {
-    setVisible(!visible)
-  }
   return (
-    <div>
-      <button onClick={handleModal}>Show Modal</button>
-      <ModalContainer visible={visible} {...args}>
-        Hi!
-        <button onClick={handleModal}>X</button>
-      </ModalContainer>
-    </div>
+    <ModalContainer close={true} {...args}>
+      Hi!
+    </ModalContainer>
   )
 }

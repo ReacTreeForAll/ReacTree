@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const ModalWrapper = styled.div`
@@ -21,11 +21,35 @@ const ModalInner = styled.div`
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 `
+const CloseButton = styled.button`
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: gray;
+  :hover {
+    background-color: red;
+  }
+`
 
-const ModalContainer = ({ width, height, color, visible = false, ...props }) => {
+const ModalContainer = ({
+  width = 300,
+  height = 300,
+  color = 'white',
+  close = false,
+  ...props
+}) => {
+  const [visible, setVisible] = useState(true)
+  const handleModal = () => {
+    setVisible((visible) => !visible)
+  }
   const innerStyle = {
     width,
     height,
+    display: visible ? 'block' : 'none',
     backgroundColor: color,
   }
 
@@ -38,8 +62,12 @@ const ModalContainer = ({ width, height, color, visible = false, ...props }) => 
   })
 
   return ReactDOM.createPortal(
-    <ModalWrapper style={{ display: visible ? 'block' : 'none' }}>
-      <ModalInner {...props} style={{ ...props.style, ...innerStyle }} />
+    <ModalWrapper>
+      <ModalInner {...props} style={{ ...props.style, ...innerStyle }}>
+        <CloseButton onClick={handleModal} style={{ display: close ? 'block' : 'none' }}>
+          X
+        </CloseButton>
+      </ModalInner>
     </ModalWrapper>,
     el,
   )
@@ -49,7 +77,7 @@ ModalContainer.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   color: PropTypes.string,
-  visible: PropTypes.bool,
+  close: PropTypes.bool,
 }
 
 export default ModalContainer
