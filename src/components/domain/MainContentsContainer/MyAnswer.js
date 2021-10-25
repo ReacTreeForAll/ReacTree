@@ -62,6 +62,8 @@ const MyAnswer = () => {
       imageHeight: 100,
       imageWidth: 100,
       showCancelButton: true,
+      confirmButtonColor: 'gray',
+      cancelButtonColor: 'gray',
       confirmButtonText: '이동하기',
       cancelButtonText: '머무르기',
     }).then((result) => {
