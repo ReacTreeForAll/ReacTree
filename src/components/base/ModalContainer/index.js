@@ -44,7 +44,7 @@ const ModalContainer = ({
 }) => {
   const [visible, setVisible] = useState(true)
   const handleModal = () => {
-    setVisible(!visible)
+    setVisible((visible) => !visible)
   }
   const innerStyle = {
     width,

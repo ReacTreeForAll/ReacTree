@@ -26,7 +26,7 @@ export default {
 
 export const Default = (args) => {
   return (
-    <ModalContainer close {...args}>
+    <ModalContainer close={true} {...args}>
       Hi!
     </ModalContainer>
   )
