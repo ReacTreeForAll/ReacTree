@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useEffect, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import Image from '../../base/Image'
 import ImgPath from '../../../assets/lock.png'
 import PropTypes from 'prop-types'
@@ -67,9 +67,10 @@ const MyBtn = styled.button`
   border: none;
   margin: 8px 8px 0 0;
   color: white; //color
-  background: none;
+  background: gray; //color
+  cursor: pointer;
   :hover {
-    background: gray;
+    background: gray; //color
   }
 `
 
@@ -145,7 +146,7 @@ const MOCK_DATA = [
   },
 ]
 
-const NavChannel = ({ viewport = 'browser', userstep }) => {
+const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
   const sidebarRef = useRef(null)
   const [showNav, setShowNav] = useState(() => {
     if (viewport === 'browser') {
@@ -157,8 +158,8 @@ const NavChannel = ({ viewport = 'browser', userstep }) => {
   const [sidebarWidth, setSidebarWidth] = useState(180)
 
   const handleNav = useCallback(() => {
-    setShowNav(!showNav)
-  }, [showNav])
+    setShowNav((showNav) => !showNav)
+  }, [])
 
   const userStepChecker = useCallback((userstep, index) => {
     if (index + 1 <= userstep) {
@@ -224,11 +225,14 @@ const NavChannel = ({ viewport = 'browser', userstep }) => {
             </NavItem>
           ))}
         </NavInner>
-        <ResizeHandle onMouseDown={startResizing} />
+        <ResizeHandle
+          style={{ display: viewport === 'browser' ? 'block' : 'none' }}
+          onMouseDown={startResizing}
+        />
       </NavContainer>
     </>
   )
-}
+})
 
 NavChannel.propTypes = {
   viewport: PropTypes.string,
