@@ -3,7 +3,7 @@ import Question from '../../components/domain/MainContentsContainer/Question'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Components/Question',
+  title: 'Components/base/Question',
   component: Question,
 }
 

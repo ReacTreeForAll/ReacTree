@@ -2,7 +2,7 @@ import Button from '../../components/base/Button'
 
 /* eslint-disable */
 export default {
-  title: 'Components/Button',
+  title: 'Components/base/Button',
   component: Button,
   argTypes: {
     children: { control: 'text' },

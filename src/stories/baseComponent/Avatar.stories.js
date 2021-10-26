@@ -2,7 +2,7 @@ import Avatar from '../../components/base/Avatar'
 
 /* eslint-disable */
 export default {
-  title: 'Components/Avatar',
+  title: 'Components/base/Avatar',
   component: Avatar,
   argTypes: {
     src: { defaultValue: 'https://picsum.photos/200' },
