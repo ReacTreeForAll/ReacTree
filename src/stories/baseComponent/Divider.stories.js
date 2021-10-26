@@ -2,7 +2,7 @@ import Divider from '../../components/base/Divider'
 
 /* eslint-disable */
 export default {
-  title: 'Components/Divider',
+  title: 'Components/base/Divider',
   component: Divider,
   argTypes: {
     size: {

@@ -2,6 +2,9 @@ import Logo from '../../base/Logo'
 import Text from '../../base/Text'
 import styled from '@emotion/styled'
 import Divider from '../../base/Divider'
+import Image from '../../base/Image'
+import ImgPath from '../../../assets/pageMove.png'
+import Button from '../../base/Button'
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -9,6 +12,7 @@ const HeaderWrapper = styled.header`
   position: sticky;
   top: 0;
   width: 100%;
+  z-index: 999;
   background-color: #fff;
 `
 
@@ -30,15 +34,17 @@ const HeaderEnd = styled.div`
   margin-left: auto;
 `
 
-const MyBtn = styled.button`
-  background-color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 24px;
-  font-size: 16px;
-  cursor: pointer;
+const A = styled.a`
+  color: #2b2b2b;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 24px;
+  padding: 16px 0;
+  display: block;
   :hover {
-    background: rgba(0, 0, 0, 0.1);
+    color: #14bd7e;
+    border-bottom: 2px solid #14bd7e;
   }
 `
 
@@ -46,15 +52,18 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderMain>
-        <HeaderStart href="#">
+        <HeaderStart href="/main">
           <Logo size={76} />
           <Text block={true}>ReacTree</Text>
         </HeaderStart>
         <HeaderEnd>
-          <MyBtn>Menu</MyBtn>
-          <MyBtn>Feed</MyBtn>
-          <MyBtn>MyTree</MyBtn>
-          <MyBtn>Settings</MyBtn>
+          <A href="/main">Main</A>
+          <A href="/feed">Feed</A>
+          <A href="/mytree">MyTree</A>
+          <A href="/settings">Settings</A>
+          <A href="#" onClick={() => alert('모달')}>
+            Friends
+          </A>
         </HeaderEnd>
       </HeaderMain>
       <Divider type="horizontal" />

@@ -1,4 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
+import MainPage from './pages/MainPage'
+import React from 'react'
 
 function App() {
   return (
@@ -8,7 +10,7 @@ function App() {
           <h1>Intro</h1>
         </Route>
         <Route path="/main" exact>
-          <h1>Main</h1>
+          <MainPage />
         </Route>
         <Route path="/main/:id">
           <h1>Main/id</h1>
