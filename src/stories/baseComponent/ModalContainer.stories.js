@@ -1,6 +1,5 @@
 import ModalContainer from '../../components/base/ModalContainer'
 
-/* eslint-disable */
 export default {
   title: 'Components/base/ModalContainer',
   component: ModalContainer,

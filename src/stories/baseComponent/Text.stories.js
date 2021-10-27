@@ -1,7 +1,5 @@
 import Text from '../../components/base/Text'
-import PropTypes from 'prop-types'
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: 'Components/base/Text',
   component: Text,

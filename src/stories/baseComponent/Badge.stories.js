@@ -1,6 +1,5 @@
 import Badge from '../../components/base/Badge'
 
-/* eslint-disable */
 export default {
   title: 'Components/base/Badge',
   component: Badge,

@@ -1,6 +1,5 @@
 import Divider from '../../components/base/Divider'
 
-/* eslint-disable */
 export default {
   title: 'Components/base/Divider',
   component: Divider,

@@ -1,6 +1,5 @@
 import Spinner from '../../components/base/Spinner'
 
-/* eslint-disable */
 export default {
   title: 'Components/Spinner',
   component: Spinner,

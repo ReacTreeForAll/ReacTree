@@ -1,6 +1,5 @@
 import Button from '../../components/base/Button'
 
-/* eslint-disable */
 export default {
   title: 'Components/base/Button',
   component: Button,

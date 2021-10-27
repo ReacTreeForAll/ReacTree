@@ -1,6 +1,5 @@
 import Avatar from '../../components/base/Avatar'
 
-/* eslint-disable */
 export default {
   title: 'Components/base/Avatar',
   component: Avatar,

@@ -1,6 +1,5 @@
 import Input from '../../components/base/Input'
 
-/* eslint-disable */
 export default {
   title: 'Components/Input',
   component: Input,
