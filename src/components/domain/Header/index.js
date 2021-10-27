@@ -2,9 +2,6 @@ import Logo from '../../base/Logo'
 import Text from '../../base/Text'
 import styled from '@emotion/styled'
 import Divider from '../../base/Divider'
-import Image from '../../base/Image'
-import ImgPath from '../../../assets/pageMove.png'
-import Button from '../../base/Button'
 
 const HeaderWrapper = styled.header`
   display: flex;

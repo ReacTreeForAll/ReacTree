@@ -18,6 +18,7 @@ export const Default = (args) => {
         src="https://picsum.photos/200"
         width="50px"
         height="50px"
+        alt="프로필"
         style={{ borderRadius: '50%' }}
       />
       <Badge {...args} />

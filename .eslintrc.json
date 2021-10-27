@@ -10,12 +10,12 @@
     "quotes": ["error", "single"],
     "arrow-spacing": "error",
     "padded-blocks": ["error", { "blocks": "never" }],
-    "comma-spacing": ["error", { "before": false, "after": true }]
-  },
-  "import/no-anonymous-default-export": [
-    "error",
-    {
-      "allowObject": true
-    }
-  ]
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "import/no-anonymous-default-export": [
+      "error",
+      {
+        "allowObject": true
+      }
+    ]
+  }
 }
