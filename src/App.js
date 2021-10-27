@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 import MainPage from './pages/MainPage'
-import IntroPage from './pages/IntroPage'
 import React from 'react'
+import IntroPage from './pages/IntroPage'
 
 function App() {
   return (
