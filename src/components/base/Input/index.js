@@ -7,39 +7,28 @@ const Input = React.memo(
     type = 'text',
     width = '80%',
     placeHolder = '입력',
-    fontSize = '24px',
     fontWeight = 400,
     padding = '1em',
     borderRadius = '3px',
     ...props
   }) => {
-    const focusedColor = 'white'
     const backgroundColor = '#F2F2F2'
     const [inputText, setInputText] = useState('')
-    const [focused, setFocused] = useState(false)
+    // const [focused, setFocused] = useState(false)
 
-    const setInputFocus = useCallback(() => {
-      setFocused((prevFocus) => !prevFocus)
-    }, [])
+    // const setInputFocus = useCallback(() => {
+    //   setFocused((prevFocus) => !prevFocus)
+    // }, [])
 
     const onChange = (event) => {
       setInputText((prevText) => event.target.value)
     }
 
-    const containerStyle = {
-      backgroundColor: 'white',
-      display: 'flex',
-      justifyContent: 'center',
-    }
-
     const inputStyle = {
       type,
       width,
-      height: '35px',
-      fontSize,
       fontWeight: 400,
-      backgroundColor: focused ? focusedColor : backgroundColor,
-      boxSizing: 'border-box',
+      backgroundColor,
       border: 'none',
       placeholderTextSize: '8px',
       outlineColor: '#14bd7e',
@@ -48,18 +37,14 @@ const Input = React.memo(
     }
 
     return (
-      <div style={{ ...containerStyle }}>
-        <input
-          type={type}
-          value={inputText}
-          placeholder={placeHolder}
-          onChange={onChange}
-          onFocus={setInputFocus}
-          onBlur={setInputFocus}
-          {...props}
-          style={{ ...props.style, ...inputStyle }}
-        />
-      </div>
+      <input
+        type={type}
+        value={inputText}
+        placeholder={placeHolder}
+        onChange={onChange}
+        {...props}
+        style={{ ...props.style, ...inputStyle }}
+      />
     )
   },
 )

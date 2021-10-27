@@ -2,6 +2,9 @@ import useForm from '../../../hooks/useForm'
 import Button from '../../base/Button'
 import styled from '@emotion/styled'
 import React from 'react'
+import Text from '../../base/Text'
+import Input from '../../base/Input'
+import { Link } from 'react-router-dom'
 
 const FormStyle = styled.form`
   display: flex;
@@ -56,80 +59,45 @@ const SignUpForm = ({ submitSignUpForm }) => {
   return (
     <FormStyle onSubmit={handleSubmit}>
       <InputStyle>
-        <input
+        <Input
           name="email"
           type="email"
           placeholder="이메일을 입력해주세요"
           onChange={handleChange}
-          style={{
-            width: '80%',
-            padding: '1em',
-            border: 'none',
-            outlineColor: '#14bd7e',
-            borderRadius: '3px',
-            backgroundColor: '#F2F2F2',
-          }}
           autoFocus
         />
         <span style={{ color: 'red', fontSize: '8px', padding: '3px' }}>{errors.email}</span>
-        <input
+        <Input
           name="fullName"
           type="text"
           placeholder="이름을 입력해주세요"
           onChange={handleChange}
-          style={{
-            width: '80%',
-            padding: '1em',
-            border: 'none',
-            outlineColor: '#14bd7e',
-            borderRadius: '3px',
-            backgroundColor: '#F2F2F2',
-          }}
         />
         <span style={{ color: 'red', fontSize: '8px', padding: '3px' }}>{errors.fullName}</span>
-        <input
+        <Input
           name="password"
           type="password"
           placeholder="비밀번호를 입력해주세요"
           onChange={handleChange}
-          style={{
-            width: '80%',
-            padding: '1em',
-            border: 'none',
-            outlineColor: '#14bd7e',
-            borderRadius: '3px',
-            backgroundColor: '#F2F2F2',
-          }}
         />
         <span style={{ color: 'red', fontSize: '8px', padding: '3px' }}>{errors.password}</span>
-        <input
+        <Input
           name="passwordCheck"
           type="password"
           placeholder="비밀번호를 한번 더 입력해주세요"
           onChange={handleChange}
-          style={{
-            width: '80%',
-            padding: '1em',
-            border: 'none',
-            outlineColor: '#14bd7e',
-            borderRadius: '3px',
-            backgroundColor: '#F2F2F2',
-          }}
         />
         <span style={{ color: 'red', fontSize: '8px', padding: '3px' }}>
           {errors.passwordCheck}
         </span>
       </InputStyle>
-      <Button
-        type="submit"
-        width={'65%'}
-        height={40}
-        textColor={'white'}
-        fontSize={'0.8em'}
-        fontWeight={700}
-        backgroundColor={'#14bd7e'}>
-        회원가입
-      </Button>
+      <Button fontSize={'1em'}>회원가입</Button>
+      <Text style={{ margin: '15px', fontSize: '0.8em' }}>
+        이미 아이디가 있으신가요?
+        <Link to="/signin" style={{ color: '#14bd7e', margin: '10px' }}>
+          로그인
+        </Link>
+      </Text>
     </FormStyle>
   )
 }
