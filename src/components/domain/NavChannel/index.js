@@ -3,13 +3,14 @@ import React, { useEffect, useRef, useState, useCallback } from 'react'
 import Image from '../../base/Image'
 import ImgPath from '../../../assets/lock.png'
 import PropTypes from 'prop-types'
+import Divider from '../../base/Divider'
 
 const NavContainer = styled.div`
-  min-width: 120px;
-  max-width: 200px;
+  min-width: 150px;
+  max-width: 300px;
   height: 100vh;
   overflow-y: auto;
-  background-color: lightgray; //color
+  background: white; //color
   position: relative;
   left: 0;
   top: 0;
@@ -26,22 +27,28 @@ const NavItem = styled.li`
 `
 
 const Awrapper = styled.div`
-  padding: 8px;
-  margin-top: 4px;
+  margin-top: 8px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   :hover {
-    background-color: skyblue; //color
+    background-color: #14bd7e; //color
+    color: white;
   }
 `
 
 const A = styled.a`
   text-decoration: none;
-  color: blue; //color
+  color: #2b2b2b; //color
   font-size: 16px; //font-size
+  font-weight: 700;
   line-height: none;
+  display: block;
   cursor: pointer;
+  padding: 16px;
+  :hover {
+    color: white;
+  }
 `
 
 const ResizeHandle = styled.div`
@@ -52,7 +59,7 @@ const ResizeHandle = styled.div`
   right: 0;
   cursor: col-resize;
   :hover {
-    background-color: gray; //color
+    background-color: rgba(0, 0, 0, 0.3); //color
   }
 `
 
@@ -76,10 +83,13 @@ const MyBtn = styled.button`
 
 const ImageWrapper = styled.div`
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.6); //color
+  background-color: rgba(0, 0, 0, 0.2); //color
   z-index: 99;
   position: absolute;
   width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
   cursor: not-allowed;
 `
 
@@ -204,30 +214,29 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
         style={{ width: sidebarWidth, display: showNav ? 'block' : 'none' }}
         onMouseDown={(e) => e.preventDefault()}>
         <BtnWrapper>
-          <MyBtn
-            style={{ visibility: viewport === 'browser' ? 'hidden' : 'visible' }}
-            onClick={handleNav}>
+          <MyBtn style={{ display: viewport === 'browser' ? 'none' : 'block' }} onClick={handleNav}>
             &lt;&lt;
           </MyBtn>
         </BtnWrapper>
         <NavInner>
           {MOCK_DATA.map((channel, index) => (
             <NavItem key={channel._id}>
-              <ImageWrapper
-                style={{ display: userStepChecker(userstep, index) ? 'none' : 'block' }}>
+              <ImageWrapper style={{ display: userStepChecker(userstep, index) ? 'none' : 'flex' }}>
                 <Image src={ImgPath} width={30} height={30} />
               </ImageWrapper>
               <Awrapper>
-                <A>
+                <A href={`/main/${index + 1}`}>
                   {index + 1} - {channel.name}
                 </A>
               </Awrapper>
+              <Divider type="horizontal" />
             </NavItem>
           ))}
         </NavInner>
         <ResizeHandle
           style={{ display: viewport === 'browser' ? 'block' : 'none' }}
           onMouseDown={startResizing}
+          onDoubleClick={() => setSidebarWidth(180)}
         />
       </NavContainer>
     </>

@@ -5,15 +5,19 @@ import imgPath from '../../../assets/leaf.png'
 import PropTypes from 'prop-types'
 
 const QuestionContainer = styled.div`
-  width: 600px;
+  width: 700px;
   height: 800px;
-  background-color: #eef2bb;
+  background-color: #eaf8f3;
+  margin-right: 54px;
+  border-radius: 16px;
+  border: 0.5px solid #aaa;
 `
 const QuestionInner = styled.div`
   height: 85%;
   margin: 8px 24px;
   padding: 16px;
   line-height: 1.5;
+  border-radius: 16px;
   box-sizing: border-box;
   background-color: #fff;
   position: relative;
