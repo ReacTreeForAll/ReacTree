@@ -8,16 +8,18 @@ const Input = React.memo(
     width = '80%',
     placeHolder = '입력',
     fontSize = '24px',
-    border = '1px solid black',
+    fontWeight = 400,
+    padding = '1em',
+    borderRadius = '3px',
     ...props
   }) => {
-    const backgroundColor = 'white'
-    const hoveredColor = '#e5e5e5'
+    const focusedColor = 'white'
+    const backgroundColor = '#F2F2F2'
     const [inputText, setInputText] = useState('')
-    const [hovered, setHovered] = useState(false)
+    const [focused, setFocused] = useState(false)
 
-    const setInputHovered = useCallback(() => {
-      setHovered((prevHovered) => !prevHovered)
+    const setInputFocus = useCallback(() => {
+      setFocused((prevFocus) => !prevFocus)
     }, [])
 
     const onChange = (event) => {
@@ -33,14 +35,16 @@ const Input = React.memo(
     const inputStyle = {
       type,
       width,
-      height: 35,
+      height: '35px',
       fontSize,
       fontWeight: 400,
-      textAlign: 'center',
-      backgroundColor: hovered ? hoveredColor : backgroundColor,
+      backgroundColor: focused ? focusedColor : backgroundColor,
       boxSizing: 'border-box',
-      border,
+      border: 'none',
       placeholderTextSize: '8px',
+      outlineColor: '#14bd7e',
+      borderRadius,
+      padding,
     }
 
     return (
@@ -49,11 +53,11 @@ const Input = React.memo(
           type={type}
           value={inputText}
           placeholder={placeHolder}
-          onMouseEnter={setInputHovered}
-          onMouseLeave={setInputHovered}
           onChange={onChange}
-          style={{ ...props.style, ...inputStyle }}
+          onFocus={setInputFocus}
+          onBlur={setInputFocus}
           {...props}
+          style={{ ...props.style, ...inputStyle }}
         />
       </div>
     )
@@ -65,7 +69,9 @@ Input.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeHolder: PropTypes.string,
   fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  border: PropTypes.string,
+  fontWeight: PropTypes.number,
+  padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  borderRadius: PropTypes.string,
 }
 
 export default Input

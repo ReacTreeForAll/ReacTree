@@ -1,7 +1,7 @@
 import Spinner from '../../components/base/Spinner'
 
 export default {
-  title: 'Components/Spinner',
+  title: 'Components/base/Spinner',
   component: Spinner,
   argTypes: {
     size: { defaultValue: '100px', control: 'text' },
