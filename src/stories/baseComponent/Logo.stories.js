@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Components/Logo',
+  title: 'Components/base/Logo',
   component: Logo,
   argTypes: {
     size: { defaultValue: 24, control: { type: 'range', min: 16, max: 60 } },

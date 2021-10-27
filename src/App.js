@@ -1,11 +1,12 @@
 import { Route, Switch } from 'react-router-dom'
+import IntroPage from './pages/IntroPage'
 
 function App() {
   return (
     <div>
       <Switch>
         <Route path="/" exact>
-          <h1>Intro</h1>
+          <IntroPage />
         </Route>
         <Route path="/main" exact>
           <h1>Main</h1>

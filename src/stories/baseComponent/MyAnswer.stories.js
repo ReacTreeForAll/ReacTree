@@ -2,7 +2,7 @@ import MyAnswer from '../../components/domain/MainContentsContainer/MyAnswer'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Components/MyAnswer',
+  title: 'Components/base/MyAnswer',
   component: MyAnswer,
 }
 

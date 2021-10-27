@@ -2,7 +2,7 @@ import Alert from '../../components/base/Alert'
 
 /* eslint-disable */
 export default {
-  title: 'Components/Alert',
+  title: 'Components/base/Alert',
   component: Alert,
 }
 
