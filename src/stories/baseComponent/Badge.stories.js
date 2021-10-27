@@ -2,7 +2,7 @@ import Badge from '../../components/base/Badge'
 
 /* eslint-disable */
 export default {
-  title: 'Components/Badge',
+  title: 'Components/base/Badge',
   component: Badge,
   argTypes: {
     isOnline: {
