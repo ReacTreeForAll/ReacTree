@@ -1,4 +1,5 @@
 import { Route, Switch } from 'react-router-dom'
+import MainPage from './pages/MainPage'
 import IntroPage from './pages/IntroPage'
 import React from 'react'
 
@@ -9,7 +10,9 @@ function App() {
         <Route path="/" exact>
           <IntroPage />
         </Route>
-        <Route path="/main" exact></Route>
+        <Route path="/main" exact>
+          <MainPage />
+        </Route>
         <Route path="/main/:id">
           <h1>Main/id</h1>
         </Route>
