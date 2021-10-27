@@ -2,13 +2,14 @@ import { Route, Switch } from 'react-router-dom'
 import MainPage from './pages/MainPage'
 import React from 'react'
 import SignUpPage from './pages/SignUpPage'
+import IntroPage from './pages/IntroPage'
 
 function App() {
   return (
     <div>
       <Switch>
         <Route path="/" exact>
-          <h1>Intro</h1>
+          <IntroPage />
         </Route>
         <Route path="/signup" exact>
           <SignUpPage />
