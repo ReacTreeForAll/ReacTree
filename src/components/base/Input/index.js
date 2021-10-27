@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import React from 'react'
 
 const Input = React.memo(
@@ -14,12 +14,6 @@ const Input = React.memo(
   }) => {
     const backgroundColor = '#F2F2F2'
     const [inputText, setInputText] = useState('')
-    // const [focused, setFocused] = useState(false)
-
-    // const setInputFocus = useCallback(() => {
-    //   setFocused((prevFocus) => !prevFocus)
-    // }, [])
-
     const onChange = (event) => {
       setInputText((prevText) => event.target.value)
     }
