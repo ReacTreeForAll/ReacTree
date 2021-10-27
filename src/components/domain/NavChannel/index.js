@@ -31,10 +31,6 @@ const Awrapper = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  :hover {
-    background-color: #14bd7e; //color
-    color: white;
-  }
 `
 
 const A = styled.a`
@@ -47,6 +43,11 @@ const A = styled.a`
   cursor: pointer;
   padding: 16px;
   :hover {
+    background-color: #14bd7e;
+    color: white;
+  }
+  &.active {
+    background-color: #14bd7e; //color
     color: white;
   }
 `
@@ -166,10 +167,30 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
   })
   const [isResizing, setIsResizing] = useState(false)
   const [sidebarWidth, setSidebarWidth] = useState(180)
+  const [selector, setSelector] = useState(0)
 
   const handleNav = useCallback(() => {
     setShowNav((showNav) => !showNav)
   }, [])
+
+  const handleSelector = useCallback(
+    (e) => {
+      if (selector !== e.target.id) {
+        setSelector((prevSelector) => parseInt(e.target.id, 10))
+      }
+    },
+    [selector],
+  )
+
+  const selectorChecker = useCallback(
+    (index) => {
+      if (selector !== index) {
+        return true
+      }
+      return false
+    },
+    [selector],
+  )
 
   const userStepChecker = useCallback((userstep, index) => {
     if (index + 1 <= userstep) {
@@ -224,8 +245,8 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
               <ImageWrapper style={{ display: userStepChecker(userstep, index) ? 'none' : 'flex' }}>
                 <Image src={ImgPath} width={30} height={30} />
               </ImageWrapper>
-              <Awrapper>
-                <A href={`/main/${index + 1}`}>
+              <Awrapper onClick={handleSelector}>
+                <A href="#" id={index + 1} className={selectorChecker(index + 1) ? '' : 'active'}>
                   {index + 1} - {channel.name}
                 </A>
               </Awrapper>
