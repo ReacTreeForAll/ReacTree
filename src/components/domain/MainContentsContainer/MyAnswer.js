@@ -5,6 +5,7 @@ import ImgPath from '../../../assets/pageMove.png'
 import React, { useState, useCallback } from 'react'
 import useForm from '../../../hooks/useForm'
 import Button from '../../base/Button'
+import PropTypes from 'prop-types'
 
 const MyAnswerContainer = styled.div`
   width: 700px;
@@ -14,6 +15,7 @@ const MyAnswerContainer = styled.div`
   border-radius: 16px;
   border: 0.5px solid #aaa;
 `
+
 const MyAnswerInner = styled.div`
   height: 85%;
   margin: 8px 24px;
@@ -36,20 +38,6 @@ const Textarea = styled.textarea`
   border: none;
   resize: none;
   box-sizing: border-box;
-`
-
-const MyBtn = styled.button`
-  background-color: #14bd7e;
-  border: none;
-  border-radius: 16px;
-  padding: 24px;
-  margin-top: 110px;
-  font-size: 16px;
-  float: right;
-  cursor: pointer;
-  :hover {
-    background: lightgray;
-  }
 `
 
 const MyAnswer = React.memo(({ onSubmit }) => {
@@ -146,5 +134,9 @@ const MyAnswer = React.memo(({ onSubmit }) => {
     </MyAnswerContainer>
   )
 })
+
+MyAnswer.prototype = {
+  onSubmit: PropTypes.func,
+}
 
 export default MyAnswer
