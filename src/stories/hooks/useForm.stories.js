@@ -1,6 +1,5 @@
 import useForm from '../../hooks/useForm'
 
-/* eslint-disable */
 export default {
   title: 'Hooks/useForm',
 }

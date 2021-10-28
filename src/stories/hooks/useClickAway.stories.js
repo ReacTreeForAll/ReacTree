@@ -2,7 +2,6 @@ import { useState } from 'react'
 import useClickAway from '../../hooks/useClickAway'
 import styled from '@emotion/styled'
 
-/* eslint-disable */
 export default {
   title: 'Hooks/useClickAway',
 }

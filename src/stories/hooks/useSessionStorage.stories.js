@@ -1,11 +1,11 @@
-import useLocalStorage from '../../hooks/useLocalStorage'
+import useSessionStorage from '../../hooks/useSessionStorage'
 
 export default {
-  title: 'Hooks/useLocalStorage',
+  title: 'Hooks/useSessionStorage',
 }
 
 export const Default = () => {
-  const [answer, setAnswer] = useLocalStorage('answer', '안녕하세요!')
+  const [answer, setAnswer] = useSessionStorage('answer', '안녕하세요!')
 
   return (
     <div>

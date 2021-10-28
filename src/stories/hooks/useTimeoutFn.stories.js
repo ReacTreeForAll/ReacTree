@@ -1,6 +1,5 @@
 import useTimeoutFn from '../../hooks/useTimeoutFn'
 
-/* eslint-disable */
 export default {
   title: 'Hooks/useTimeoutFn',
 }
