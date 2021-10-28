@@ -7,6 +7,7 @@ import { useCallback, useState } from 'react'
 import FriendModal from '../FriendModal'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -22,7 +23,7 @@ const HeaderMain = styled.div`
   display: flex;
 `
 
-const HeaderStart = styled.a`
+const HeaderStartRouterLink = styled(Link)`
   display: flex;
   margin-right: auto;
   align-items: center;
@@ -86,12 +87,12 @@ const Header = ({ logout }) => {
     <>
       <HeaderWrapper>
         <HeaderMain>
-          <HeaderStart href="/main">
+          <HeaderStartRouterLink to="/main/0">
             <Logo size={76} />
             <Text block={true}>ReacTree</Text>
-          </HeaderStart>
+          </HeaderStartRouterLink>
           <HeaderEnd>
-            <RouterLink to="/main">Main</RouterLink>
+            <RouterLink to="/main/0">Main</RouterLink>
             <RouterLink to="/feed">Feed</RouterLink>
             <RouterLink to="/mytree">MyTree</RouterLink>
             <RouterLink to="/settings">Settings</RouterLink>
@@ -106,6 +107,10 @@ const Header = ({ logout }) => {
       <FriendModal showModal={showModal} onClose={() => setShowModal(false)} />
     </>
   )
+}
+
+Header.propTypes = {
+  logout: PropTypes.func,
 }
 
 export default Header
