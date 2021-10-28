@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import React from 'react'
 import bgImgPath from '../../../assets/backgroundImg.png'
 import Text from '../../base/Text'
-import { useState } from 'react'
 import SignUpForm from './SignUpForm'
 import Logo from '../../base/Logo'
 
@@ -13,10 +12,10 @@ const BackgroundStyle = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  font-size: 24px;
+  font-size: 18px;
 `
 
-const ModalWrapper = styled.div`
+const BackgroundWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -26,7 +25,7 @@ const ModalWrapper = styled.div`
   z-index: 1000;
 `
 
-const ModalInner = styled.div`
+const SignUpContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -37,40 +36,19 @@ const ModalInner = styled.div`
   min-width: 250px;
   max-width: 400px;
   height: 70%;
-  min-height: 500px;
+  min-height: 570px;
   z-index: 2000;
-  padding: 0 0 5%;
   background-color: white;
   @media (max-width: 768px) {
     font-size: 16px;
   }
 `
-
-const CloseButton = styled.button`
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  background-color: gray;
-  cursor: pointer;
-  :hover {
-    background-color: red;
-  }
-`
-
 const SignUpModal = ({ submitSignUpForm }) => {
-  const [visible, setVisible] = useState(true)
-  const handleModal = () => {
-    setVisible((visible) => !visible)
-  }
   return (
     <>
       <BackgroundStyle>
-        <ModalWrapper style={{ display: visible ? 'block' : 'none' }}>
-          <ModalInner style={{ display: visible ? 'block' : 'none' }}>
-            <CloseButton onClick={handleModal}>X</CloseButton>
+        <BackgroundWrapper>
+          <SignUpContainer>
             <div
               style={{
                 display: 'flex',
@@ -82,7 +60,7 @@ const SignUpModal = ({ submitSignUpForm }) => {
               <Text
                 style={{
                   display: 'block',
-                  fontSize: '1.3em',
+                  fontSize: '1.5em',
                   fontWeight: 700,
                   textAlign: 'center',
                 }}>
@@ -90,8 +68,8 @@ const SignUpModal = ({ submitSignUpForm }) => {
               </Text>
             </div>
             <SignUpForm submitSignUpForm={submitSignUpForm} />
-          </ModalInner>
-        </ModalWrapper>
+          </SignUpContainer>
+        </BackgroundWrapper>
       </BackgroundStyle>
     </>
   )
