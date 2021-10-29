@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import useScroll from '../../hooks/useScroll'
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: 'Hooks/useScroll',
   component: useScroll,

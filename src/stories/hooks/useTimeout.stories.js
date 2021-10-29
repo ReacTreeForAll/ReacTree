@@ -1,6 +1,5 @@
 import useTimeout from '../../hooks/useTimeout'
 
-/* eslint-disable */
 export default {
   title: 'Hooks/useTimeout',
 }
