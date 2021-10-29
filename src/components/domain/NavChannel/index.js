@@ -83,7 +83,7 @@ const ImageWrapper = styled.div`
   cursor: not-allowed;
 `
 
-const NavChannel = React.memo(({ viewport = 'browser', userstep, selectId, mockData }) => {
+const NavChannel = React.memo(({ viewport = 'browser', userstep = 0, selectId, channels }) => {
   const sidebarRef = useRef(null)
   const [showNav, setShowNav] = useState(() => {
     if (viewport === 'browser') {
@@ -113,6 +113,7 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep, selectId, mockD
 
   const initSelector = useCallback(() => {
     if (selector === 0) {
+      console.log(222, selector)
       setSelector(selectId + 1)
     }
   }, [selectId, selector])
@@ -187,8 +188,8 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep, selectId, mockD
           </Button>
         </BtnWrapper>
         <NavInner>
-          {mockData &&
-            mockData.map((channel, index) => (
+          {channels &&
+            channels.map((channel, index) => (
               <NavItem key={channel._id}>
                 <ImageWrapper
                   style={{ display: userStepChecker(userstep, index) ? 'none' : 'flex' }}>
@@ -218,9 +219,9 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep, selectId, mockD
 
 NavChannel.propTypes = {
   viewport: PropTypes.string,
-  userstep: PropTypes.number.isRequired,
+  userstep: PropTypes.number,
   selectId: PropTypes.number,
-  mockData: PropTypes.array,
+  channels: PropTypes.array,
 }
 
 export default NavChannel

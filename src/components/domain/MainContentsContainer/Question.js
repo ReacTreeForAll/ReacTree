@@ -26,7 +26,7 @@ const QuestionInner = styled.div`
   justify-content: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 `
-const Question = ({ children, ...props }) => {
+const Question = ({ children = '', ...props }) => {
   const textStyle = {
     fontSize: 48,
     textAlign: 'center',

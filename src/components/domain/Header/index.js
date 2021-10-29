@@ -8,6 +8,7 @@ import FriendModal from '../FriendModal'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import useSessionStorage from '../../../hooks/useSessionStorage'
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -66,22 +67,12 @@ const MyBtn = styled.button`
   }
 `
 
-const Header = ({ logout }) => {
+const Header = ({ logOut }) => {
   const [showModal, setShowModal] = useState(false)
 
   const handleModal = useCallback(() => {
     setShowModal(true)
   }, [])
-
-  const history = useHistory()
-  const LogOut = useCallback(() => {
-    console.log('조상으로 부터 받은 Logout함수')
-  }, [])
-
-  const handleLogout = useCallback(() => {
-    LogOut()
-    history.push({ pathname: '/' })
-  }, [LogOut, history])
 
   return (
     <>
@@ -97,7 +88,7 @@ const Header = ({ logout }) => {
             <RouterLink to="/mytree">MyTree</RouterLink>
             <RouterLink to="/settings">Settings</RouterLink>
             <MyBtn onClick={handleModal}>Friends</MyBtn>
-            <MyBtn onClick={handleLogout}>
+            <MyBtn onClick={logOut}>
               <span className="material-icons">logout</span>
             </MyBtn>
           </HeaderEnd>
@@ -110,7 +101,7 @@ const Header = ({ logout }) => {
 }
 
 Header.propTypes = {
-  logout: PropTypes.func,
+  logOut: PropTypes.func,
 }
 
 export default Header
