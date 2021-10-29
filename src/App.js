@@ -3,6 +3,7 @@ import MainPage from './pages/MainPage'
 import React from 'react'
 import SignUpPage from './pages/SignUpPage'
 import IntroPage from './pages/IntroPage'
+import PostCard from './components/domain/PostContentsContainer/PostCard'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <h1>Main/id</h1>
         </Route>
         <Route path="/feed" exact>
-          <h1>Feed</h1>
+          <PostCard />
         </Route>
         <Route path="/feed/:id">
           <h1>Feed/id</h1>
