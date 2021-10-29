@@ -12,13 +12,14 @@ export const RequestApi = (url, method, data) => {
     .catch((e) => console.error(e))
 }
 
-export const Authorization = () => {
+export const Authorization = (url, method, data) => {
   // useSessionStorage 머지 후 변경 예정
   const tokenId = sessionStorage.getItem('tokenId')
   return axios({
-    url: `${API_END_POINT}/auth-user`,
-    method: 'get',
+    url: `${API_END_POINT}${url}`,
+    method,
     headers: { Authorization: `Bearer ${tokenId}` },
+    data,
   })
     .then((res) => res.data)
     .catch((e) => console.error(e))
