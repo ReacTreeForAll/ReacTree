@@ -4,6 +4,8 @@ import Image from '../../base/Image'
 import ImgPath from '../../../assets/lock.png'
 import PropTypes from 'prop-types'
 import Divider from '../../base/Divider'
+import { Link, useHistory } from 'react-router-dom'
+import Button from '../../../components/base/Button'
 
 const NavContainer = styled.div`
   min-width: 150px;
@@ -33,7 +35,7 @@ const Awrapper = styled.div`
   white-space: nowrap;
 `
 
-const A = styled.a`
+const RouterLink = styled(Link)`
   text-decoration: none;
   color: #2b2b2b; //color
   font-size: 16px; //font-size
@@ -69,19 +71,6 @@ const BtnWrapper = styled.div`
   flex-direction: row-reverse;
 `
 
-const MyBtn = styled.button`
-  padding: 8px;
-  border-radius: 8px;
-  border: none;
-  margin: 8px 8px 0 0;
-  color: white; //color
-  background: gray; //color
-  cursor: pointer;
-  :hover {
-    background: gray; //color
-  }
-`
-
 const ImageWrapper = styled.div`
   text-align: center;
   background-color: rgba(0, 0, 0, 0.2); //color
@@ -94,70 +83,7 @@ const ImageWrapper = styled.div`
   cursor: not-allowed;
 `
 
-const MOCK_DATA = [
-  {
-    _id: 1,
-    name: 'Context API',
-  },
-  {
-    _id: 2,
-    name: 'useEffect',
-  },
-  {
-    _id: 3,
-    name: 'useFormLongLongLongLongLong',
-  },
-  {
-    _id: 4,
-    name: '다슬다슬',
-  },
-  {
-    _id: 5,
-    name: '록꾸거록꾸거',
-  },
-  {
-    _id: 6,
-    name: 'Context API',
-  },
-  {
-    _id: 7,
-    name: 'useEffect',
-  },
-  {
-    _id: 8,
-    name: 'useFormLongLongLongLongLong',
-  },
-  {
-    _id: 9,
-    name: '다슬다슬',
-  },
-  {
-    _id: 10,
-    name: '록꾸거록꾸거',
-  },
-  {
-    _id: 11,
-    name: '록꾸거록꾸거',
-  },
-  {
-    _id: 12,
-    name: '록꾸거록꾸거',
-  },
-  {
-    _id: 13,
-    name: '록꾸거록꾸거',
-  },
-  {
-    _id: 14,
-    name: '록꾸거록꾸거',
-  },
-  {
-    _id: 15,
-    name: '록꾸거록꾸거',
-  },
-]
-
-const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
+const NavChannel = React.memo(({ viewport = 'browser', userstep, selectId, mockData }) => {
   const sidebarRef = useRef(null)
   const [showNav, setShowNav] = useState(() => {
     if (viewport === 'browser') {
@@ -168,6 +94,7 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
   const [isResizing, setIsResizing] = useState(false)
   const [sidebarWidth, setSidebarWidth] = useState(180)
   const [selector, setSelector] = useState(0)
+  const history = useHistory()
 
   const handleNav = useCallback(() => {
     setShowNav((showNav) => !showNav)
@@ -177,10 +104,22 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
     (e) => {
       if (selector !== e.target.id) {
         setSelector((prevSelector) => parseInt(e.target.id, 10))
+        const selectIndex = parseInt(e.target.id - 1, 10)
+        history.push(`/main/${selectIndex}`)
       }
     },
-    [selector],
+    [selector, history],
   )
+
+  const initSelector = useCallback(() => {
+    if (selector === 0) {
+      setSelector(selectId + 1)
+    }
+  }, [selectId, selector])
+
+  useEffect(() => {
+    initSelector()
+  }, [])
 
   const selectorChecker = useCallback(
     (index) => {
@@ -227,32 +166,45 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
 
   return (
     <>
-      <MyBtn style={{ display: showNav ? 'none' : 'block' }} onClick={handleNav}>
+      <Button
+        width={'4%'}
+        height={30}
+        style={{ display: showNav ? 'none' : 'block' }}
+        onClick={handleNav}>
         &gt;&gt;
-      </MyBtn>
+      </Button>
       <NavContainer
         ref={sidebarRef}
         style={{ width: sidebarWidth, display: showNav ? 'block' : 'none' }}
         onMouseDown={(e) => e.preventDefault()}>
         <BtnWrapper>
-          <MyBtn style={{ display: viewport === 'browser' ? 'none' : 'block' }} onClick={handleNav}>
+          <Button
+            width={'25%'}
+            height={30}
+            style={{ display: viewport === 'browser' ? 'none' : 'block', marginRight: '8px' }}
+            onClick={handleNav}>
             &lt;&lt;
-          </MyBtn>
+          </Button>
         </BtnWrapper>
         <NavInner>
-          {MOCK_DATA.map((channel, index) => (
-            <NavItem key={channel._id}>
-              <ImageWrapper style={{ display: userStepChecker(userstep, index) ? 'none' : 'flex' }}>
-                <Image src={ImgPath} width={30} height={30} />
-              </ImageWrapper>
-              <Awrapper onClick={handleSelector}>
-                <A href="#" id={index + 1} className={selectorChecker(index + 1) ? '' : 'active'}>
-                  {index + 1} - {channel.name}
-                </A>
-              </Awrapper>
-              <Divider type="horizontal" />
-            </NavItem>
-          ))}
+          {mockData &&
+            mockData.map((channel, index) => (
+              <NavItem key={channel._id}>
+                <ImageWrapper
+                  style={{ display: userStepChecker(userstep, index) ? 'none' : 'flex' }}>
+                  <Image src={ImgPath} width={30} height={30} />
+                </ImageWrapper>
+                <Awrapper onClick={handleSelector}>
+                  <RouterLink
+                    to={`/main/${index + 1}`}
+                    id={index + 1}
+                    className={selectorChecker(index + 1) ? '' : 'active'}>
+                    {index + 1} - {channel.name}
+                  </RouterLink>
+                </Awrapper>
+                <Divider type="horizontal" />
+              </NavItem>
+            ))}
         </NavInner>
         <ResizeHandle
           style={{ display: viewport === 'browser' ? 'block' : 'none' }}
@@ -267,6 +219,8 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep }) => {
 NavChannel.propTypes = {
   viewport: PropTypes.string,
   userstep: PropTypes.number.isRequired,
+  selectId: PropTypes.number,
+  mockData: PropTypes.object,
 }
 
 export default NavChannel
