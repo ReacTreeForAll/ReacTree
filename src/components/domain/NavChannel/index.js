@@ -220,7 +220,7 @@ NavChannel.propTypes = {
   viewport: PropTypes.string,
   userstep: PropTypes.number.isRequired,
   selectId: PropTypes.number,
-  mockData: PropTypes.object,
+  mockData: PropTypes.array,
 }
 
 export default NavChannel

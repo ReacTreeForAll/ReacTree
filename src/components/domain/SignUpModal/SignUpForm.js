@@ -18,7 +18,7 @@ const InputStyle = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1em;
-  width: 70%;
+  width: 80%;
   height: 40%;
   border-radius: 5px;
 `

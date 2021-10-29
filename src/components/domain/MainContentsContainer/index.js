@@ -15,7 +15,7 @@ const MainContentsContainer = ({ selectId = 0, mockData }) => {
 
 MainContentsContainer.prototype = {
   selectId: PropTypes.number,
-  onSubmit: PropTypes.func,
+  mockData: PropTypes.array,
 }
 
 export default MainContentsContainer

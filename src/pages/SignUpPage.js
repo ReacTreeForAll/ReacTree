@@ -1,9 +1,9 @@
-import axios from 'axios'
 import SignUpModal from '../components/domain/SignUpModal'
 import Swal from 'sweetalert2'
 import successImg from '../../src/assets/success.png'
 import failImg from '../../src/assets/fail.png'
 import { useHistory } from 'react-router'
+import { RequestApi } from '../utils/Api'
 
 const SignUpPage = () => {
   const history = useHistory()
@@ -36,13 +36,11 @@ const SignUpPage = () => {
   }
   const submitSignUpForm = async (values) => {
     try {
-      const res = await axios
-        .post('http://13.209.30.200:5002/signup', {
-          email: values.email,
-          fullName: JSON.stringify({ name: values.fullName, userStep: 0 }),
-          password: values.password,
-        })
-        .then((res) => res.data)
+      const res = await RequestApi('/signup', 'POST', {
+        email: values.email,
+        fullName: JSON.stringify({ name: values.fullName, userStep: 0 }),
+        password: values.password,
+      })
       SuccessAlert()
       return res
     } catch (e) {

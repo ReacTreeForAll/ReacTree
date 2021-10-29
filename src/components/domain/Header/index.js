@@ -98,7 +98,7 @@ const Header = ({ logout }) => {
             <RouterLink to="/settings">Settings</RouterLink>
             <MyBtn onClick={handleModal}>Friends</MyBtn>
             <MyBtn onClick={handleLogout}>
-              <span class="material-icons">logout</span>
+              <span className="material-icons">logout</span>
             </MyBtn>
           </HeaderEnd>
         </HeaderMain>
