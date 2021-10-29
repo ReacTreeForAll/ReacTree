@@ -40,18 +40,13 @@ const Textarea = styled.textarea`
   box-sizing: border-box;
 `
 
-const MyAnswer = React.memo(({ onSubmit }) => {
-  const sleep = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(), 1000)
-    })
-  }
+const MyAnswer = React.memo(({ addPost, channelId }) => {
   const { errors, handleChange, handleSubmit } = useForm({
     initialValues: {
       body: '',
     },
-    onSubmit: async () => {
-      await sleep()
+    onSubmit: async (values) => {
+      await addPost({ ...values, channelId: channelId })
       Alert()
       console.log('DoneSubmit')
     },

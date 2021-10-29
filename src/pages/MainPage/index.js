@@ -12,7 +12,7 @@ const MainPage = React.memo(() => {
   const history = useHistory()
   const { url } = useRouteMatch()
   let paramsId = parseInt(url.split('/')[2], 10) //11
-
+  console.log(paramsId)
   const stepAuthorization = useCallback(
     (userstep, paramsId) => {
       if (paramsId + 1 <= userstep) {
@@ -28,6 +28,7 @@ const MainPage = React.memo(() => {
   const initChannels = async () => {
     try {
       const res = await RequestApi('/channels', 'GET')
+      console.log(res)
       setChannels(res)
     } catch (e) {
       console.error(e)
@@ -50,6 +51,18 @@ const MainPage = React.memo(() => {
     }
   }
 
+  const addPost = async (values) => {
+    try {
+      await Authorization('/posts/create', 'POST', {
+        title: values.body,
+        channelId: values.channelId,
+      })
+      alert('포스트 저장 완료!')
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   useEffect(() => {
     stepAuthorization(userStep, paramsId)
     initChannels()
@@ -66,12 +79,13 @@ const MainPage = React.memo(() => {
         <NavChannel
           channels={channels}
           userstep={userStep === 0 ? 1 : userStep}
-          selectId={paramsId + 1 && console.log(4, paramsId) <= userStep ? paramsId : 0}
+          selectId={paramsId + 1 <= userStep ? paramsId : 0}
         />
         <Div3>
           <MainContentsContainer
             channels={channels}
             selectId={paramsId + 1 <= userStep ? paramsId : 0}
+            addPost={addPost}
           />
         </Div3>
       </Div2>
