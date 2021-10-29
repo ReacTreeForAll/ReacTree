@@ -42,18 +42,13 @@ const Question = ({ children = '', ...props }) => {
     height: 60,
   }
 
-  const bodyStyle = {
-    fontSize: 48,
-    padding: 24,
-  }
-
   return (
     <QuestionContainer {...props}>
       <Text block={true} style={{ ...textStyle }}>
         Question
       </Text>
       <QuestionInner>
-        <Text block={true} style={{ ...bodyStyle }}>
+        <Text block={true} fontSize={'3em'}>
           {children}
         </Text>
         <Image src={imgPath} style={{ ...imageStyle }} />
