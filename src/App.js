@@ -3,7 +3,6 @@ import MainPage from './pages/MainPage'
 import React from 'react'
 import SignUpPage from './pages/SignUpPage'
 import IntroPage from './pages/IntroPage'
-import PostCard from './components/domain/PostContentsContainer/PostCard'
 
 function App() {
   return (
@@ -15,15 +14,11 @@ function App() {
         <Route path="/signup" exact>
           <SignUpPage />
         </Route>
-        <Route path="/signin" exact>
-          <h1>SignIn</h1>
-        </Route>
+        <Route path="/signin" exact></Route>
         <Route path="/main/:id" exact>
           <MainPage />
         </Route>
-        <Route path="/feed" exact>
-          <PostCard />
-        </Route>
+        <Route path="/feed" exact></Route>
         <Route path="/feed/:id">
           <h1>Feed/id</h1>
         </Route>

@@ -32,15 +32,18 @@ const SignUpContainer = styled.div`
   transform: translate(-50%, -50%);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  width: 60%;
+  width: 70%;
   min-width: 250px;
   max-width: 400px;
-  height: 70%;
+  height: 65%;
   min-height: 570px;
-  z-index: 2000;
   background-color: white;
   @media (max-width: 768px) {
     font-size: 16px;
+  }
+  @media (max-width: 375px) {
+    font-size: 13px;
+    min-height: 540px;
   }
 `
 const SignUpModal = ({ submitSignUpForm }) => {
@@ -54,7 +57,7 @@ const SignUpModal = ({ submitSignUpForm }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                marginTop: '30px',
+                marginTop: '2em',
               }}>
               <Logo size={120} />
               <Text

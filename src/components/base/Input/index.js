@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
 import React from 'react'
 
 const Input = React.memo(
@@ -13,11 +12,6 @@ const Input = React.memo(
     ...props
   }) => {
     const backgroundColor = '#F2F2F2'
-    const [inputText, setInputText] = useState('')
-    const onChange = (event) => {
-      setInputText((prevText) => event.target.value)
-    }
-
     const inputStyle = {
       type,
       width,
@@ -33,9 +27,7 @@ const Input = React.memo(
     return (
       <input
         type={type}
-        value={inputText}
         placeholder={placeHolder}
-        onChange={onChange}
         {...props}
         style={{ ...props.style, ...inputStyle }}
       />

@@ -17,9 +17,9 @@ const InputStyle = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.8em;
+  padding: 1em;
   width: 70%;
-  height: 250px;
+  height: 40%;
   border-radius: 5px;
 `
 const SignUpForm = ({ submitSignUpForm }) => {
@@ -59,31 +59,39 @@ const SignUpForm = ({ submitSignUpForm }) => {
   return (
     <FormStyle onSubmit={handleSubmit}>
       <InputStyle>
+        <label htmlFor="email" />
         <Input
           name="email"
           type="email"
+          id="email"
           placeholder="이메일을 입력해주세요"
           onChange={handleChange}
           autoFocus
         />
         <span style={{ color: 'red', fontSize: '8px', padding: '3px' }}>{errors.email}</span>
+        <label htmlFor="fullName" />
         <Input
           name="fullName"
           type="text"
+          id="fullName"
           placeholder="이름을 입력해주세요"
           onChange={handleChange}
         />
         <span style={{ color: 'red', fontSize: '8px', padding: '3px' }}>{errors.fullName}</span>
+        <label htmlFor="password" />
         <Input
           name="password"
           type="password"
+          id="password"
           placeholder="비밀번호를 입력해주세요"
           onChange={handleChange}
         />
         <span style={{ color: 'red', fontSize: '8px', padding: '3px' }}>{errors.password}</span>
+        <label htmlFor="passwordCheck" />
         <Input
           name="passwordCheck"
           type="password"
+          id="passwordCheck"
           placeholder="비밀번호를 한번 더 입력해주세요"
           onChange={handleChange}
         />
