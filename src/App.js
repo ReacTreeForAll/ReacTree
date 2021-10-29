@@ -17,11 +17,8 @@ function App() {
         <Route path="/signin" exact>
           <h1>SignIn</h1>
         </Route>
-        <Route path="/main" exact>
+        <Route path="/main/:id" exact>
           <MainPage />
-        </Route>
-        <Route path="/main/:id">
-          <h1>Main/id</h1>
         </Route>
         <Route path="/feed" exact>
           <h1>Feed</h1>

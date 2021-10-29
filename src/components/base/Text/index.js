@@ -28,7 +28,7 @@ const Text = ({
 
 Text.propTypes = {
   children: PropTypes.node.isRequired,
-  fontSize: PropTypes.number,
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
   fontWeight: PropTypes.bool,
   underline: PropTypes.bool,
