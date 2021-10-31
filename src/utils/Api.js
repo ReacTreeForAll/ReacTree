@@ -13,12 +13,12 @@ export const RequestApi = async (url, method, data) => {
 }
 
 export const Authorization = async (url, method, data) => {
-  const token = JSON.parse(sessionStorage.getItem('tokenId'))
+  const { tokenId } = JSON.parse(sessionStorage.getItem('authUser'))
   return await axios({
     url,
     method,
-    headers: { Authorization: `Bearer ${token}` },
-    data,
+    headers: { Authorization: `Bearer ${tokenId}` },
+    data: data,
   })
     .then((res) => res.data)
     .catch((e) => console.error(e))

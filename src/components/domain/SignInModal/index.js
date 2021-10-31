@@ -71,9 +71,7 @@ const SignInModal = ({ submitSignInForm }) => {
       email: '',
       password: '',
     },
-    onSubmit: async (values) => {
-      await submitSignInForm(values)
-    },
+    onSubmit: submitSignInForm,
     validate: ({ email, password }) => {
       const errors = {}
       if (!email) {

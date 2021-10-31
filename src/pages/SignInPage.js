@@ -2,12 +2,12 @@ import SignInModal from '../components/domain/SignInModal'
 import Swal from 'sweetalert2'
 import failImg from '../../src/assets/fail.png'
 import { useHistory } from 'react-router'
-import useSessionStorage from '../hooks/useSessionStorage'
 import { RequestApi } from '../utils/Api'
+import { useUserContext } from '../contexts/UserProvider'
 
 const SignInPage = () => {
   const history = useHistory()
-  const [tokenId, setTokenId] = useSessionStorage('tokenId', '')
+  const { onLoggedIn } = useUserContext()
   const FailAlert = () => {
     Swal.fire({
       title: '로그인 실패',
@@ -25,8 +25,11 @@ const SignInPage = () => {
         email: values.email,
         password: values.password,
       })
-      const { token } = res
-      setTokenId(token)
+      const { user, token } = res
+      onLoggedIn({
+        userInfo: user,
+        tokenId: token,
+      })
       history.push('/main/0')
       return res
     } catch (e) {

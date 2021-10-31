@@ -4,6 +4,8 @@ import React from 'react'
 import SignUpPage from './pages/SignUpPage'
 import IntroPage from './pages/IntroPage'
 import SignInPage from './pages/SignInPage'
+import Comment from './components/domain/PostContentsContainer/Comment'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
         <Route path="/main/:id" exact>
           <MainPage />
         </Route>
-        <Route path="/feed" exact></Route>
+        <Route path="/feed" exact>
+          <Comment />
+        </Route>
         <Route path="/feed/:id">
           <h1>Feed/id</h1>
         </Route>
@@ -32,7 +36,7 @@ function App() {
           <h1>Settings</h1>
         </Route>
         <Route path="*">
-          <h1>NotFound</h1>
+          <NotFoundPage />
         </Route>
       </Switch>
     </div>

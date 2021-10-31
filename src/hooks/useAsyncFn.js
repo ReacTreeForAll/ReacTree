@@ -6,7 +6,6 @@ const useAsyncFn = (fn, deps) => {
 
   const callback = useCallback((...args) => {
     const callId = ++lastCallId.current
-
     if (!state.isLoading) {
       setState({ ...state, isLoading: true })
     }
@@ -21,6 +20,7 @@ const useAsyncFn = (fn, deps) => {
         return error
       },
     )
+    //eslint-disable-next-line
   }, deps)
 
   return [state, callback]
