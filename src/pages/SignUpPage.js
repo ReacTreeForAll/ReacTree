@@ -38,7 +38,7 @@ const SignUpPage = () => {
     try {
       const res = await RequestApi('/signup', 'POST', {
         email: values.email,
-        fullName: JSON.stringify({ name: values.fullName, userStep: 0 }),
+        fullName: JSON.stringify({ name: values.fullName, userStep: 1 }),
         password: values.password,
       })
       SuccessAlert()
