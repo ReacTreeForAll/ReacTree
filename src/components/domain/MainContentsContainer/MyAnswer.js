@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import Text from '../../base/Text'
 import Swal from 'sweetalert2'
 import ImgPath from '../../../assets/pageMove.png'
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import useForm from '../../../hooks/useForm'
 import Button from '../../base/Button'
 import PropTypes from 'prop-types'
@@ -40,14 +40,14 @@ const Textarea = styled.textarea`
   box-sizing: border-box;
 `
 
-const MyAnswer = React.memo(({ children, addPost, channelId }) => {
+const MyAnswer = ({ title, addPost, channelId }) => {
   const { errors, handleChange, handleSubmit } = useForm({
     initialValues: {
       body: '',
     },
     onSubmit: async (values) => {
       await addPost({ ...values, channelId: channelId })
-      Alert()
+      // Alert()
       console.log('DoneSubmit')
     },
     validate: ({ body }) => {
@@ -58,18 +58,31 @@ const MyAnswer = React.memo(({ children, addPost, channelId }) => {
   })
   const [isEdit, setIsEdit] = useState(true)
 
+  //Edit 상태 on/off
   const handleEdit = useCallback(
     (e) => {
       if (isEdit) {
-        setIsEdit(() => false)
+        setIsEdit(false)
       } else {
         e.preventDefault()
         e.stopPropagation()
-        setIsEdit(() => true)
+        setIsEdit(true)
       }
     },
     [isEdit],
   )
+
+  const initAnswer = () => {
+    if (title) {
+      setIsEdit(false)
+    } else {
+      setIsEdit(true)
+    }
+  }
+
+  useEffect(() => {
+    initAnswer()
+  }, [title])
 
   const textStyle = {
     fontSize: 48,
@@ -111,9 +124,9 @@ const MyAnswer = React.memo(({ children, addPost, channelId }) => {
             placeholder="답변을 입력해주세요!!"
             disabled={!isEdit}
             onChange={handleChange}
-            autoFocus={true}>
-            {children}
-          </Textarea>
+            autoFocus={true}
+            defaultValue={title ? title : ''}
+          />
           <Text fontSize={16} color="red">
             {errors.body ? errors.body : ''}
           </Text>
@@ -129,7 +142,7 @@ const MyAnswer = React.memo(({ children, addPost, channelId }) => {
       </MyAnswerInner>
     </MyAnswerContainer>
   )
-})
+}
 
 MyAnswer.prototype = {
   onSubmit: PropTypes.func,

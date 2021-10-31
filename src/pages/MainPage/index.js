@@ -10,6 +10,7 @@ const MainPage = React.memo(() => {
   const [channels, setChannels] = useState([])
   const [userStep, setUserStep] = useState(0)
   const [userInfo, setUserInfo] = useState([])
+  const [postInfo, setPostInfo] = useState([])
   const history = useHistory()
   const { url } = useRouteMatch()
   let paramsId = parseInt(url.split('/')[2], 10)
@@ -57,30 +58,36 @@ const MainPage = React.memo(() => {
   const addPost = async (values) => {
     try {
       console.log(555, values, userInfo.fullName)
-      console.log({ ...userInfo.fullName, userStep: userInfo.fullName.userStep + 1 })
-      // await Authorization('/posts/create', 'POST', {
-      //   title: values.body,
-      //   channelId: values.channelId,
-      // })
+      const res = await Authorization('/posts/create', 'POST', {
+        title: values.body,
+        channelId: values.channelId,
+      })
       const ress = await Authorization('/settings/update-user', 'PUT', {
         fullName: JSON.stringify({
           ...userInfo.fullName,
           userStep: userInfo.fullName.userStep + 1,
         }),
-        username: '123',
+        username: JSON.stringify({
+          ...userInfo.fullName,
+          userStep: userInfo.fullName.userStep + 1,
+        }),
       })
       console.log('done', ress)
-      // alert('포스트 저장 완료!')
+      alert('포스트 저장 완료!')
+      window.location.reload()
     } catch (e) {
       console.error(e)
     }
   }
 
-  //postId를 이용해 MyAnswer에 해당 Post의 내용을 전달함
-  const initPostBody = async (postId) => {
+  // 특정 사용자의 포스트 목록 조회
+  const initPost = async () => {
     try {
-      const res = await Authorization(`/posts/${postId}`, 'POST')
-      console.log('postID', res)
+      console.log('initpost', userInfo)
+      if (userInfo._id) {
+        const res = await Authorization(`/posts/author/${userInfo._id}`, 'GET')
+        setPostInfo(res.reverse())
+      }
     } catch (e) {
       console.error(e)
     }
@@ -94,22 +101,25 @@ const MainPage = React.memo(() => {
     getUserInfo()
   }, [])
 
+  useEffect(() => {
+    initPost()
+  }, [userInfo])
+
   return (
     <Div1>
       <Header logOut={logOut} />
       <Div2>
         <NavChannel
-          url={url}
-          paramsId={paramsId > userStep ? 0 : paramsId}
+          paramsId={paramsId + 1 > userStep ? 0 : paramsId}
           channels={channels}
           userstep={userStep === 0 ? 1 : userStep}
         />
         <Div3>
           <MainContentsContainer
             channels={channels}
-            selectId={paramsId + 1 <= userStep ? paramsId : 0}
+            paramsId={paramsId}
             addPost={addPost}
-            initPostBody={initPostBody}
+            postInfo={postInfo}
           />
         </Div3>
       </Div2>

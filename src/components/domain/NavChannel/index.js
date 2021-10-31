@@ -47,6 +47,7 @@ const NavChannel = React.memo(({ viewport = 'browser', userstep = 0, channels, p
 
   // 사용자 진도율에 따라 자물쇠 이미지를 on/off함
   const userStepChecker = useCallback((userstep, index) => {
+    // console.log(`step: ${userstep}, idx:${index}`)
     if (index + 1 <= userstep) {
       return true
     }
