@@ -1,11 +1,107 @@
 import styled from '@emotion/styled'
 import Text from '../../base/Text'
-import Swal from 'sweetalert2'
-import ImgPath from '../../../assets/pageMove.png'
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import useForm from '../../../hooks/useForm'
 import Button from '../../base/Button'
 import PropTypes from 'prop-types'
+
+const MyAnswer = ({ title, addPost, updatePost, channelId, postId }) => {
+  //useForm을 사용한 Submit 이벤트 핸들링
+  const { errors, handleChange, handleSubmit } = useForm({
+    initialValues: {
+      body: '',
+    },
+    onSubmit: async (values) => {
+      if (!title) {
+        await addPost({ ...values, channelId: channelId })
+        console.log('add Done')
+      } else {
+        await updatePost({ ...values, channelId, postId })
+        console.log('update Done')
+      }
+    },
+    validate: ({ body }) => {
+      const newErros = {}
+      if (!body) newErros.body = '내용을 입력해주세요!!'
+      return newErros
+    },
+  })
+  const [isEdit, setIsEdit] = useState(true)
+
+  //Edit 상태 on/off
+  const handleEdit = useCallback(
+    (e) => {
+      if (isEdit) {
+        setIsEdit(false)
+      } else {
+        e.preventDefault()
+        e.stopPropagation()
+        setIsEdit(true)
+      }
+    },
+    [isEdit],
+  )
+
+  //Title Prop여부에 따른 Edit 상태 변경
+  const initAnswer = () => {
+    if (title) {
+      setIsEdit(false)
+    } else {
+      setIsEdit(true)
+    }
+  }
+
+  useEffect(() => {
+    initAnswer()
+  }, [title])
+
+  const textStyle = {
+    fontSize: 48,
+    textAlign: 'center',
+    paddingTop: 16,
+    paddingBottom: 16,
+  }
+
+  return (
+    <MyAnswerContainer>
+      <Text block={true} style={{ ...textStyle }}>
+        Answer
+      </Text>
+      <MyAnswerInner>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="textarea"></label>
+          <Textarea
+            id="textarea"
+            name="body"
+            placeholder="답변을 입력해주세요!!"
+            disabled={!isEdit}
+            onChange={handleChange}
+            autoFocus={true}
+            defaultValue={title ? title : ''}
+          />
+          <Text fontSize={16} color="red">
+            {errors.body ? errors.body : ''}
+          </Text>
+          <Button
+            style={{ display: 'block', marginTop: 100, float: 'right' }}
+            width={60}
+            height={60}
+            fontSize={'14px'}
+            onClick={handleEdit}>
+            {isEdit ? '저장' : '수정'}
+          </Button>
+        </form>
+      </MyAnswerInner>
+    </MyAnswerContainer>
+  )
+}
+
+MyAnswer.prototype = {
+  onSubmit: PropTypes.func,
+  updatePost: PropTypes.func,
+  addPost: PropTypes.func,
+  children: PropTypes.string,
+}
 
 const MyAnswerContainer = styled.div`
   width: 700px;
@@ -39,104 +135,5 @@ const Textarea = styled.textarea`
   resize: none;
   box-sizing: border-box;
 `
-
-const MyAnswer = React.memo(({ onSubmit }) => {
-  const sleep = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(), 1000)
-    })
-  }
-  const { errors, handleChange, handleSubmit } = useForm({
-    initialValues: {
-      body: '',
-    },
-    onSubmit: async () => {
-      await sleep()
-      Alert()
-      console.log('DoneSubmit')
-    },
-    validate: ({ body }) => {
-      const newErros = {}
-      if (!body) newErros.body = '내용을 입력해주세요!!'
-      return newErros
-    },
-  })
-  const [isEdit, setIsEdit] = useState(true)
-
-  const handleEdit = useCallback(
-    (e) => {
-      if (isEdit) {
-        setIsEdit(() => false)
-      } else {
-        e.preventDefault()
-        e.stopPropagation()
-        setIsEdit(() => true)
-      }
-    },
-    [isEdit],
-  )
-
-  const textStyle = {
-    fontSize: 48,
-    textAlign: 'center',
-    paddingTop: 16,
-    paddingBottom: 16,
-  }
-
-  const Alert = useCallback(() => {
-    Swal.fire({
-      title: '저장 완료!!',
-      text: '피드페이지로 이동하시겠어요??',
-      imageUrl: ImgPath,
-      imageHeight: 100,
-      imageWidth: 100,
-      showCancelButton: true,
-      confirmButtonColor: 'gray',
-      cancelButtonColor: 'gray',
-      confirmButtonText: '이동하기',
-      cancelButtonText: '머무르기',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        alert('해당 영역에서 피드페이지로 이동시켜줘야 합니다.')
-      }
-    })
-  }, [])
-
-  return (
-    <MyAnswerContainer>
-      <Text block={true} style={{ ...textStyle }}>
-        Answer
-      </Text>
-      <MyAnswerInner>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="textarea"></label>
-          <Textarea
-            id="textarea"
-            name="body"
-            placeholder="답변을 입력해주세요!!"
-            disabled={!isEdit}
-            onChange={handleChange}
-            autoFocus={true}
-          />
-          <Text fontSize={16} color="red">
-            {errors.body ? errors.body : ''}
-          </Text>
-          <Button
-            style={{ display: 'block', marginTop: 100, float: 'right' }}
-            width={60}
-            height={60}
-            fontSize={'14px'}
-            onClick={handleEdit}>
-            {isEdit ? '저장' : '수정'}
-          </Button>
-        </form>
-      </MyAnswerInner>
-    </MyAnswerContainer>
-  )
-})
-
-MyAnswer.prototype = {
-  onSubmit: PropTypes.func,
-}
 
 export default MyAnswer
