@@ -150,7 +150,7 @@ const MainPage = React.memo(() => {
         <Div3>
           <MainContentsContainer
             channels={channels}
-            paramsId={paramsId}
+            paramsId={paramsId + 1 > userStep ? 0 : paramsId}
             addPost={addPost}
             postInfo={postInfo}
             updatePost={updatePost}
