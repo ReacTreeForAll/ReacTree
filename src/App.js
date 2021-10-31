@@ -4,11 +4,8 @@ import React from 'react'
 import SignUpPage from './pages/SignUpPage'
 import IntroPage from './pages/IntroPage'
 import SignInPage from './pages/SignInPage'
-<<<<<<< HEAD
 import Comment from './components/domain/PostContentsContainer/Comment'
-=======
 import NotFoundPage from './pages/NotFoundPage'
->>>>>>> feat/#107/notFound
 
 function App() {
   return (
