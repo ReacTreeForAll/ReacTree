@@ -4,7 +4,7 @@ import React from 'react'
 import SignUpPage from './pages/SignUpPage'
 import IntroPage from './pages/IntroPage'
 import SignInPage from './pages/SignInPage'
-import Test from './components/domain/PostContentsContainer/Test'
+import Comment from './components/domain/PostContentsContainer/Comment'
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           <MainPage />
         </Route>
         <Route path="/feed" exact>
-          <Test />
+          <Comment />
         </Route>
         <Route path="/feed/:id">
           <h1>Feed/id</h1>

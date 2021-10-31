@@ -30,9 +30,7 @@ const SignUpForm = ({ submitSignUpForm }) => {
       password: '',
       passwordCheck: '',
     },
-    onSubmit: async (values) => {
-      await submitSignUpForm(values)
-    },
+    onSubmit: submitSignUpForm,
     validate: ({ email, fullName, password, passwordCheck }) => {
       const errors = {}
       if (!email) {
