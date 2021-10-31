@@ -2,7 +2,7 @@ import Question from './Question'
 import MyAnswer from './MyAnswer'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-const MainContentsContainer = ({ selectId = 0, channels, addPost }) => {
+const MainContentsContainer = ({ selectId = 0, channels, addPost, initPostBody }) => {
   return (
     <>
       <Question>
@@ -10,8 +10,9 @@ const MainContentsContainer = ({ selectId = 0, channels, addPost }) => {
       </Question>
       <MyAnswer
         addPost={addPost}
-        channelId={channels && channels?.filter((_, index) => index === selectId)[0]?._id}
-      />
+        channelId={channels && channels?.filter((_, index) => index === selectId)[0]?._id}>
+        {channels && channels?.filter((_, index) => index === selectId)[0]?._id}
+      </MyAnswer>
     </>
   )
 }

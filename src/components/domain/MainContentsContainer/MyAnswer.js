@@ -40,7 +40,7 @@ const Textarea = styled.textarea`
   box-sizing: border-box;
 `
 
-const MyAnswer = React.memo(({ addPost, channelId }) => {
+const MyAnswer = React.memo(({ children, addPost, channelId }) => {
   const { errors, handleChange, handleSubmit } = useForm({
     initialValues: {
       body: '',
@@ -111,8 +111,9 @@ const MyAnswer = React.memo(({ addPost, channelId }) => {
             placeholder="답변을 입력해주세요!!"
             disabled={!isEdit}
             onChange={handleChange}
-            autoFocus={true}
-          />
+            autoFocus={true}>
+            {children}
+          </Textarea>
           <Text fontSize={16} color="red">
             {errors.body ? errors.body : ''}
           </Text>
@@ -132,6 +133,7 @@ const MyAnswer = React.memo(({ addPost, channelId }) => {
 
 MyAnswer.prototype = {
   onSubmit: PropTypes.func,
+  children: PropTypes.string,
 }
 
 export default MyAnswer
