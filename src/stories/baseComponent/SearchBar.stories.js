@@ -1,5 +1,6 @@
 import SearchBar from '../../components/base/SearchBar'
 import styled from '@emotion/styled'
+import ImgPath from '../../assets/leaf.png'
 
 export default {
   title: 'Components/base/SearchBar',
@@ -43,8 +44,11 @@ export const Default = (args) => {
     }
   `
   return (
-    <div class="container" style={{ ...containerStyle }}>
-      <SearchBar children={<DataButton onClick={handleOnClick}>{'follow'}</DataButton>} />
+    <div className="container" style={{ ...containerStyle }}>
+      <SearchBar
+        src={ImgPath}
+        children={<DataButton onClick={handleOnClick}>{'follow'}</DataButton>}
+      />
     </div>
   )
 }
