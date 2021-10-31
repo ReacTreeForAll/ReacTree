@@ -4,6 +4,7 @@ import React from 'react'
 import SignUpPage from './pages/SignUpPage'
 import IntroPage from './pages/IntroPage'
 import SignInPage from './pages/SignInPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
           <h1>Settings</h1>
         </Route>
         <Route path="*">
-          <h1>NotFound</h1>
+          <NotFoundPage />
         </Route>
       </Switch>
     </div>
