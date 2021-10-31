@@ -4,28 +4,6 @@ import Image from '../../base/Image'
 import imgPath from '../../../assets/leaf.png'
 import PropTypes from 'prop-types'
 
-const QuestionContainer = styled.div`
-  width: 700px;
-  height: 800px;
-  background-color: #eaf8f3;
-  margin-right: 54px;
-  border-radius: 16px;
-  border: 0.5px solid #aaa;
-`
-const QuestionInner = styled.div`
-  height: 85%;
-  margin: 8px 24px;
-  padding: 16px;
-  line-height: 1.5;
-  border-radius: 16px;
-  box-sizing: border-box;
-  background-color: #fff;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-`
 const Question = ({ children = '', ...props }) => {
   const textStyle = {
     fontSize: 48,
@@ -60,5 +38,28 @@ const Question = ({ children = '', ...props }) => {
 Question.prototype = {
   children: PropTypes.string.isRequired,
 }
+
+const QuestionContainer = styled.div`
+  width: 700px;
+  height: 800px;
+  background-color: #eaf8f3;
+  margin-right: 54px;
+  border-radius: 16px;
+  border: 0.5px solid #aaa;
+`
+const QuestionInner = styled.div`
+  height: 85%;
+  margin: 8px 24px;
+  padding: 16px;
+  line-height: 1.5;
+  border-radius: 16px;
+  box-sizing: border-box;
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+`
 
 export default Question

@@ -1,54 +1,24 @@
 import styled from '@emotion/styled'
 import Text from '../../base/Text'
-import Swal from 'sweetalert2'
-import ImgPath from '../../../assets/pageMove.png'
 import React, { useState, useCallback, useEffect } from 'react'
 import useForm from '../../../hooks/useForm'
 import Button from '../../base/Button'
 import PropTypes from 'prop-types'
 
-const MyAnswerContainer = styled.div`
-  width: 700px;
-  height: 800px;
-  background-color: #eaf8f3;
-  margin-right: 32px;
-  border-radius: 16px;
-  border: 0.5px solid #aaa;
-`
-
-const MyAnswerInner = styled.div`
-  height: 85%;
-  margin: 8px 24px;
-  padding: 16px;
-  line-height: 1.5;
-  box-sizing: border-box;
-  border-radius: 16px;
-  background-color: #fff;
-  position: relative;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-`
-
-const Textarea = styled.textarea`
-  width: 100%;
-  height: 400px;
-  padding: 24px;
-  margin-top: 60px;
-  font-size: 18px;
-  outline: none;
-  border: none;
-  resize: none;
-  box-sizing: border-box;
-`
-
-const MyAnswer = ({ title, addPost, channelId }) => {
+const MyAnswer = ({ title, addPost, updatePost, channelId, postId }) => {
+  //useForm을 사용한 Submit 이벤트 핸들링
   const { errors, handleChange, handleSubmit } = useForm({
     initialValues: {
       body: '',
     },
     onSubmit: async (values) => {
-      await addPost({ ...values, channelId: channelId })
-      // Alert()
-      console.log('DoneSubmit')
+      if (!title) {
+        await addPost({ ...values, channelId: channelId })
+        console.log('add Done')
+      } else {
+        await updatePost({ ...values, channelId, postId })
+        console.log('update Done')
+      }
     },
     validate: ({ body }) => {
       const newErros = {}
@@ -72,6 +42,7 @@ const MyAnswer = ({ title, addPost, channelId }) => {
     [isEdit],
   )
 
+  //Title Prop여부에 따른 Edit 상태 변경
   const initAnswer = () => {
     if (title) {
       setIsEdit(false)
@@ -90,25 +61,6 @@ const MyAnswer = ({ title, addPost, channelId }) => {
     paddingTop: 16,
     paddingBottom: 16,
   }
-
-  const Alert = useCallback(() => {
-    Swal.fire({
-      title: '저장 완료!!',
-      text: '피드페이지로 이동하시겠어요??',
-      imageUrl: ImgPath,
-      imageHeight: 100,
-      imageWidth: 100,
-      showCancelButton: true,
-      confirmButtonColor: 'gray',
-      cancelButtonColor: 'gray',
-      confirmButtonText: '이동하기',
-      cancelButtonText: '머무르기',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        alert('해당 영역에서 피드페이지로 이동시켜줘야 합니다.')
-      }
-    })
-  }, [])
 
   return (
     <MyAnswerContainer>
@@ -146,7 +98,42 @@ const MyAnswer = ({ title, addPost, channelId }) => {
 
 MyAnswer.prototype = {
   onSubmit: PropTypes.func,
+  updatePost: PropTypes.func,
+  addPost: PropTypes.func,
   children: PropTypes.string,
 }
+
+const MyAnswerContainer = styled.div`
+  width: 700px;
+  height: 800px;
+  background-color: #eaf8f3;
+  margin-right: 32px;
+  border-radius: 16px;
+  border: 0.5px solid #aaa;
+`
+
+const MyAnswerInner = styled.div`
+  height: 85%;
+  margin: 8px 24px;
+  padding: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+`
+
+const Textarea = styled.textarea`
+  width: 100%;
+  height: 400px;
+  padding: 24px;
+  margin-top: 60px;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  resize: none;
+  box-sizing: border-box;
+`
 
 export default MyAnswer

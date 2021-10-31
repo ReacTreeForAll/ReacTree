@@ -1,17 +1,20 @@
 import Question from './Question'
 import MyAnswer from './MyAnswer'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-const MainContentsContainer = ({ paramsId, channels, addPost, postInfo }) => {
+const MainContentsContainer = ({ paramsId, channels, addPost, postInfo, updatePost }) => {
   return (
     <>
       <Question>
         {channels && channels?.filter((_, index) => index === paramsId)[0]?.description}
       </Question>
       <MyAnswer
+        updatePost={updatePost}
         addPost={addPost}
         channelId={channels && channels?.filter((_, index) => index === paramsId)[0]?._id}
-        title={postInfo && postInfo?.filter((_, index) => index === paramsId)[0]?.title}></MyAnswer>
+        postId={postInfo && postInfo?.filter((_, index) => index === paramsId)[0]?._id}
+        title={postInfo && postInfo?.filter((_, index) => index === paramsId)[0]?.title}
+      />
     </>
   )
 }
@@ -21,6 +24,7 @@ MainContentsContainer.prototype = {
   paramsId: PropTypes.number,
   channels: PropTypes.array,
   addPost: PropTypes.func,
+  updatePost: PropTypes.func,
   postInfo: PropTypes.array,
 }
 
