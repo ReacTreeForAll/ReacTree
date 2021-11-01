@@ -49,7 +49,7 @@ const MainPage = React.memo(() => {
   const logOut = async () => {
     try {
       await Authorization('/logout', 'POST')
-      sessionStorage.removeItem('tokenId')
+      sessionStorage.clear()
       history.push('/')
     } catch (e) {
       console.error(e)

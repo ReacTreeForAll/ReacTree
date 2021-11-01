@@ -84,7 +84,7 @@ const Header = ({ logOut }) => {
           </HeaderStartRouterLink>
           <HeaderEnd>
             <RouterLink to="/main/0">Main</RouterLink>
-            <RouterLink to="/feed">Feed</RouterLink>
+            <RouterLink to="/feed/0">Feed</RouterLink>
             <RouterLink to="/mytree">MyTree</RouterLink>
             <RouterLink to="/settings">Settings</RouterLink>
             <MyBtn onClick={handleModal}>Friends</MyBtn>
