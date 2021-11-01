@@ -7,16 +7,19 @@ import Input from '../../base/Input'
 import Button from '../../base/Button'
 import { useCallback } from 'react'
 import { useUserContext } from '../../../contexts/UserProvider'
+import Text from '../../base/Text'
 
-const Comment = () => {
+const Comment = ({ postId }) => {
   const [newComment, setNewComment] = useState('')
   const [commentList, setCommentList] = useState([])
   const [likeList, setLikeList] = useState([])
   const [isLiked, setIsLiked] = useState(false)
   const [showComment, setShowComment] = useState(false)
   const { userState } = useUserContext()
+  const [postBody, setPostBody] = useState('')
   // postId 임의로 받았다고 생각하고 진행
-  const postId = '617b9c4d71e5193aea3bc941'
+  // const postId = '617b9c4d71e5193aea3bc941'
+  console.log(postId)
 
   // 댓글을 생성하는 API
   const createComment = async (newComment, postId) => {
@@ -86,19 +89,20 @@ const Comment = () => {
 
   // 렌더링 된 이후 한번만 포스트 정보 받아오기
   const getPostInfo = async () => {
-    const data = await RequestApi('/posts/617b9c4d71e5193aea3bc941', 'GET')
-    const { comments, likes } = data
+    const data = await RequestApi(`/posts/${postId}`, 'GET')
+    const { comments, likes, title } = data
     // 유저가 특정 포스트에 좋아요를 누른 상태라면 isLiked true로 설정
     if (likes.filter((like) => like.user === userState.userInfo._id).length !== 0) {
       setIsLiked(true)
     }
     setLikeList(likes)
     setCommentList(comments.reverse())
+    setPostBody(title)
   }
 
   useEffect(() => {
     getPostInfo()
-  }, [])
+  }, [postId])
 
   // 댓글 입력 시간을 계산해주는 함수 -> 나중에 옮겨야할듯
   const displayTime = (createdAt) => {
@@ -119,17 +123,21 @@ const Comment = () => {
     return `${Math.floor(years)}년 전`
   }
   return (
-    <>
-      <CardMain>내용내용</CardMain>
-      <LikeIcon style={{ color: `${isLiked ? 'red' : 'black'}` }}>
-        <span onClick={handleLike} className="material-icons">
-          favorite
-        </span>
-        <span>{likeList.length}</span>
-      </LikeIcon>
+    <Wrapper>
+      <CardMain>
+        <Text block={true} fontSize={'0.4em'}>
+          {postBody}
+        </Text>
+        <LikeIcon style={{ color: `${isLiked ? 'red' : ''}` }}>
+          <span onClick={handleLike} className="material-icons">
+            favorite
+          </span>
+          <span>{likeList.length}</span>
+        </LikeIcon>
+      </CardMain>
       <CommentsContainer>
         <CommentsTitle onClick={handleShowComment}>
-          <span style={{ margin: '8px', fontWeight: '700' }}>
+          <span style={{ margin: '8px', fontWeight: '700', fontSize: '0.4em' }}>
             총 {commentList.length}개의 댓글이 있습니다
           </span>
           <span style={{ fontSize: '30px' }} className="material-icons">
@@ -137,7 +145,7 @@ const Comment = () => {
           </span>
         </CommentsTitle>
         {showComment ? (
-          <CommentList style={{ position: 'fixed', width: '700px', zIndex: '2000' }}>
+          <CommentList style={{ position: 'fixed', zIndex: '2000' }}>
             {commentList.map((data, index) => (
               <CommentItem key={index}>
                 <CommentContents>
@@ -186,25 +194,32 @@ const Comment = () => {
           <Button type="submit">입력</Button>
         </form>
       </MyComment>
-    </>
+    </Wrapper>
   )
 }
 
+const Wrapper = styled.div`
+  width: 600px;
+  background-color: lightsalmon;
+  font-size: 48px;
+  margin: 0 auto;
+  padding: 16px 0 32px 0;
+`
+
 const CardMain = styled.div`
-  width: 700px;
-  height: 500px;
+  width: 100%;
+  height: 200px;
   background-color: lightgray;
   text-align: center;
-  padding-top: 300px;
-  font-size: 30px;
-  font-weight: 700;
+  position: relative;
 `
 const CommentsContainer = styled.div`
-  width: 700px;
+  width: 100%;
+  background-color: green;
 `
 const CommentsTitle = styled.div`
   display: flex;
-  width: 700px;
+  width: 100%;
   height: 30px;
   :hover {
     background-color: #eaf8f3;
@@ -213,23 +228,24 @@ const CommentsTitle = styled.div`
 const LikeIcon = styled.span`
   font-size: 30px;
   display: block;
-  text-align: right;
+  bottom: 0;
+  right: 0;
+  position: absolute;
   padding: 13px;
-  width: 700px;
   &:hover {
     color: red;
   }
 `
 
 const MyComment = styled.div`
-  height: 100px;
-  width: 700px;
+  height: auto;
+  width: 100%;
   display: flex;
   align-items: center;
-  background-color: silver;
+  background-color: yellow;
 `
 const CommentList = styled.ul`
-  width: 100%;
+  width: 500px;
   display: block;
   background-color: #fbfbfb;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
@@ -244,6 +260,7 @@ const CommentContents = styled.div`
   width: 95%;
   display: flex;
   align-items: center;
+  font-size: 0.3em;
   span:not(last-child) {
     margin-right: 15px;
   }

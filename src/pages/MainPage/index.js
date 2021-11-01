@@ -143,6 +143,7 @@ const MainPage = React.memo(() => {
       <Header logOut={logOut} />
       <Div2>
         <NavChannel
+          category={'main'}
           paramsId={paramsId + 1 > userStep ? 0 : paramsId}
           channels={channels}
           userstep={userStep === 0 ? 1 : userStep}

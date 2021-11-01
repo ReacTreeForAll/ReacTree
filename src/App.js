@@ -4,7 +4,7 @@ import React from 'react'
 import SignUpPage from './pages/SignUpPage'
 import IntroPage from './pages/IntroPage'
 import SignInPage from './pages/SignInPage'
-import Comment from './components/domain/PostContentsContainer/Comment'
+import FeedPage from './pages/FeedPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
@@ -23,12 +23,12 @@ function App() {
         <Route path="/main/:id" exact>
           <MainPage />
         </Route>
-        <Route path="/feed" exact>
-          <Comment />
+        <Route path="/feed/:id" exact>
+          <FeedPage />
         </Route>
-        <Route path="/feed/:id">
+        {/* <Route path="/feed/:id">
           <h1>Feed/id</h1>
-        </Route>
+        </Route> */}
         <Route path="/mytree">
           <h1>MyTree</h1>
         </Route>
