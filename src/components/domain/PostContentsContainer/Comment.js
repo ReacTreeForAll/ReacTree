@@ -128,7 +128,7 @@ const Comment = ({ postId }) => {
       <CardMain>
         <Text
           block={true}
-          fontWeight={'700'}
+          fontWeight={700}
           color={'#2b2b2b'}
           fontSize={'0.4em'}
           style={{ padding: '16px' }}>
@@ -218,7 +218,7 @@ const CardMain = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  &:first-child {
+  &:not(first-child) {
     margin-top: 32px;
   }
 `
@@ -233,6 +233,7 @@ const CommentsTitle = styled.div`
   width: 100%;
   height: 30px;
   :hover {
+    color: white;
     background-color: #14bd7e;
   }
 `

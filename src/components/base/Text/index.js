@@ -20,17 +20,17 @@ const Text = ({
   const Tag = block ? 'div' : paragraph ? 'p' : 'span'
 
   return (
-    <Tag style={{ ...props.style, ...fontStyle }} {...props}>
+    <Tag {...props} style={{ ...props.style, ...fontStyle }}>
       {children}
     </Tag>
   )
 }
 
 Text.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
-  fontWeight: PropTypes.bool,
+  fontWeight: PropTypes.number,
   underline: PropTypes.bool,
   block: PropTypes.bool,
   paragraph: PropTypes.bool,
