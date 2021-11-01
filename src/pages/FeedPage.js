@@ -44,6 +44,18 @@ const FeedPage = () => {
       console.error(e)
     }
   }
+
+  //로그아웃 API
+  const logOut = async () => {
+    try {
+      await Authorization('/logout', 'POST')
+      sessionStorage.removeItem('tokenId')
+      history.push('/')
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   useEffect(() => {
     initChannels()
     getUserInfo()
@@ -51,7 +63,7 @@ const FeedPage = () => {
 
   return (
     <FeedContainer>
-      <Header />
+      <Header logOut={logOut} />
       <Div2>
         <NavChannel
           category={'feed'}

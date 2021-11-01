@@ -3,7 +3,7 @@ import Comment from './Comment'
 import Text from '../../base/Text'
 import PropTypes from 'prop-types'
 
-const PostGroup = ({ channels, paramsId }) => {
+const PostGroup = ({ channels = '', paramsId }) => {
   const postList = channels?.filter((_, index) => index === paramsId)[0]?.posts
   return (
     <PostGroupWrapper>

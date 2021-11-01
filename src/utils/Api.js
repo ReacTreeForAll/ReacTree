@@ -13,7 +13,7 @@ export const RequestApi = async (url, method, data) => {
 }
 
 export const Authorization = async (url, method, data) => {
-  const { tokenId } = JSON.parse(sessionStorage.getItem('authUser'))
+  const tokenId = JSON.parse(sessionStorage.getItem('tokenId'))
   return await axios({
     url,
     method,

@@ -27,7 +27,7 @@ const Text = ({
 }
 
 Text.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
   fontWeight: PropTypes.number,

@@ -15,11 +15,8 @@ const Comment = ({ postId }) => {
   const [likeList, setLikeList] = useState([])
   const [isLiked, setIsLiked] = useState(false)
   const [showComment, setShowComment] = useState(false)
-  const { userState } = useUserContext()
+  const { userState, updateUserState } = useUserContext()
   const [postBody, setPostBody] = useState('')
-  // postId 임의로 받았다고 생각하고 진행
-  // const postId = '617b9c4d71e5193aea3bc941'
-  console.log(postId)
 
   // 댓글을 생성하는 API
   const createComment = async (newComment, postId) => {
@@ -41,6 +38,7 @@ const Comment = ({ postId }) => {
     const likeResponse = await Authorization('/likes/create', 'POST', {
       postId,
     })
+    setIsLiked(true)
     setLikeList([likeResponse, ...likeList])
   }
 
@@ -48,20 +46,18 @@ const Comment = ({ postId }) => {
   const deleteLike = async (targetId) => {
     await Authorization('/likes/delete', 'DELETE', { id: targetId })
     setLikeList(likeList.filter((like) => like._id !== targetId))
-    console.log(likeList)
+    setIsLiked(false)
   }
 
   // 유저는 한번만 좋아요가 가능하도록 구현
   // 현재 좋아요한 내역이 없다면 좋아요 생성
   // 좋아요한 내역이 있다면 좋아요 취소
   const handleLike = (e) => {
-    const userAlreadyLike = likeList.filter((like) => like.user === userState.userInfo._id)
+    const userAlreadyLike = likeList.filter((like) => like.user === userState._id)
     if (!isLiked && userAlreadyLike.length === 0) {
       createLike(postId)
-      setIsLiked(true)
     } else {
-      deleteLike(userAlreadyLike[0]._id)
-      setIsLiked(false)
+      deleteLike(userAlreadyLike[0]?._id)
     }
   }
 
@@ -92,8 +88,12 @@ const Comment = ({ postId }) => {
     const data = await RequestApi(`/posts/${postId}`, 'GET')
     const { comments, likes, title } = data
     // 유저가 특정 포스트에 좋아요를 누른 상태라면 isLiked true로 설정
-    if (likes.filter((like) => like.user === userState.userInfo._id).length !== 0) {
+    const userLiked = likes.filter((like) => like.user === userState._id)
+    if (userLiked.length !== 0) {
       setIsLiked(true)
+      updateUserState({ ...userState, likes: userLiked })
+    } else {
+      setIsLiked(false)
     }
     setLikeList(likes)
     setCommentList(comments.reverse())
@@ -102,6 +102,7 @@ const Comment = ({ postId }) => {
 
   useEffect(() => {
     getPostInfo()
+    return () => setIsLiked(false)
   }, [postId])
 
   // 댓글 입력 시간을 계산해주는 함수 -> 나중에 옮겨야할듯
@@ -127,7 +128,7 @@ const Comment = ({ postId }) => {
       <CardMain>
         <Text
           block={true}
-          fontWeight={'700'}
+          fontWeight={700}
           color={'#2b2b2b'}
           fontSize={'0.4em'}
           style={{ padding: '16px' }}>
@@ -150,7 +151,6 @@ const Comment = ({ postId }) => {
           </span>
         </CommentsTitle>
         {showComment ? (
-          // <CommentList style={{ position: 'fixed', zIndex: '2000' }}></CommentList>
           <CommentList>
             {commentList.map((data, index) => (
               <CommentItem key={index}>
@@ -159,7 +159,7 @@ const Comment = ({ postId }) => {
                   <span>{data.comment}</span>
                   <span style={{ fontSize: '10px' }}>{displayTime(data.createdAt)}</span>
                 </CommentContents>
-                {data.author.email === userState.userInfo.email ? (
+                {data.author.email === userState.email ? (
                   <Icon onClick={() => deleteComment(data._id)} className="material-icons">
                     highlight_off
                   </Icon>
@@ -218,7 +218,7 @@ const CardMain = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  &:first-child {
+  &:not(first-child) {
     margin-top: 32px;
   }
 `
@@ -285,6 +285,7 @@ const CommentContents = styled.div`
 `
 const Icon = styled.span`
   font-size: 18px;
+  cursor: pointer;
   :hover {
     color: red;
   }
