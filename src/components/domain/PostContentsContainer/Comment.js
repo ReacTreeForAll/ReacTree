@@ -125,7 +125,12 @@ const Comment = ({ postId }) => {
   return (
     <Wrapper>
       <CardMain>
-        <Text block={true} fontSize={'0.4em'}>
+        <Text
+          block={true}
+          fontWeight={'700'}
+          color={'#2b2b2b'}
+          fontSize={'0.4em'}
+          style={{ padding: '16px' }}>
           {postBody}
         </Text>
         <LikeIcon style={{ color: `${isLiked ? 'red' : ''}` }}>
@@ -145,7 +150,8 @@ const Comment = ({ postId }) => {
           </span>
         </CommentsTitle>
         {showComment ? (
-          <CommentList style={{ position: 'fixed', zIndex: '2000' }}>
+          // <CommentList style={{ position: 'fixed', zIndex: '2000' }}></CommentList>
+          <CommentList>
             {commentList.map((data, index) => (
               <CommentItem key={index}>
                 <CommentContents>
@@ -168,20 +174,11 @@ const Comment = ({ postId }) => {
         )}
       </CommentsContainer>
       <MyComment>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            width: '80%',
-            height: '60%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft: '50px',
-          }}>
+        <Form onSubmit={handleSubmit}>
           <Avatar
             src="https://avatars.githubusercontent.com/u/77623643?v=4"
-            size={70}
-            mode={'fill'}
+            size={50}
+            style={{ marginRight: '8px' }}
           />
           <label htmlFor="myComment" />
           <Input
@@ -190,9 +187,17 @@ const Comment = ({ postId }) => {
             value={newComment}
             placeholder="댓글을 입력해주세요!"
             onChange={handleChange}
+            style={{ backgroundColor: 'red' }}
           />
-          <Button type="submit">입력</Button>
-        </form>
+          <Button
+            width={35}
+            height={35}
+            fontSize={'0.1em'}
+            style={{ margin: '0 auto' }}
+            type="submit">
+            입력
+          </Button>
+        </Form>
       </MyComment>
     </Wrapper>
   )
@@ -200,29 +205,35 @@ const Comment = ({ postId }) => {
 
 const Wrapper = styled.div`
   width: 600px;
-  background-color: lightsalmon;
+  background-color: white;
   font-size: 48px;
   margin: 0 auto;
-  padding: 16px 0 32px 0;
 `
 
 const CardMain = styled.div`
   width: 100%;
   height: 200px;
-  background-color: lightgray;
-  text-align: center;
+  background-color: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  &:first-child {
+    margin-top: 32px;
+  }
 `
 const CommentsContainer = styled.div`
   width: 100%;
-  background-color: green;
+  background-color: #f3f3f5;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 `
 const CommentsTitle = styled.div`
   display: flex;
   width: 100%;
   height: 30px;
   :hover {
-    background-color: #eaf8f3;
+    background-color: #14bd7e;
   }
 `
 const LikeIcon = styled.span`
@@ -232,6 +243,7 @@ const LikeIcon = styled.span`
   right: 0;
   position: absolute;
   padding: 13px;
+  cursor: pointer;
   &:hover {
     color: red;
   }
@@ -240,15 +252,21 @@ const LikeIcon = styled.span`
 const MyComment = styled.div`
   height: auto;
   width: 100%;
-  display: flex;
-  align-items: center;
-  background-color: yellow;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
 `
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+`
+
 const CommentList = styled.ul`
-  width: 500px;
+  width: 600px;
   display: block;
   background-color: #fbfbfb;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 0 0 5px 5px;
 `
 const CommentItem = styled.div`

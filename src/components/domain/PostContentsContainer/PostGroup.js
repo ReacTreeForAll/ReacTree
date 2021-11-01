@@ -26,7 +26,6 @@ PostGroup.propTypes = {
 
 const PostGroupWrapper = styled.div`
   width: 900px;
-  background-color: red;
   font-size: 48px;
   margin: 0 auto;
 `
@@ -35,7 +34,8 @@ const GroupHeader = styled.div`
   width: 100%;
   text-align: center;
   padding: 16px;
-  background-color: blue;
+  background-color: #14bd7e;
+  color: white;
 `
 
 const GroupBody = styled.div`
@@ -43,7 +43,7 @@ const GroupBody = styled.div`
   height: 100vh;
   overflow: hidden;
   overflow-y: auto;
-  background-color: lightpink;
+  background-color: white;
 `
 
 export default PostGroup

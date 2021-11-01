@@ -20,7 +20,7 @@ const Text = ({
   const Tag = block ? 'div' : paragraph ? 'p' : 'span'
 
   return (
-    <Tag style={{ ...props.style, ...fontStyle }} {...props}>
+    <Tag {...props} style={{ ...props.style, ...fontStyle }}>
       {children}
     </Tag>
   )
