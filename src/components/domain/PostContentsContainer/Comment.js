@@ -7,16 +7,16 @@ import Input from '../../base/Input'
 import Button from '../../base/Button'
 import { useCallback } from 'react'
 import { useUserContext } from '../../../contexts/UserProvider'
+import Text from '../../base/Text'
 
-const Comment = () => {
+const Comment = ({ postId }) => {
   const [newComment, setNewComment] = useState('')
   const [commentList, setCommentList] = useState([])
   const [likeList, setLikeList] = useState([])
   const [isLiked, setIsLiked] = useState(false)
   const [showComment, setShowComment] = useState(false)
-  const { userState } = useUserContext()
-  // postId 임의로 받았다고 생각하고 진행
-  const postId = '617b9c4d71e5193aea3bc941'
+  const { userState, updateUserState } = useUserContext()
+  const [postBody, setPostBody] = useState('')
 
   // 댓글을 생성하는 API
   const createComment = async (newComment, postId) => {
@@ -38,6 +38,7 @@ const Comment = () => {
     const likeResponse = await Authorization('/likes/create', 'POST', {
       postId,
     })
+    setIsLiked(true)
     setLikeList([likeResponse, ...likeList])
   }
 
@@ -45,20 +46,18 @@ const Comment = () => {
   const deleteLike = async (targetId) => {
     await Authorization('/likes/delete', 'DELETE', { id: targetId })
     setLikeList(likeList.filter((like) => like._id !== targetId))
-    console.log(likeList)
+    setIsLiked(false)
   }
 
   // 유저는 한번만 좋아요가 가능하도록 구현
   // 현재 좋아요한 내역이 없다면 좋아요 생성
   // 좋아요한 내역이 있다면 좋아요 취소
   const handleLike = (e) => {
-    const userAlreadyLike = likeList.filter((like) => like.user === userState.userInfo._id)
+    const userAlreadyLike = likeList.filter((like) => like.user === userState._id)
     if (!isLiked && userAlreadyLike.length === 0) {
       createLike(postId)
-      setIsLiked(true)
     } else {
-      deleteLike(userAlreadyLike[0]._id)
-      setIsLiked(false)
+      deleteLike(userAlreadyLike[0]?._id)
     }
   }
 
@@ -86,19 +85,25 @@ const Comment = () => {
 
   // 렌더링 된 이후 한번만 포스트 정보 받아오기
   const getPostInfo = async () => {
-    const data = await RequestApi('/posts/617b9c4d71e5193aea3bc941', 'GET')
-    const { comments, likes } = data
+    const data = await RequestApi(`/posts/${postId}`, 'GET')
+    const { comments, likes, title } = data
     // 유저가 특정 포스트에 좋아요를 누른 상태라면 isLiked true로 설정
-    if (likes.filter((like) => like.user === userState.userInfo._id).length !== 0) {
+    const userLiked = likes.filter((like) => like.user === userState._id)
+    if (userLiked.length !== 0) {
       setIsLiked(true)
+      updateUserState({ ...userState, likes: userLiked })
+    } else {
+      setIsLiked(false)
     }
     setLikeList(likes)
     setCommentList(comments.reverse())
+    setPostBody(title)
   }
 
   useEffect(() => {
     getPostInfo()
-  }, [])
+    return () => setIsLiked(false)
+  }, [postId])
 
   // 댓글 입력 시간을 계산해주는 함수 -> 나중에 옮겨야할듯
   const displayTime = (createdAt) => {
@@ -119,17 +124,26 @@ const Comment = () => {
     return `${Math.floor(years)}년 전`
   }
   return (
-    <>
-      <CardMain>내용내용</CardMain>
-      <LikeIcon style={{ color: `${isLiked ? 'red' : 'black'}` }}>
-        <span onClick={handleLike} className="material-icons">
-          favorite
-        </span>
-        <span>{likeList.length}</span>
-      </LikeIcon>
+    <Wrapper>
+      <CardMain>
+        <Text
+          block={true}
+          fontWeight={'700'}
+          color={'#2b2b2b'}
+          fontSize={'0.4em'}
+          style={{ padding: '16px' }}>
+          {postBody}
+        </Text>
+        <LikeIcon style={{ color: `${isLiked ? 'red' : ''}` }}>
+          <span onClick={handleLike} className="material-icons">
+            favorite
+          </span>
+          <span>{likeList.length}</span>
+        </LikeIcon>
+      </CardMain>
       <CommentsContainer>
         <CommentsTitle onClick={handleShowComment}>
-          <span style={{ margin: '8px', fontWeight: '700' }}>
+          <span style={{ margin: '8px', fontWeight: '700', fontSize: '0.4em' }}>
             총 {commentList.length}개의 댓글이 있습니다
           </span>
           <span style={{ fontSize: '30px' }} className="material-icons">
@@ -137,7 +151,7 @@ const Comment = () => {
           </span>
         </CommentsTitle>
         {showComment ? (
-          <CommentList style={{ position: 'fixed', width: '700px', zIndex: '2000' }}>
+          <CommentList>
             {commentList.map((data, index) => (
               <CommentItem key={index}>
                 <CommentContents>
@@ -145,7 +159,7 @@ const Comment = () => {
                   <span>{data.comment}</span>
                   <span style={{ fontSize: '10px' }}>{displayTime(data.createdAt)}</span>
                 </CommentContents>
-                {data.author.email === userState.userInfo.email ? (
+                {data.author.email === userState.email ? (
                   <Icon onClick={() => deleteComment(data._id)} className="material-icons">
                     highlight_off
                   </Icon>
@@ -160,20 +174,11 @@ const Comment = () => {
         )}
       </CommentsContainer>
       <MyComment>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            width: '80%',
-            height: '60%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft: '50px',
-          }}>
+        <Form onSubmit={handleSubmit}>
           <Avatar
             src="https://avatars.githubusercontent.com/u/77623643?v=4"
-            size={70}
-            mode={'fill'}
+            size={50}
+            style={{ marginRight: '8px' }}
           />
           <label htmlFor="myComment" />
           <Input
@@ -182,57 +187,86 @@ const Comment = () => {
             value={newComment}
             placeholder="댓글을 입력해주세요!"
             onChange={handleChange}
+            style={{ backgroundColor: 'red' }}
           />
-          <Button type="submit">입력</Button>
-        </form>
+          <Button
+            width={35}
+            height={35}
+            fontSize={'0.1em'}
+            style={{ margin: '0 auto' }}
+            type="submit">
+            입력
+          </Button>
+        </Form>
       </MyComment>
-    </>
+    </Wrapper>
   )
 }
 
+const Wrapper = styled.div`
+  width: 600px;
+  background-color: white;
+  font-size: 48px;
+  margin: 0 auto;
+`
+
 const CardMain = styled.div`
-  width: 700px;
-  height: 500px;
-  background-color: lightgray;
-  text-align: center;
-  padding-top: 300px;
-  font-size: 30px;
-  font-weight: 700;
+  width: 100%;
+  height: 200px;
+  background-color: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &:first-child {
+    margin-top: 32px;
+  }
 `
 const CommentsContainer = styled.div`
-  width: 700px;
+  width: 100%;
+  background-color: #f3f3f5;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 `
 const CommentsTitle = styled.div`
   display: flex;
-  width: 700px;
+  width: 100%;
   height: 30px;
   :hover {
-    background-color: #eaf8f3;
+    background-color: #14bd7e;
   }
 `
 const LikeIcon = styled.span`
   font-size: 30px;
   display: block;
-  text-align: right;
+  bottom: 0;
+  right: 0;
+  position: absolute;
   padding: 13px;
-  width: 700px;
+  cursor: pointer;
   &:hover {
     color: red;
   }
 `
 
 const MyComment = styled.div`
-  height: 100px;
-  width: 700px;
-  display: flex;
-  align-items: center;
-  background-color: silver;
-`
-const CommentList = styled.ul`
+  height: auto;
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+`
+
+const CommentList = styled.ul`
+  width: 600px;
   display: block;
   background-color: #fbfbfb;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 0 0 5px 5px;
 `
 const CommentItem = styled.div`
@@ -244,12 +278,14 @@ const CommentContents = styled.div`
   width: 95%;
   display: flex;
   align-items: center;
+  font-size: 0.3em;
   span:not(last-child) {
     margin-right: 15px;
   }
 `
 const Icon = styled.span`
   font-size: 18px;
+  cursor: pointer;
   :hover {
     color: red;
   }

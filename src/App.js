@@ -6,6 +6,7 @@ import IntroPage from './pages/IntroPage'
 import SignInPage from './pages/SignInPage'
 import Comment from './components/domain/PostContentsContainer/Comment'
 import NotFoundPage from './pages/NotFoundPage'
+import SettingContainer from './components/domain/SettingContainer'
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
           <h1>MyTree</h1>
         </Route>
         <Route path="/settings">
-          <h1>Settings</h1>
+          <SettingContainer />
         </Route>
         <Route path="*">
           <NotFoundPage />

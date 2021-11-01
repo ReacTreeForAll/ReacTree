@@ -7,7 +7,7 @@ import { useUserContext } from '../contexts/UserProvider'
 
 const SignInPage = () => {
   const history = useHistory()
-  const { onLoggedIn } = useUserContext()
+  const { updateUserState, userState } = useUserContext()
   const FailAlert = () => {
     Swal.fire({
       title: '로그인 실패',
@@ -26,10 +26,8 @@ const SignInPage = () => {
         password: values.password,
       })
       const { user, token } = res
-      onLoggedIn({
-        userInfo: user,
-        tokenId: token,
-      })
+      sessionStorage.setItem('tokenId', JSON.stringify(token))
+      updateUserState(user)
       history.push('/main/0')
       return res
     } catch (e) {
