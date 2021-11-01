@@ -233,6 +233,7 @@ const CommentsTitle = styled.div`
   width: 100%;
   height: 30px;
   :hover {
+    color: white;
     background-color: #14bd7e;
   }
 `
