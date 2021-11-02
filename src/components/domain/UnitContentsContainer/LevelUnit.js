@@ -1,11 +1,15 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-const LevelUnit = ({ level, imageSrc, ...props }) => {
+const LevelUnit = ({ level, imageSrc, clickHandler, ...props }) => {
   const userLevel = level
 
+  const onLevelClick = (event) => {
+    clickHandler(level)
+  }
+
   return (
-    <LevelInnerCircle>
+    <LevelInnerCircle onClick={onLevelClick}>
       <LevelImg src={imageSrc} alt="유닛" />
       <Level>Lv. {userLevel}</Level>
     </LevelInnerCircle>

@@ -1,15 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import ImgPath from '../../../assets/unit.png'
+import ModalContainer from '../../../components/base/ModalContainer'
 
-const Unit = ({ channel, ...props }) => {
+const Unit = ({
+  unitId,
+  level,
+  userStep,
+  channel,
+  channelName,
+  channelInfo,
+  likedPosts,
+  hoverHandler,
+  ...props
+}) => {
+  const [modalVisible, setModalVisible] = useState(false)
+  const maxActiveUnit = userStep % 10
+  if (unitId > maxActiveUnit) {
+    //배경 어둡게 비활성화하기
+  }
+
+  const validateUnit = (unitId, level, userStep) => {
+    if (unitId > userStep) {
+      alert('아직 열리지 않았습니다')
+      return
+    }
+    setModalVisible(true)
+  }
+
+  const onHandleHover = () => {
+    hoverHandler(true)
+  }
+  const onClickHandler = (event) => {
+    validateUnit(unitId, level, userStep, channel)
+  }
+
+  const handleShow = (event) => {
+    event.stopPropagation()
+    setModalVisible(false)
+  }
+
   return (
-    <OuterCircle>
-      <InnerCircle>
-        <Img src={ImgPath} alt="유닛" />
-        <Chapter>{channel}</Chapter>
-      </InnerCircle>
-    </OuterCircle>
+    <>
+      <ModalContainer
+        showModal={modalVisible}
+        handleShow={handleShow}
+        unitId={unitId}
+        level={level}
+        userStep={userStep}
+        channel={channel}
+        channelName={channelName}
+        channelInfo={channelInfo}
+        likedPosts={likedPosts}
+      />
+      <OuterCircle onClick={onClickHandler} onMouseOver={onHandleHover}>
+        <InnerCircle>
+          <Img src={ImgPath} alt="유닛" />
+          <Chapter>{channel}</Chapter>
+        </InnerCircle>
+      </OuterCircle>
+    </>
   )
 }
 
@@ -42,6 +92,7 @@ const InnerCircle = styled.div`
   background-color: #ddf5ff;
   border-radius: 50%;
   border: 5px solid white;
+  pointer-events: none;
 `
 
 const Img = styled.img`
@@ -49,10 +100,13 @@ const Img = styled.img`
   height: 60%;
   border: none;
   background-color: transparent;
+  pointer-events: none;
 `
 const Chapter = styled.span`
   position: absolute;
   font-size: 20px;
   font-weight: 700;
-  left: 44%;
+  top: 40%;
+  left: 38%;
+  pointer-events: none;
 `

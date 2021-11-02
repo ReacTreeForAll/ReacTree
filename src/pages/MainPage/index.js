@@ -39,6 +39,7 @@ const MainPage = React.memo(() => {
         email,
       })
       const step = JSON.parse(res.fullName).userStep
+      console.log(userInfo)
       setUserStep(step)
     } catch (e) {
       console.error(e)
