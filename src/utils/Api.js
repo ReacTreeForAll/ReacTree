@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://13.209.30.200:5003'
+axios.defaults.baseURL = 'https://learn.programmers.co.kr:5003'
 
 export const RequestApi = async (url, method, data) => {
   return await axios({
