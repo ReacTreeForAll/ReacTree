@@ -7,7 +7,7 @@ import { useUserContext } from '../contexts/UserProvider'
 
 const SignInPage = () => {
   const history = useHistory()
-  const { updateUserState, userState } = useUserContext()
+  const { updateUserState } = useUserContext()
   const FailAlert = () => {
     Swal.fire({
       title: '로그인 실패',

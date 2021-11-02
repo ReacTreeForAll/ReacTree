@@ -28,8 +28,8 @@ const Avatar = ({
     height: size,
   }
   return (
-    <AvatarWrapper {...props} shape={shape} style={{ ...avatarStyle, ...props.style }}>
-      <img src={src} alt={alt} mode={mode} style={{ ...avatarStyle }} />
+    <AvatarWrapper {...props} shape={shape} mode={mode} style={{ ...avatarStyle, ...props.style }}>
+      <img src={src} alt={alt} mode={mode} style={{ ...avatarStyle, ...props.style }} />
     </AvatarWrapper>
   )
 }
