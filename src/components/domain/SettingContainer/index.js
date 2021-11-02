@@ -6,6 +6,7 @@ import { Authorization } from '../../../utils/Api'
 import ChangeForm from './ChangeForm'
 import leafImage from '../../../assets/leaf.png'
 import Image from '../../base/Image'
+import NavChannel from '../NavChannel'
 
 const SettingContainer = ({ submitSettingForm, userPersonal }) => {
   const [imageUrl, setImageUrl] = useState('')
@@ -53,101 +54,82 @@ const SettingContainer = ({ submitSettingForm, userPersonal }) => {
   }, [userPersonal])
 
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
-      <Header />
-      <div style={{ display: 'flex', height: '100%', backgroundColor: '#F3F3F5' }}>
-        <NavContainer />
-        <Settings>
-          <UserInfoContainer>
-            <CoverImageContainer
-              style={{
-                background: `${
-                  coverImageUrl ? `url(${coverImageUrl})` : ''
-                } no-repeat center center/contain white`,
-              }}>
-              <CoverWrapper>
-                <UserCoverImg>
-                  <AddCoverImage htmlFor="userCoverImage">
-                    <span
-                      className="material-icons"
-                      style={{ borderRadius: '50%', backgroundColor: 'white', padding: '3px' }}>
-                      add_a_photo
-                    </span>
-                  </AddCoverImage>
-                  <input
-                    type="file"
-                    id="userCoverImage"
-                    accept="image/*"
-                    onChange={showCoverImage}
-                    style={{ display: 'none' }}
-                  />
-                </UserCoverImg>
-                <UserProfileImg>
-                  {imageUrl && (
-                    <Avatar src={imageUrl} alt="imageFile" size={'150px'} mode={'contain'} />
-                  )}
-                  <AddProfileImage htmlFor="userProfileImage">
-                    <span
-                      className="material-icons"
-                      style={{ borderRadius: '50%', backgroundColor: 'white', padding: '3px' }}>
-                      add_a_photo
-                    </span>
-                    <input
-                      type="file"
-                      id="userProfileImage"
-                      accept="image/*"
-                      onChange={showPreviewImage}
-                      style={{ display: 'none' }}
-                    />
-                  </AddProfileImage>
-                </UserProfileImg>
-              </CoverWrapper>
-            </CoverImageContainer>
-            <UserSettingContainer>
-              <User>
-                <UserInfoItem>
-                  <Image src={leafImage} width={'20px'} height={'20px'} />
-                  <span>Email: {userPersonal.email}</span>
-                </UserInfoItem>
-                <UserInfoItem>
-                  <Image src={leafImage} width={'20px'} height={'20px'} />
-                  <span>
-                    FullName: {userPersonal.fullName && JSON.parse(userPersonal.fullName).name}
-                  </span>
-                </UserInfoItem>
-                <UserInfoItem>
-                  <Image src={leafImage} width={'20px'} height={'20px'} />
-                  <span>
-                    CurrentStep:{' '}
-                    {userPersonal.fullName && JSON.parse(userPersonal.fullName).userStep}
-                  </span>
-                </UserInfoItem>
-              </User>
-              <ChangeFormContainer>
-                <ChangeForm submitSettingForm={submitSettingForm} />
-              </ChangeFormContainer>
-            </UserSettingContainer>
-          </UserInfoContainer>
-        </Settings>
-      </div>
-    </div>
+    <Settings>
+      <UserInfoContainer>
+        <CoverImageContainer
+          style={{
+            background: `${
+              coverImageUrl ? `url(${coverImageUrl})` : ''
+            } no-repeat center center/contain white`,
+          }}>
+          <CoverWrapper>
+            <UserCoverImg>
+              <AddCoverImage htmlFor="userCoverImage">
+                <span
+                  className="material-icons"
+                  style={{ borderRadius: '50%', backgroundColor: 'white', padding: '3px' }}>
+                  add_a_photo
+                </span>
+              </AddCoverImage>
+              <input
+                type="file"
+                id="userCoverImage"
+                accept="image/*"
+                onChange={showCoverImage}
+                style={{ display: 'none' }}
+              />
+            </UserCoverImg>
+            <UserProfileImg>
+              {imageUrl && (
+                <Avatar src={imageUrl} alt="imageFile" size={'150px'} mode={'contain'} />
+              )}
+              <AddProfileImage htmlFor="userProfileImage">
+                <span
+                  className="material-icons"
+                  style={{ borderRadius: '50%', backgroundColor: 'white', padding: '3px' }}>
+                  add_a_photo
+                </span>
+                <input
+                  type="file"
+                  id="userProfileImage"
+                  accept="image/*"
+                  onChange={showPreviewImage}
+                  style={{ display: 'none' }}
+                />
+              </AddProfileImage>
+            </UserProfileImg>
+          </CoverWrapper>
+        </CoverImageContainer>
+        <UserSettingContainer>
+          <User>
+            <UserInfoItem>
+              <Image src={leafImage} width={'20px'} height={'20px'} />
+              <span>Email: {userPersonal.email}</span>
+            </UserInfoItem>
+            <UserInfoItem>
+              <Image src={leafImage} width={'20px'} height={'20px'} />
+              <span>
+                FullName: {userPersonal.fullName && JSON.parse(userPersonal.fullName).name}
+              </span>
+            </UserInfoItem>
+            <UserInfoItem>
+              <Image src={leafImage} width={'20px'} height={'20px'} />
+              <span>
+                CurrentStep: {userPersonal.fullName && JSON.parse(userPersonal.fullName).userStep}
+              </span>
+            </UserInfoItem>
+          </User>
+          <ChangeFormContainer>
+            <ChangeForm submitSettingForm={submitSettingForm} />
+          </ChangeFormContainer>
+        </UserSettingContainer>
+      </UserInfoContainer>
+    </Settings>
   )
 }
-const NavContainer = styled.div`
-  min-width: 150px;
-  max-width: 300px;
-  height: 100vh;
-  overflow-y: auto;
-  background: #14bd7e;
-  position: relative;
-  left: 0;
-  top: 0;
-`
 const Settings = styled.div`
-  width: 70%;
+  width: 80%;
   min-width: 500px;
-  height: 90%;
-  margin: 50px;
   border-radius: 5px;
 `
 const UserInfoContainer = styled.div`

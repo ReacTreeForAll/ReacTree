@@ -98,7 +98,7 @@ const SignUpForm = ({ submitSignUpForm }) => {
         </span>
       </InputStyle>
       <Button fontSize={'1em'}>회원가입</Button>
-      <Text style={{ margin: '15px', fontSize: '0.8em' }}>
+      <Text style={{ margin: '15px' }} fontSize={'0.8em'}>
         이미 아이디가 있으신가요?
         <Link to="/signin" style={{ color: '#14bd7e', margin: '10px' }}>
           로그인
