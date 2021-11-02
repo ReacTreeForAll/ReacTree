@@ -9,8 +9,13 @@
     "semi": ["error", "never"],
     "quotes": ["error", "single"],
     "arrow-spacing": "error",
-    "object-property-newline": "error",
     "padded-blocks": ["error", { "blocks": "never" }],
-    "comma-spacing": ["error", { "before": false, "after": true }]
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "import/no-anonymous-default-export": [
+      "error",
+      {
+        "allowObject": true
+      }
+    ]
   }
 }
