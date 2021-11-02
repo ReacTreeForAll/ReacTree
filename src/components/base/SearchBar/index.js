@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Avatar from '../Avatar'
 import useForm from '../../../hooks/useForm'
-import useDebounce from '../../../hooks/useDebounce'
 import {
   Search,
   Form,
@@ -16,10 +15,11 @@ import {
 } from './styled'
 import { Authorization } from '../../../utils/Api'
 
-const SearchBar = React.memo(({ loginUserId, loginUserFollowing, ...props }) => {
+const SearchBar = React.memo(({ friendList, initFollow, ...props }) => {
   const [result, setResult] = useState([])
   const modalEl = useRef(null)
   const [isOpen, setOpen] = useState(false)
+  const friends = friendList.map((user) => user.followers[0])
   const { handleChange, handleSubmit } = useForm({
     initialValues: {
       name: '',
@@ -29,13 +29,14 @@ const SearchBar = React.memo(({ loginUserId, loginUserFollowing, ...props }) => 
         const res = await Authorization(`search/users/${values.name}`, 'GET')
         const friendData = res.map((data) => {
           let result = null
-          if (loginUserFollowing.includes(data.followers[0])) {
+          if (friends.includes(data.followers[0])) {
             result = { ...data, isFriend: true }
           } else {
             result = { ...data, isFriend: false }
           }
           return result
         })
+        console.log(friendData)
         setResult(friendData)
       }
     },
@@ -69,11 +70,15 @@ const SearchBar = React.memo(({ loginUserId, loginUserFollowing, ...props }) => 
         })
         alert('친구 추가')
       } else {
-        await Authorization('/follow/delete', 'DELETE', {
-          id: e.target.dataset.id,
-        })
-        alert('친구 삭제!')
+        console.log('언팔 잠시대기')
+        // console.log(e.target.dataset.id)
+        // await Authorization('/follow/delete', 'DELETE', {
+        //   id: e.target.dataset.id,
+        // })
+        // alert('친구 삭제!')
       }
+      initFollow && initFollow()
+      setOpen(false)
     } catch (e) {
       console.error(e)
     }

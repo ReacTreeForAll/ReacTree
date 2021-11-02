@@ -67,7 +67,7 @@ const MyBtn = styled.button`
   }
 `
 
-const Header = ({ logOut }) => {
+const Header = ({ logOut, userInfo }) => {
   const [showModal, setShowModal] = useState(false)
 
   const handleModal = useCallback(() => {
@@ -95,7 +95,13 @@ const Header = ({ logOut }) => {
         </HeaderMain>
         <Divider type="horizontal" />
       </HeaderWrapper>
-      <FriendModal showModal={showModal} onClose={() => setShowModal(false)} />
+      {userInfo && (
+        <FriendModal
+          userInfo={userInfo && userInfo}
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </>
   )
 }
