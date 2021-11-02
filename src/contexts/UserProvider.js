@@ -1,4 +1,4 @@
-import { createContext, useContext, useCallback, useState } from 'react'
+import { createContext, useContext, useCallback } from 'react'
 import useSessionStorage from '../hooks/useSessionStorage'
 
 const UserContext = createContext()
@@ -13,6 +13,7 @@ const UserProvider = ({ children }) => {
   }
   const resetUserState = useCallback(() => {
     setUserState({})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <UserContext.Provider value={{ userState, updateUserState, resetUserState }}>

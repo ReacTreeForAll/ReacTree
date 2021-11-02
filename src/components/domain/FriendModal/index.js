@@ -7,7 +7,7 @@ import Avatar from '../../../components/base/Avatar'
 import Badge from '../../../components/base/Badge'
 import Text from '../../base/Text'
 import SearchBar from '../../base/SearchBar'
-import { RequestApi, Authorization } from '../../../utils/Api'
+import { Authorization } from '../../../utils/Api'
 
 const FriendModal = ({ showModal = false, onClose, userInfo, ...props }) => {
   // const loginUserId = '617c01c9f4f4476099ac7995'
@@ -40,6 +40,7 @@ const FriendModal = ({ showModal = false, onClose, userInfo, ...props }) => {
 
   useEffect(() => {
     initFollow()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo])
 
   return ReactDOM.createPortal(

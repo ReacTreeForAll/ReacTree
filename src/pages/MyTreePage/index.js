@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../../components/domain/Header'
-import Spinner from '../../components/base/Spinner'
 import UnitContentsContainer from '../../components/domain/UnitContentsContainer'
 import { useHistory } from 'react-router-dom'
 import { RequestApi, Authorization } from '../../utils/Api'

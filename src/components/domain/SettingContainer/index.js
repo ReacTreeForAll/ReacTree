@@ -1,4 +1,3 @@
-import Header from '../Header'
 import Avatar from '../../base/Avatar'
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
@@ -6,7 +5,6 @@ import { Authorization } from '../../../utils/Api'
 import ChangeForm from './ChangeForm'
 import leafImage from '../../../assets/leaf.png'
 import Image from '../../base/Image'
-import NavChannel from '../NavChannel'
 
 const SettingContainer = ({ submitSettingForm, userPersonal }) => {
   const [imageUrl, setImageUrl] = useState('')
@@ -51,6 +49,7 @@ const SettingContainer = ({ submitSettingForm, userPersonal }) => {
 
   useEffect(() => {
     getUserImage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPersonal])
 
   return (
