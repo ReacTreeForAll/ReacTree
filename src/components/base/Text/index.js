@@ -30,7 +30,7 @@ Text.propTypes = {
   children: PropTypes.node.isRequired,
   fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
-  fontWeight: PropTypes.bool,
+  fontWeight: PropTypes.number,
   underline: PropTypes.bool,
   block: PropTypes.bool,
   paragraph: PropTypes.bool,
