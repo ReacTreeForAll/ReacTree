@@ -49,7 +49,7 @@ const MainPage = React.memo(() => {
   const logOut = async () => {
     try {
       await Authorization('/logout', 'POST')
-      sessionStorage.removeItem('tokenId')
+      sessionStorage.clear()
       history.push('/')
     } catch (e) {
       console.error(e)
@@ -143,6 +143,7 @@ const MainPage = React.memo(() => {
       <Header logOut={logOut} />
       <Div2>
         <NavChannel
+          category={'main'}
           paramsId={paramsId + 1 > userStep ? 0 : paramsId}
           channels={channels}
           userstep={userStep === 0 ? 1 : userStep}
