@@ -53,6 +53,7 @@ const MyAnswer = ({ title, addPost, updatePost, channelId, postId }) => {
 
   useEffect(() => {
     initAnswer()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title])
 
   const textStyle = {

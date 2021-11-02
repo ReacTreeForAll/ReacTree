@@ -89,6 +89,7 @@ const NavChannel = React.memo(
     useEffect(() => {
       setSelector(paramsId)
       userStepChecker(userstep, paramsId)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [paramsId])
 
     return (

@@ -112,10 +112,12 @@ const MainPage = React.memo(() => {
 
   useEffect(() => {
     getUserInfo()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     initPost()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo])
 
   const alert = () => {

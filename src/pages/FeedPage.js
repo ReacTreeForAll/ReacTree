@@ -86,12 +86,4 @@ const Div2 = styled.div`
   background-color: #f3f3f5;
 `
 
-const Div3 = styled.div`
-  display: flex;
-  margin: 0 auto;
-  padding: 32px;
-  @media screen and (max-width: 1200px) {
-    flex-direction: column;
-  }
-`
 export default FeedPage

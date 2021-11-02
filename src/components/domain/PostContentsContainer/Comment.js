@@ -103,6 +103,7 @@ const Comment = ({ postId }) => {
   useEffect(() => {
     getPostInfo()
     return () => setIsLiked(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId])
 
   // 댓글 입력 시간을 계산해주는 함수 -> 나중에 옮겨야할듯

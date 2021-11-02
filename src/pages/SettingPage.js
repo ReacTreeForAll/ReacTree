@@ -68,7 +68,7 @@ const SettingPage = () => {
         fullName,
         email,
       })
-      const data = await Authorization('/settings/update-password', 'PUT', {
+      await Authorization('/settings/update-password', 'PUT', {
         password: values.password,
       })
       ChangeAlert()
