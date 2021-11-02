@@ -2,6 +2,8 @@ import React, { useCallback } from 'react'
 import { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Avatar from '../Avatar'
+import useForm from '../../../hooks/useForm'
+import useDebounce from '../../../hooks/useDebounce'
 import {
   Search,
   Form,
@@ -12,22 +14,44 @@ import {
   UserName,
   DataButton,
 } from './styled'
-import { MOCK } from './Data'
+import { Authorization } from '../../../utils/Api'
 
-const SearchBar = ({ placeholder = 'Search', data, handler, children, src, ...props }) => {
-  const [filteredData, setFilteredData] = useState([])
+const SearchBar = React.memo(({ loginUserId, loginUserFollowing, ...props }) => {
+  const [result, setResult] = useState([])
   const modalEl = useRef(null)
   const [isOpen, setOpen] = useState(false)
+  const { handleChange, handleSubmit } = useForm({
+    initialValues: {
+      name: '',
+    },
+    onSubmit: async (values) => {
+      if (values.name) {
+        const res = await Authorization(`search/users/${values.name}`, 'GET')
+        const friendData = res.map((data) => {
+          let result = null
+          if (loginUserFollowing.includes(data.followers[0])) {
+            result = { ...data, isFriend: true }
+          } else {
+            result = { ...data, isFriend: false }
+          }
+          return result
+        })
+        setResult(friendData)
+      }
+    },
+  })
 
+  //검색 결과 창 닫기 기능
   const handleClickOutside = useCallback(
     ({ target }) => {
-      if (isOpen && !modalEl.current.contains(target)) {
+      if (isOpen && !modalEl.current?.contains(target)) {
         setOpen(false)
       }
     },
     [isOpen],
   )
 
+  //검색 결과 창 닫기 기능 전역 이벤트 설정 및 Clear
   useEffect(() => {
     window.addEventListener('click', handleClickOutside)
     return () => {
@@ -35,70 +59,70 @@ const SearchBar = ({ placeholder = 'Search', data, handler, children, src, ...pr
     }
   }, [modalEl, handleClickOutside])
 
-  const handleOnClick = (event) => {
-    const targetUserName = event.target.parentNode.getAttribute('data-userinfo')
-    alert(`${targetUserName}를 follow했습니다`)
-  }
-
-  const handleFilter = (event) => {
-    event.stopPropagation()
-    const searchName = event.target.value
-    const newFilter = MOCK.filter((value) => {
-      return value.fullName.name.toLowerCase().includes(searchName.toLowerCase())
-    })
-
-    if (searchName === '') {
-      setFilteredData([])
-      setOpen(false)
-    } else {
-      setFilteredData(newFilter)
-      setOpen(true)
+  //팔로우/언팔로우 기능
+  const handleFollow = async (e) => {
+    //버튼 Text === Follow 일 경우 현재 친구 관계가 아님을 의미하므로 친구 추가!
+    try {
+      if (e.target.innerText === 'Follow') {
+        await Authorization('/follow/create', 'POST', {
+          userId: e.target.dataset.id,
+        })
+        alert('친구 추가')
+      } else {
+        await Authorization('/follow/delete', 'DELETE', {
+          id: e.target.dataset.id,
+        })
+        alert('친구 삭제!')
+      }
+    } catch (e) {
+      console.error(e)
     }
   }
+
+  useEffect(() => {
+    setOpen(true)
+    return () => setOpen(false)
+  }, [result])
 
   return (
     <>
       <Search>
-        <Form
-          onSubmit={(event) => {
-            event.preventDefault()
-          }}>
+        <Form onSubmit={handleSubmit}>
           <label htmlFor="friend-search" />
           <SearchInput
             id="friend-search"
             type="search"
             width="100%"
+            name="name"
             padding="10px 35px 10px 15px"
             borderRadius="100px"
-            placeholder={placeholder}
-            onChange={handleFilter}
+            placeholder="Search"
+            onChange={handleChange}
+            onKeyUp={handleSubmit}
             autoComplete="off"
           />
         </Form>
         {isOpen && (
           <DataResult ref={modalEl}>
-            {filteredData.slice(0, 15).map((value, key) => {
-              const userName = value.fullName.name
-              return (
-                <DataItemContainer key={key} data-userinfo={userName}>
-                  <DataItem>
-                    <Avatar size={35} src={src} />
-                    <UserName>{userName}</UserName>
-                  </DataItem>
-                  <DataButton onClick={handleOnClick}>{'follow'}</DataButton>
-                </DataItemContainer>
-              )
-            })}
+            {result.map((user) => (
+              <DataItemContainer key={user._id} data-userinfo={user.fullName}>
+                <DataItem>
+                  <Avatar size={35} src={user.image} />
+                  <UserName>{user.fullName}</UserName>
+                </DataItem>
+                <DataButton data-id={user._id} onClick={handleFollow}>
+                  {user.isFriend ? 'UnFollow' : 'Follow'}
+                </DataButton>
+              </DataItemContainer>
+            ))}
           </DataResult>
         )}
       </Search>
     </>
   )
-}
+})
 
 SearchBar.propTypes = {
-  placeholder: PropTypes.string,
-  data: PropTypes.array,
   handler: PropTypes.func,
   children: PropTypes.any,
 }
