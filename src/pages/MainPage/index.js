@@ -175,9 +175,12 @@ const Div2 = styled.div`
 const Div3 = styled.div`
   display: flex;
   margin: 0 auto;
-  padding: 32px;
+  padding-top: 30px;
+  width: 80%;
+  height: 80vh;
   @media screen and (max-width: 1200px) {
     flex-direction: column;
+    height: 80%;
   }
 `
 

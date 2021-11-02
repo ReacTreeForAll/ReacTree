@@ -17,6 +17,7 @@ const BackgroundStyle = styled.div`
 
 const BackgroundWrapper = styled.div`
   position: fixed;
+  overflow-y: auto;
   top: 0;
   left: 0;
   width: 100%;
@@ -61,10 +62,10 @@ const SignUpModal = ({ submitSignUpForm }) => {
               }}>
               <Logo size={120} />
               <Text
+                fontSize={'1.5em'}
+                fontWeight={700}
                 style={{
                   display: 'block',
-                  fontSize: '1.5em',
-                  fontWeight: 700,
                   textAlign: 'center',
                 }}>
                 가꿈이 지원서

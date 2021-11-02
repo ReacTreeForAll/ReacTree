@@ -68,7 +68,7 @@ const MyAnswer = ({ title, addPost, updatePost, channelId, postId }) => {
         Answer
       </Text>
       <MyAnswerInner>
-        <form onSubmit={handleSubmit}>
+        <AnswerSubmitForm onSubmit={handleSubmit}>
           <label htmlFor="textarea"></label>
           <Textarea
             id="textarea"
@@ -82,15 +82,17 @@ const MyAnswer = ({ title, addPost, updatePost, channelId, postId }) => {
           <Text fontSize={16} color="red">
             {errors.body ? errors.body : ''}
           </Text>
-          <Button
-            style={{ display: 'block', marginTop: 100, float: 'right' }}
-            width={60}
-            height={60}
-            fontSize={'14px'}
-            onClick={handleEdit}>
-            {isEdit ? '저장' : '수정'}
-          </Button>
-        </form>
+          <div>
+            <Button
+              style={{ display: 'block', float: 'right' }}
+              width={60}
+              height={60}
+              fontSize={'14px'}
+              onClick={handleEdit}>
+              {isEdit ? '저장' : '수정'}
+            </Button>
+          </div>
+        </AnswerSubmitForm>
       </MyAnswerInner>
     </MyAnswerContainer>
   )
@@ -104,17 +106,23 @@ MyAnswer.prototype = {
 }
 
 const MyAnswerContainer = styled.div`
-  width: 700px;
-  height: 800px;
+  width: 50%;
+  height: 100%;
+  min-height: 550px;
   background-color: #eaf8f3;
-  margin-right: 32px;
+  margin: 32px;
   border-radius: 16px;
   border: 0.5px solid #aaa;
+  @media (max-width: 1200px) {
+    min-height: 400px;
+    width: 90%;
+    height: 200px;
+  }
 `
 
 const MyAnswerInner = styled.div`
-  height: 85%;
   margin: 8px 24px;
+  min-height: 450px;
   padding: 16px;
   line-height: 1.5;
   box-sizing: border-box;
@@ -122,18 +130,32 @@ const MyAnswerInner = styled.div`
   background-color: #fff;
   position: relative;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  @media (max-width: 1200px) {
+    height: 200px;
+    min-height: 300px;
+    width: 90%;
+    min-width: 200px;
+  }
 `
-
+const AnswerSubmitForm = styled.form`
+  display: flex;
+  flex-direction: column;
+`
 const Textarea = styled.textarea`
   width: 100%;
-  height: 400px;
+  height: 300px;
   padding: 24px;
-  margin-top: 60px;
+  margin-top: 30px;
   font-size: 18px;
   outline: none;
   border: none;
   resize: none;
   box-sizing: border-box;
+  @media (max-width: 1200px) {
+    height: 150px;
+    width: 90%;
+    min-width: 200px;
+  }
 `
 
 export default MyAnswer

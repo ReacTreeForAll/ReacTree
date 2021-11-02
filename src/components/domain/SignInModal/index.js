@@ -21,6 +21,7 @@ const BackgroundWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  overflow-y: auto;
   z-index: 1000;
   width: 100%;
   height: 100vh;
@@ -104,10 +105,10 @@ const SignInModal = ({ submitSignInForm }) => {
               }}>
               <Logo size={120} />
               <Text
+                fontWeight={700}
+                fontSize={'1.3em'}
                 style={{
                   display: 'block',
-                  fontSize: '1.3em',
-                  fontWeight: 700,
                   textAlign: 'center',
                 }}>
                 리액트 가꿈이가 되시겠습니까?
@@ -142,7 +143,7 @@ const SignInModal = ({ submitSignInForm }) => {
               <Button fontSize={'1em'} type="submit">
                 로그인
               </Button>
-              <Text style={{ margin: '15px', fontSize: '0.8em' }}>
+              <Text style={{ margin: '15px' }} fontSize={'0.8em'}>
                 ReacTree 회원이 아니신가요?
                 <Link to="/signup" style={{ color: '#14bd7e', margin: '10px' }}>
                   회원가입

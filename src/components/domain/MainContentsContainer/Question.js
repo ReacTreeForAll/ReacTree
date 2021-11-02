@@ -26,7 +26,7 @@ const Question = ({ children = '', ...props }) => {
         Question
       </Text>
       <QuestionInner>
-        <Text block={true} fontSize={'3em'}>
+        <Text block={true} fontSize={'2em'}>
           {children}
         </Text>
         <Image src={imgPath} style={{ ...imageStyle }} />
@@ -40,26 +40,39 @@ Question.prototype = {
 }
 
 const QuestionContainer = styled.div`
-  width: 700px;
-  height: 800px;
+  width: 50%;
+  height: 100%;
+  min-height: 550px;
   background-color: #eaf8f3;
-  margin-right: 54px;
+  margin: 32px;
   border-radius: 16px;
   border: 0.5px solid #aaa;
+  @media (max-width: 1200px) {
+    min-height: 300px;
+    width: 90%;
+    height: 200px;
+  }
 `
 const QuestionInner = styled.div`
-  height: 85%;
   margin: 8px 24px;
-  padding: 16px;
+  padding: 40px;
+  min-height: 450px;
   line-height: 1.5;
   border-radius: 16px;
+  word-break: keep-all;
   box-sizing: border-box;
   background-color: #fff;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* text-align: center; */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  @media (max-width: 1200px) {
+    min-height: 200px;
+    width: 90%;
+    min-width: 200px;
+    font-size: 10px;
+  }
 `
 
 export default Question

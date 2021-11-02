@@ -22,16 +22,17 @@ const BackgroundWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
+  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 `
 
 const IntroContainer = styled.div`
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   width: 100%;
-  height: 70%;
+  height: 60%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -48,10 +49,10 @@ const IntroPage = () => {
         <IntroContainer>
           <Logo size={'12em'} />
           <Text
+            color={'white'}
+            fontSize={'1.5em'}
+            fontWeight={700}
             style={{
-              fontWeight: 700,
-              fontSize: '1.5em',
-              color: 'white',
               textAlign: 'center',
               lineHeight: '1.5',
               margin: '2em',
@@ -60,13 +61,13 @@ const IntroPage = () => {
             <br />
             나만의 리액트리를 가꿀 준비가 됐다면 ?
           </Text>
-          <div style={{ width: '50%', margin: '2em', textAlign: 'center' }}>
+          <div style={{ width: '50%', margin: '1em', textAlign: 'center' }}>
             <Button
               onClick={() => {
                 history.push('/signin')
               }}
               width={'25%'}
-              style={{ margin: '15px' }}>
+              style={{ margin: '10px' }}>
               로그인
             </Button>
             <Button
