@@ -141,7 +141,7 @@ const MainPage = React.memo(() => {
 
   return (
     <Div1>
-      <Header logOut={logOut} />
+      <Header userInfo={userInfo && userInfo} logOut={logOut} />
       <Div2>
         <NavChannel
           category={'main'}

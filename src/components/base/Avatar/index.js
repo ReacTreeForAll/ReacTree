@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-
+import ImgPath from '../../../assets/fail.png'
 const shapetoCssValue = {
   circle: '50%',
   round: '4px',
@@ -18,7 +18,7 @@ const AvatarWrapper = styled.div`
 const Avatar = ({
   shape = 'circle',
   size = 50,
-  src,
+  src = ImgPath,
   mode = 'cover',
   alt = 'ImgError..',
   ...props
@@ -36,7 +36,7 @@ const Avatar = ({
 
 Avatar.propTypes = {
   size: PropTypes.number,
-  src: PropTypes.string.isRequired,
+  src: PropTypes.string,
   alt: PropTypes.string,
   mode: PropTypes.string,
   shape: PropTypes.string,

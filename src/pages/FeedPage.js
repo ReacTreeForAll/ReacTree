@@ -63,7 +63,7 @@ const FeedPage = () => {
 
   return (
     <FeedContainer>
-      <Header logOut={logOut} />
+      <Header userInfo={userInfo && userInfo} logOut={logOut} />
       <Div2>
         <NavChannel
           category={'feed'}

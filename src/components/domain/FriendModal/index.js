@@ -1,11 +1,84 @@
 import styled from '@emotion/styled'
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import useClickAway from '../../../hooks/useClickAway'
 import useKey from '../../../hooks/useKey'
 import Avatar from '../../../components/base/Avatar'
 import Badge from '../../../components/base/Badge'
 import Text from '../../base/Text'
+import SearchBar from '../../base/SearchBar'
+import { RequestApi, Authorization } from '../../../utils/Api'
+
+const FriendModal = ({ showModal = false, onClose, userInfo, ...props }) => {
+  // const loginUserId = '617c01c9f4f4476099ac7995'
+  const loginUserId = userInfo._id
+  const [friendList, setFriendList] = useState([])
+
+  // 팔로우 목록 조회
+  const initFollow = async () => {
+    console.log('innitfollow', loginUserId)
+    if (loginUserId) {
+      const res = await Authorization(`/users/${loginUserId}`, 'GET')
+      setFriendList(res.following.map((data) => data.user))
+    }
+  }
+  const ref = useClickAway(() => {
+    onClose && onClose()
+  })
+
+  useKey('keydown', 'Escape', () => {
+    onClose && onClose()
+  })
+
+  const el = useMemo(() => document.createElement('div'), [])
+  useEffect(() => {
+    document.body.appendChild(el)
+    return () => {
+      document.body.removeChild(el)
+    }
+  })
+
+  useEffect(() => {
+    initFollow()
+  }, [userInfo])
+
+  return ReactDOM.createPortal(
+    <BackgroundStyle>
+      <ModalWrapper style={{ display: showModal ? 'block' : 'none' }}>
+        <ModalInner ref={ref}>
+          <ModalBody className="modal-body">
+            <ModalTop className="header">
+              <SearchBar initFollow={initFollow} friendList={friendList && friendList} />
+            </ModalTop>
+            <ModalMiddle>
+              <Text>Search Bar 하단 영역</Text>
+            </ModalMiddle>
+            <ModalBottom>
+              <Text fontSize={'0.8em'} block={true}>
+                현재 접속 중 영역
+              </Text>
+              {friendList &&
+                friendList.map((user) => (
+                  <SearchRes key={user._id}>
+                    <div>
+                      <Avatar src={user.image} size={30} />
+                      <Badge isOnline={user.isOnline} />
+                    </div>
+                    <div>
+                      <Text fontSize={'0.8em'} color={'#2b2b2b'}>
+                        {JSON.parse(user.fullName).name} / {JSON.parse(user.fullName).userStep}
+                      </Text>
+                    </div>
+                  </SearchRes>
+                ))}
+            </ModalBottom>
+          </ModalBody>
+        </ModalInner>
+      </ModalWrapper>
+    </BackgroundStyle>,
+    el,
+  )
+}
 
 const BackgroundStyle = styled.div`
   width: 100%;
@@ -75,115 +148,5 @@ const SearchRes = styled.div`
   align-items: center;
   margin-bottom: 8px;
 `
-
-const MOCK_DATA = [
-  {
-    _id: 1,
-    email: 'abcde@naver.com',
-    fullName: { userName: '문타리', userStep: 2 },
-    image: 'https://picsum.photos/200',
-  },
-  {
-    _id: 2,
-    email: 'zzzzzz@naver.com',
-    fullName: { userName: '김다슬', userStep: 5 },
-    image: 'https://picsum.photos/200',
-  },
-  {
-    _id: 3,
-    email: 'ggggggg@naver.com',
-    fullName: { userName: '윤승록', userStep: 7 },
-    image: 'https://picsum.photos/200',
-  },
-  {
-    _id: 4,
-    email: 'abcde@naver.com',
-    fullName: { userName: '문타리', userStep: 2 },
-    image: 'https://picsum.photos/200',
-  },
-  {
-    _id: 5,
-    email: 'zzzzzz@naver.com',
-    fullName: { userName: '김다슬', userStep: 5 },
-    image: 'https://picsum.photos/200',
-  },
-  {
-    _id: 6,
-    email: 'ggggggg@naver.com',
-    fullName: { userName: '윤승록', userStep: 7 },
-    image: 'https://picsum.photos/200',
-  },
-  {
-    _id: 7,
-    email: 'abcde@naver.com',
-    fullName: { userName: '문타리', userStep: 2 },
-    image: 'https://picsum.photos/200',
-  },
-  {
-    _id: 8,
-    email: 'zzzzzz@naver.com',
-    fullName: { userName: '김다슬', userStep: 5 },
-    image: 'https://picsum.photos/200',
-  },
-  {
-    _id: 9,
-    email: 'ggggggg@naver.com',
-    fullName: { userName: '윤승록', userStep: 7 },
-    image: 'https://picsum.photos/200',
-  },
-]
-
-const FriendModal = ({ showModal = false, onClose, ...props }) => {
-  const ref = useClickAway(() => {
-    onClose && onClose()
-  })
-
-  useKey('keydown', 'Escape', () => {
-    onClose && onClose()
-  })
-
-  const el = useMemo(() => document.createElement('div'), [])
-  useEffect(() => {
-    document.body.appendChild(el)
-    return () => {
-      document.body.removeChild(el)
-    }
-  })
-  return ReactDOM.createPortal(
-    <BackgroundStyle>
-      <ModalWrapper style={{ display: showModal ? 'block' : 'none' }}>
-        <ModalInner ref={ref}>
-          <ModalBody className="modal-body">
-            <ModalTop className="header">
-              <Text>Search Bar</Text>
-            </ModalTop>
-            <ModalMiddle>
-              <Text>Search Bar 하단 영역</Text>
-            </ModalMiddle>
-            <ModalBottom>
-              <Text fontSize={'0.8em'} block={true}>
-                현재 접속 중 영역
-              </Text>
-              {MOCK_DATA.map((user) => (
-                <SearchRes key={user._id}>
-                  <div>
-                    <Avatar src={user.image} size={30} />
-                    <Badge isOnline={true} />
-                  </div>
-                  <div>
-                    <Text fontSize={'0.8em'} color={'#2b2b2b'}>
-                      {user.fullName.userName} / {user.fullName.userStep}
-                    </Text>
-                  </div>
-                </SearchRes>
-              ))}
-            </ModalBottom>
-          </ModalBody>
-        </ModalInner>
-      </ModalWrapper>
-    </BackgroundStyle>,
-    el,
-  )
-}
 
 export default FriendModal
