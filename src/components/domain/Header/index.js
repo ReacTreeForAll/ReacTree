@@ -10,6 +10,63 @@ import PropTypes from 'prop-types'
 import { Authorization } from '../../../utils/Api'
 import { useHistory } from 'react-router-dom'
 
+const Header = ({ userInfo }) => {
+  const [showModal, setShowModal] = useState(false)
+  const history = useHistory()
+
+  const handleModal = useCallback(() => {
+    setShowModal(true)
+  }, [])
+
+  //로그아웃 API
+  const logOut = async () => {
+    try {
+      await Authorization('/logout', 'POST')
+      sessionStorage.clear()
+      history.push('/')
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  return (
+    <>
+      <HeaderWrapper>
+        <HeaderMain>
+          <HeaderStartRouterLink to="/main/0">
+            <Logo size={76} />
+            <Text block={true}>ReacTree</Text>
+          </HeaderStartRouterLink>
+          <HeaderEnd>
+            <RouterLink to="/main/0">Main</RouterLink>
+            <RouterLink to="/feed/0">Feed</RouterLink>
+            <RouterLink to="/mytree">MyTree</RouterLink>
+            <RouterLink to="/settings">Settings</RouterLink>
+            <MyBtn onClick={handleModal}>Friends</MyBtn>
+            <MyBtn onClick={logOut}>
+              <span className="material-icons" onClick={logOut}>
+                logout
+              </span>
+            </MyBtn>
+          </HeaderEnd>
+        </HeaderMain>
+        <Divider type="horizontal" />
+      </HeaderWrapper>
+      {userInfo && (
+        <FriendModal
+          userInfo={userInfo && userInfo}
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+    </>
+  )
+}
+
+Header.propTypes = {
+  userInfo: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+}
+
 const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
@@ -66,62 +123,5 @@ const MyBtn = styled.button`
     border-bottom: 3px solid #14bd7e;
   }
 `
-
-const Header = ({ userInfo }) => {
-  const [showModal, setShowModal] = useState(false)
-  const history = useHistory()
-
-  const handleModal = useCallback(() => {
-    setShowModal(true)
-  }, [])
-
-  //로그아웃 API
-  const logOut = async () => {
-    try {
-      await Authorization('/logout', 'POST')
-      sessionStorage.clear()
-      history.push('/')
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  return (
-    <>
-      <HeaderWrapper>
-        <HeaderMain>
-          <HeaderStartRouterLink to="/main/0">
-            <Logo size={76} />
-            <Text block={true}>ReacTree</Text>
-          </HeaderStartRouterLink>
-          <HeaderEnd>
-            <RouterLink to="/main/0">Main</RouterLink>
-            <RouterLink to="/feed/0">Feed</RouterLink>
-            <RouterLink to="/mytree">MyTree</RouterLink>
-            <RouterLink to="/settings">Settings</RouterLink>
-            <MyBtn onClick={handleModal}>Friends</MyBtn>
-            <MyBtn onClick={logOut}>
-              <span className="material-icons" onClick={logOut}>
-                logout
-              </span>
-            </MyBtn>
-          </HeaderEnd>
-        </HeaderMain>
-        <Divider type="horizontal" />
-      </HeaderWrapper>
-      {userInfo && (
-        <FriendModal
-          userInfo={userInfo && userInfo}
-          showModal={showModal}
-          onClose={() => setShowModal(false)}
-        />
-      )}
-    </>
-  )
-}
-
-Header.propTypes = {
-  logOut: PropTypes.func,
-}
 
 export default Header

@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Avatar from '../Avatar'
 import useForm from '../../../hooks/useForm'
+import Text from '../../base/Text'
 import {
   Search,
   Form,
@@ -10,7 +11,6 @@ import {
   DataResult,
   DataItemContainer,
   DataItem,
-  UserName,
   DataButton,
 } from './styled'
 import { Authorization } from '../../../utils/Api'
@@ -69,7 +69,7 @@ const SearchBar = React.memo(({ friendList, initFollow, ...props }) => {
         })
         alert('친구 추가')
       } else {
-        console.log('언팔 잠시대기')
+        alert('언팔 잠시 대기!')
         // console.log(e.target.dataset.id)
         // await Authorization('/follow/delete', 'DELETE', {
         //   id: e.target.dataset.id,
@@ -107,12 +107,14 @@ const SearchBar = React.memo(({ friendList, initFollow, ...props }) => {
           />
         </Form>
         {isOpen && (
-          <DataResult ref={modalEl}>
+          <DataResult ref={modalEl} style={{ display: isOpen ? 'block' : 'none' }}>
             {result.map((user) => (
               <DataItemContainer key={user._id} data-userinfo={user.fullName}>
                 <DataItem>
                   <Avatar size={35} src={user.image} />
-                  <UserName>{user.fullName}</UserName>
+                  <Text fontSize={'1.0em'} style={{ marginLeft: '8px' }}>
+                    {JSON.parse(user.fullName).name}
+                  </Text>
                 </DataItem>
                 <DataButton data-id={user._id} onClick={handleFollow}>
                   {user.isFriend ? 'UnFollow' : 'Follow'}
@@ -127,8 +129,8 @@ const SearchBar = React.memo(({ friendList, initFollow, ...props }) => {
 })
 
 SearchBar.propTypes = {
-  handler: PropTypes.func,
-  children: PropTypes.any,
+  friendList: PropTypes.array,
+  initFollow: PropTypes.func,
 }
 
 export default SearchBar

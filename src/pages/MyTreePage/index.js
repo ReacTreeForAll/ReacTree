@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../../components/domain/Header'
 import UnitContentsContainer from '../../components/domain/UnitContentsContainer'
-import { useHistory } from 'react-router-dom'
 import { RequestApi, Authorization } from '../../utils/Api'
 import { Div1, Div2 } from './style'
 
@@ -9,7 +8,6 @@ const MyTreePage = () => {
   const [channels, setChannels] = useState([])
   const [channelInfo, setChannelInfo] = useState([])
   const [userInfo, setUserInfo] = useState(null)
-  const history = useHistory()
 
   // 초기 채널 목록 API
   const initChannels = async () => {
@@ -45,20 +43,9 @@ const MyTreePage = () => {
     getUserInfo()
   }, [])
 
-  //로그아웃 API
-  const logOut = async () => {
-    try {
-      await Authorization('/logout', 'POST')
-      sessionStorage.clear()
-      history.push('/')
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
   return (
     <Div1>
-      <Header logOut={logOut} />
+      <Header userInfo={userInfo} />
       <Div2>
         {userInfo && (
           <UnitContentsContainer
