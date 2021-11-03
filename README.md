@@ -33,7 +33,7 @@
 - 배포 : Netlify
 - 협엽 도구 : Eslint, prettier, storybook, Notion
 
-## 기능 소개 다이어그램
+## 기능 소개
 ![image](https://user-images.githubusercontent.com/65607601/140065379-622fc9e2-3975-4f24-bfee-122c03f31cc3.png)
 
 ## 기대 효과
