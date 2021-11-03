@@ -114,9 +114,9 @@ const PostCard = () => {
     setShowComment(true)
   }
 
-  const offShowComment = () => {
-    setShowComment(false)
-  }
+  // const offShowComment = () => {
+  //   setShowComment(false)
+  // }
   return (
     <CardWrapper>
       <CardMain>main</CardMain>

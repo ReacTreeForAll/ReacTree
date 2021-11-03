@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import React from 'react'
 import bgImgPath from '../../src/assets/backgroundImg.png'
 import Text from '../components/base/Text'
-import Button from '../components/base/Button'
 import Logo from '../components/base/Logo'
 import { useHistory } from 'react-router'
 
