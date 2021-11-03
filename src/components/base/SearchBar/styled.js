@@ -1,10 +1,9 @@
 import styled from '@emotion/styled'
 
 export const Search = styled.div`
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
+  margin: 0 autop;
+  font-size: 32px;
 `
 export const Form = styled.form`
   width: 100%;
@@ -18,6 +17,8 @@ export const SearchInput = styled.input`
   padding: 10px 35px 10px 15px;
   border: none;
   border-radius: 100px;
+  font-size: 0.5em;
+  color: #2b2b2b;
   &:focus {
     outline-color: rgba(220, 228, 170, 0.7);
   }
@@ -27,10 +28,8 @@ export const DataResult = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 5px;
-  width: 95%;
+  width: 100%;
   height: 150px;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;
   overflow-y: auto;
   &::-webkit-scrollbar {
@@ -43,13 +42,12 @@ export const DataResult = styled.div`
 export const DataItemContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 35px;
-  padding: 0;
+  padding: 8px;
 `
 
 export const DataItem = styled.div`
   display: flex;
-  flex-grow: 4;
+  flex-grow: 1;
   line-height: 35px;
   font-size: 16px;
   color: black;
@@ -59,20 +57,18 @@ export const DataItem = styled.div`
   margin: auto;
 `
 export const DataButton = styled.button`
-  width: 35px;
+  display: block;
+  width: 60px;
   height: auto;
   border-radius: 50%;
   background-color: #14bd7e;
   color: white;
-  box-sizing: 'border-box';
   border: none;
-  box-shadow: '5px 2px 2px gray';
-  cursor: 'pointer';
+  font-size: 0.2em;
+  box-shadow: 0 1px 3px black;
+  cursor: pointer;
   &:hover {
     color: black;
     background-color: #f3f3f5;
   }
-`
-export const UserName = styled.div`
-  text-align: center;
 `

@@ -25,8 +25,10 @@ const SettingPage = () => {
   const getUser = async () => {
     try {
       const res = await Authorization('/auth-user', 'GET')
-      const { fullName, email, image, coverImage } = res
+      const { _id, isOnline, fullName, email, image, coverImage } = res
       setUserPersonal({
+        _id,
+        isOnline,
         fullName,
         email,
         image,
@@ -84,7 +86,7 @@ const SettingPage = () => {
   }, [])
   return (
     <div style={{ margin: '0 32px' }}>
-      <Header />
+      <Header userInfo={userPersonal} />
       <SettingContentsContainer>
         <NavChannel
           category={'main'}
