@@ -16,7 +16,6 @@ const FriendModal = ({ showModal = false, onClose, userInfo, ...props }) => {
 
   // 팔로우 목록 조회
   const initFollow = async () => {
-    console.log('innitfollow', loginUserId)
     if (loginUserId) {
       const res = await Authorization(`/users/${loginUserId}`, 'GET')
       setFriendList(res.following.map((data) => data.user))

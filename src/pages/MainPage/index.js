@@ -39,7 +39,6 @@ const MainPage = React.memo(() => {
         email,
       })
       const step = JSON.parse(res.fullName).userStep
-      console.log(userInfo)
       setUserStep(step)
     } catch (e) {
       console.error(e)
@@ -134,7 +133,7 @@ const MainPage = React.memo(() => {
       cancelButtonText: '머무르기',
     }).then((result) => {
       if (result.isConfirmed) {
-        history.push()
+        history.push(`/feed/${userStep - 1}`)
       } else {
         window.location.reload()
       }

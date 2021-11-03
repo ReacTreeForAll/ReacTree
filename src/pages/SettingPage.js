@@ -62,11 +62,12 @@ const SettingPage = () => {
           userStep: JSON.parse(userPersonal.fullName).userStep,
         }),
       })
-      const { fullName, email } = userInfo
+      const { fullName, email, image, coverImage } = userInfo
       setUserPersonal({
-        ...userPersonal,
         fullName,
         email,
+        image,
+        coverImage,
       })
       await Authorization('/settings/update-password', 'PUT', {
         password: values.password,

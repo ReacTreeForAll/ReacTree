@@ -41,14 +41,12 @@ Question.prototype = {
 
 const QuestionContainer = styled.div`
   width: 50%;
-  height: 100%;
-  min-height: 550px;
   background-color: #eaf8f3;
   margin: 32px;
   border-radius: 16px;
   border: 0.5px solid #aaa;
   @media (max-width: 1200px) {
-    min-height: 300px;
+    min-height: 400px;
     width: 90%;
     height: 200px;
   }
@@ -56,16 +54,17 @@ const QuestionContainer = styled.div`
 const QuestionInner = styled.div`
   margin: 8px 24px;
   padding: 40px;
-  min-height: 450px;
+  height: 80%;
   line-height: 1.5;
   border-radius: 16px;
+  text-align: center;
   word-break: keep-all;
   box-sizing: border-box;
   background-color: #fff;
   position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
-  /* text-align: center; */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   @media (max-width: 1200px) {
     min-height: 200px;
