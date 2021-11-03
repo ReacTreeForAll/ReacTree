@@ -69,7 +69,7 @@ const FeedPage = () => {
           category={'feed'}
           channels={channels}
           paramsId={paramsId + 1 > userStep ? 0 : paramsId}
-          userstep={userStep === 0 ? 1 : userStep}
+          userstep={userStep === 0 ? 1 : userStep - 1}
         />
         <PostGroup channels={channels} paramsId={paramsId + 1 > userStep ? 0 : paramsId} />
       </Div2>
