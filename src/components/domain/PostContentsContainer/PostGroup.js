@@ -3,7 +3,7 @@ import Comment from './Comment'
 import Text from '../../base/Text'
 import PropTypes from 'prop-types'
 
-const PostGroup = ({ channels = '', paramsId }) => {
+const PostGroup = ({ channels = '', paramsId, userInfo }) => {
   const postList = channels?.filter((_, index) => index === paramsId)[0]?.posts
   return (
     <PostGroupWrapper>
@@ -13,7 +13,10 @@ const PostGroup = ({ channels = '', paramsId }) => {
         </Text>
       </GroupHeader>
       <GroupBody>
-        {postList && postList.map((post, index) => <Comment key={index} postId={post} />)}
+        {postList &&
+          postList.map((postId, index) => (
+            <Comment key={index} postId={postId} userInfo={userInfo} />
+          ))}
       </GroupBody>
     </PostGroupWrapper>
   )

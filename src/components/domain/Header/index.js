@@ -7,6 +7,8 @@ import FriendModal from '../FriendModal'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { Authorization } from '../../../utils/Api'
+import { useHistory } from 'react-router-dom'
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -65,12 +67,24 @@ const MyBtn = styled.button`
   }
 `
 
-const Header = ({ logOut, userInfo }) => {
+const Header = ({ userInfo }) => {
   const [showModal, setShowModal] = useState(false)
+  const history = useHistory()
 
   const handleModal = useCallback(() => {
     setShowModal(true)
   }, [])
+
+  //로그아웃 API
+  const logOut = async () => {
+    try {
+      await Authorization('/logout', 'POST')
+      sessionStorage.clear()
+      history.push('/')
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   return (
     <>
@@ -87,7 +101,9 @@ const Header = ({ logOut, userInfo }) => {
             <RouterLink to="/settings">Settings</RouterLink>
             <MyBtn onClick={handleModal}>Friends</MyBtn>
             <MyBtn onClick={logOut}>
-              <span className="material-icons">logout</span>
+              <span className="material-icons" onClick={logOut}>
+                logout
+              </span>
             </MyBtn>
           </HeaderEnd>
         </HeaderMain>

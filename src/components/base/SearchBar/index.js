@@ -36,7 +36,6 @@ const SearchBar = React.memo(({ friendList, initFollow, ...props }) => {
           }
           return result
         })
-        console.log(friendData)
         setResult(friendData)
       }
     },

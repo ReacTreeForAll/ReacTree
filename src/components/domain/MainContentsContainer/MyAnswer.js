@@ -14,10 +14,8 @@ const MyAnswer = ({ title, addPost, updatePost, channelId, postId }) => {
     onSubmit: async (values) => {
       if (!title) {
         await addPost({ ...values, channelId: channelId })
-        console.log('add Done')
       } else {
         await updatePost({ ...values, channelId, postId })
-        console.log('update Done')
       }
     },
     validate: ({ body }) => {

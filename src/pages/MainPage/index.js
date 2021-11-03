@@ -45,17 +45,6 @@ const MainPage = React.memo(() => {
     }
   }
 
-  //로그아웃 API
-  const logOut = async () => {
-    try {
-      await Authorization('/logout', 'POST')
-      sessionStorage.clear()
-      history.push('/')
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
   //포스트 등록 && userStep + 1로 유저 설정 변경 API
   const addPost = async (values) => {
     try {
@@ -142,7 +131,7 @@ const MainPage = React.memo(() => {
 
   return (
     <Div1>
-      <Header userInfo={userInfo && userInfo} logOut={logOut} />
+      <Header userInfo={userInfo && userInfo} />
       <Div2>
         <NavChannel
           category={'main'}
