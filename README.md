@@ -33,8 +33,6 @@
 - 배포 : Netlify
 - 협엽 도구 : Eslint, prettier, storybook, Notion
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/13656c42-cf37-4fbc-b559-0a697d2e274b/deploy-status)](https://app.netlify.com/sites/inspiring-heisenberg-eec7e5/deploys)
-
 ## 기능 소개 다이어그램
 ![image](https://user-images.githubusercontent.com/65607601/140065379-622fc9e2-3975-4f24-bfee-122c03f31cc3.png)
 
@@ -45,4 +43,19 @@
 - 나의 리액트리를 가꾸어, 거대한 나만의 리액트 숲을 완성할 수 있는 가꿈이로 성장해 나가길 희망합니다!
 ![image](https://user-images.githubusercontent.com/65607601/140066077-c7549586-3ae4-4ed2-8719-4198b89e6021.png)
 
+## 프로젝트 환경 & 실행
+### Node Version
+- v16.10.0
+### Application install
+`npm install`
+### Application run
+`npm start`
 
+
+## 프로젝트 지원
+### programmers dev-course
+
+# 프로젝트 도메인
+https://reactree.netlify.app
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/13656c42-cf37-4fbc-b559-0a697d2e274b/deploy-status)](https://app.netlify.com/sites/inspiring-heisenberg-eec7e5/deploys)
