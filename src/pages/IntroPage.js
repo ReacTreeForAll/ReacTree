@@ -29,7 +29,7 @@ const BackgroundWrapper = styled.div`
 
 const IntroContainer = styled.div`
   position: absolute;
-  top: 35%;
+  top: 50%;
   left: 50%;
   width: 100%;
   height: 60%;
@@ -39,6 +39,23 @@ const IntroContainer = styled.div`
   align-items: center;
   @media (max-width: 768px) {
     font-size: 12px;
+  }
+`
+const ButtonStyle = styled.button`
+  width: 30%;
+  max-width: 200px;
+  border: none;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #14bd7e;
+  font-size: 0.8em;
+  font-weight: 700;
+  margin: 10px;
+  color: white;
+  box-shadow: 1px 1px 1px gray;
+  :hover {
+    background-color: #f3f3f5;
+    color: black;
   }
 `
 const IntroPage = () => {
@@ -56,27 +73,33 @@ const IntroPage = () => {
               textAlign: 'center',
               lineHeight: '1.5',
               margin: '2em',
+              wordBreak: 'keep-all',
             }}>
             눈부신 성장을 위한 리액트 30일 챌린지!
             <br />
             나만의 리액트리를 가꿀 준비가 됐다면 ?
           </Text>
-          <div style={{ width: '50%', margin: '1em', textAlign: 'center' }}>
-            <Button
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '50%',
+              margin: '1em',
+              textAlign: 'center',
+            }}>
+            <ButtonStyle
               onClick={() => {
                 history.push('/signin')
-              }}
-              width={'25%'}
-              style={{ margin: '10px' }}>
+              }}>
               로그인
-            </Button>
-            <Button
+            </ButtonStyle>
+            <ButtonStyle
               onClick={() => {
                 history.push('/signup')
-              }}
-              width={'25%'}>
+              }}>
               회원가입
-            </Button>
+            </ButtonStyle>
           </div>
         </IntroContainer>
       </BackgroundWrapper>

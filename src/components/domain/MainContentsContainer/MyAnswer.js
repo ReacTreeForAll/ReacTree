@@ -83,7 +83,7 @@ const MyAnswer = ({ title, addPost, updatePost, channelId, postId }) => {
           <Text fontSize={16} color="red">
             {errors.body ? errors.body : ''}
           </Text>
-          <div>
+          <div style={{ margin: '15px' }}>
             <Button
               style={{ display: 'block', float: 'right' }}
               width={60}
@@ -108,8 +108,7 @@ MyAnswer.prototype = {
 
 const MyAnswerContainer = styled.div`
   width: 50%;
-  height: 100%;
-  min-height: 550px;
+  min-height: 500px;
   background-color: #eaf8f3;
   margin: 32px;
   border-radius: 16px;
@@ -123,8 +122,8 @@ const MyAnswerContainer = styled.div`
 
 const MyAnswerInner = styled.div`
   margin: 8px 24px;
-  min-height: 450px;
   padding: 16px;
+  height: 80%;
   line-height: 1.5;
   box-sizing: border-box;
   border-radius: 16px;
@@ -141,10 +140,11 @@ const MyAnswerInner = styled.div`
 const AnswerSubmitForm = styled.form`
   display: flex;
   flex-direction: column;
+  height: 100%;
 `
 const Textarea = styled.textarea`
   width: 100%;
-  height: 300px;
+  height: 60%;
   padding: 24px;
   margin-top: 30px;
   font-size: 18px;
@@ -154,7 +154,6 @@ const Textarea = styled.textarea`
   box-sizing: border-box;
   @media (max-width: 1200px) {
     height: 150px;
-    width: 90%;
     min-width: 200px;
   }
 `
