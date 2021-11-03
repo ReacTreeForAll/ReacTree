@@ -4,13 +4,12 @@ import NavChannel from '../components/domain/NavChannel'
 import styled from '@emotion/styled'
 import { useState, useEffect } from 'react'
 import { RequestApi, Authorization } from '../utils/Api'
-import { useRouteMatch, useHistory } from 'react-router-dom'
+import { useRouteMatch } from 'react-router-dom'
 
 const FeedPage = () => {
   const [channels, setChannels] = useState([])
   const [userStep, setUserStep] = useState(0)
   const [userInfo, setUserInfo] = useState([])
-  const history = useHistory()
   const { url } = useRouteMatch()
   let paramsId = parseInt(url.split('/')[2], 10)
 
@@ -27,30 +26,21 @@ const FeedPage = () => {
   const getUserInfo = async () => {
     try {
       const res = await Authorization('/auth-user', 'GET')
-      const { _id, isOnline, fullName, email, comments, image, imagePublicId, likes } = res
-      setUserInfo({
-        _id,
-        isOnline,
-        fullName: JSON.parse(fullName),
-        email,
-        comments,
-        image,
-        imagePublicId,
-        likes,
-      })
-      const step = JSON.parse(res.fullName).userStep
-      setUserStep(step)
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  //로그아웃 API
-  const logOut = async () => {
-    try {
-      await Authorization('/logout', 'POST')
-      sessionStorage.clear()
-      history.push('/')
+      if (res) {
+        const { _id, isOnline, fullName, email, comments, image, imagePublicId, likes } = res
+        setUserInfo({
+          _id,
+          isOnline,
+          fullName,
+          email,
+          comments,
+          image,
+          imagePublicId,
+          likes,
+        })
+        const step = JSON.parse(res.fullName).userStep
+        setUserStep(step)
+      }
     } catch (e) {
       console.error(e)
     }
@@ -63,15 +53,19 @@ const FeedPage = () => {
 
   return (
     <FeedContainer>
-      <Header userInfo={userInfo && userInfo} logOut={logOut} />
+      <Header userInfo={userInfo && userInfo} />
       <Div2>
         <NavChannel
           category={'feed'}
-          channels={channels}
+          channels={channels && channels}
           paramsId={paramsId + 1 > userStep ? 0 : paramsId}
           userstep={userStep === 0 ? 1 : userStep}
         />
-        <PostGroup channels={channels} paramsId={paramsId + 1 > userStep ? 0 : paramsId} />
+        <PostGroup
+          userInfo={userInfo && userInfo}
+          channels={channels && channels}
+          paramsId={paramsId + 1 > userStep ? 0 : paramsId}
+        />
       </Div2>
     </FeedContainer>
   )

@@ -39,19 +39,7 @@ const MainPage = React.memo(() => {
         email,
       })
       const step = JSON.parse(res.fullName).userStep
-      console.log(userInfo)
       setUserStep(step)
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  //로그아웃 API
-  const logOut = async () => {
-    try {
-      await Authorization('/logout', 'POST')
-      sessionStorage.clear()
-      history.push('/')
     } catch (e) {
       console.error(e)
     }
@@ -143,7 +131,7 @@ const MainPage = React.memo(() => {
 
   return (
     <Div1>
-      <Header userInfo={userInfo && userInfo} logOut={logOut} />
+      <Header userInfo={userInfo && userInfo} />
       <Div2>
         <NavChannel
           category={'main'}

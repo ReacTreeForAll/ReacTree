@@ -9,7 +9,7 @@ import { useCallback } from 'react'
 import { useUserContext } from '../../../contexts/UserProvider'
 import Text from '../../base/Text'
 
-const Comment = ({ postId }) => {
+const Comment = ({ postId, userInfo }) => {
   const [newComment, setNewComment] = useState('')
   const [commentList, setCommentList] = useState([])
   const [likeList, setLikeList] = useState([])
@@ -17,6 +17,7 @@ const Comment = ({ postId }) => {
   const [showComment, setShowComment] = useState(false)
   const { userState, updateUserState } = useUserContext()
   const [postBody, setPostBody] = useState('')
+  const [author, setAuthor] = useState({})
 
   // 댓글을 생성하는 API
   const createComment = async (newComment, postId) => {
@@ -86,18 +87,24 @@ const Comment = ({ postId }) => {
   // 렌더링 된 이후 한번만 포스트 정보 받아오기
   const getPostInfo = async () => {
     const data = await RequestApi(`/posts/${postId}`, 'GET')
-    const { comments, likes, title } = data
+    const { comments, likes, title, author } = data
     // 유저가 특정 포스트에 좋아요를 누른 상태라면 isLiked true로 설정
-    const userLiked = likes.filter((like) => like.user === userState._id)
-    if (userLiked.length !== 0) {
-      setIsLiked(true)
-      updateUserState({ ...userState, likes: userLiked })
-    } else {
-      setIsLiked(false)
+    if (data) {
+      const userLiked = likes.filter((like) => like.user === userState._id)
+      if (userLiked.length !== 0) {
+        setIsLiked(true)
+        updateUserState({ ...userState, likes: userLiked })
+      } else {
+        setIsLiked(false)
+      }
+      setLikeList(likes)
+      setCommentList(comments.reverse())
+      setPostBody(title)
+      setAuthor({
+        email: author.email,
+        authorName: JSON.parse(author.fullName).name,
+      })
     }
-    setLikeList(likes)
-    setCommentList(comments.reverse())
-    setPostBody(title)
   }
 
   useEffect(() => {
@@ -131,10 +138,15 @@ const Comment = ({ postId }) => {
           block={true}
           fontWeight={700}
           color={'#2b2b2b'}
-          fontSize={'0.4em'}
+          fontSize={'0.6em'}
           style={{ padding: '16px' }}>
           {postBody}
         </Text>
+        {author && (
+          <Text block={true} color={'#2b2b2b'} fontSize={'0.4em'}>
+            {author.authorName} / {author.email}
+          </Text>
+        )}
         <LikeIcon style={{ color: `${isLiked ? 'red' : ''}` }}>
           <span onClick={handleLike} className="material-icons">
             favorite
@@ -176,11 +188,7 @@ const Comment = ({ postId }) => {
       </CommentsContainer>
       <MyComment>
         <Form onSubmit={handleSubmit}>
-          <Avatar
-            src="https://avatars.githubusercontent.com/u/77623643?v=4"
-            size={50}
-            style={{ marginRight: '8px' }}
-          />
+          <Avatar src={userInfo.image} size={50} style={{ marginRight: '8px' }} />
           <label htmlFor="myComment" />
           <Input
             id="myComment"
@@ -218,6 +226,7 @@ const CardMain = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   position: relative;
   &:not(first-child) {
     margin-top: 32px;
