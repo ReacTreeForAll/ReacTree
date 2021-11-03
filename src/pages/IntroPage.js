@@ -28,7 +28,7 @@ const BackgroundWrapper = styled.div`
 
 const IntroContainer = styled.div`
   position: absolute;
-  top: 35%;
+  top: 40%;
   left: 50%;
   width: 100%;
   height: 60%;
@@ -50,7 +50,7 @@ const ButtonStyle = styled.button`
   background-color: #14bd7e;
   font-size: 0.8em;
   font-weight: 700;
-  margin: 10px;
+  margin: 5px;
   color: white;
   box-shadow: 1px 1px 1px gray;
   :hover {
