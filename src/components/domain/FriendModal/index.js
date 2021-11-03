@@ -46,33 +46,33 @@ const FriendModal = ({ showModal = false, onClose, userInfo, ...props }) => {
     <BackgroundStyle>
       <ModalWrapper style={{ display: showModal ? 'block' : 'none' }}>
         <ModalInner ref={ref}>
-          <ModalBody className="modal-body">
-            <ModalTop className="header">
-              <SearchBar initFollow={initFollow} friendList={friendList && friendList} />
-            </ModalTop>
-            <ModalMiddle>
-              <Text>Search Bar 하단 영역</Text>
-            </ModalMiddle>
-            <ModalBottom>
-              <Text fontSize={'0.8em'} block={true}>
-                현재 접속 중 영역
+          <Div1>
+            <SearchBar initFollow={initFollow} friendList={friendList && friendList} />
+          </Div1>
+          <ModalBottom>
+            <Text fontSize={'0.8em'} block={true}>
+              내 친구 / 진도율
+            </Text>
+            {friendList && friendList.length === 0 ? (
+              <Text block={true} fontSize={'1.5em'} color={'#2b2b2b'} style={{ padding: '32px' }}>
+                아직은 친구가 없으시네요..!
               </Text>
-              {friendList &&
-                friendList.map((user) => (
-                  <SearchRes key={user._id}>
-                    <div>
-                      <Avatar src={user.image} size={30} />
-                      <Badge isOnline={user.isOnline} />
-                    </div>
-                    <div>
-                      <Text fontSize={'0.8em'} color={'#2b2b2b'}>
-                        {JSON.parse(user.fullName).name} / {JSON.parse(user.fullName).userStep}
-                      </Text>
-                    </div>
-                  </SearchRes>
-                ))}
-            </ModalBottom>
-          </ModalBody>
+            ) : (
+              friendList.map((user) => (
+                <SearchRes key={user._id}>
+                  <div>
+                    <Avatar src={user.image} size={30} />
+                    <Badge isOnline={user.isOnline} />
+                  </div>
+                  <div>
+                    <Text fontSize={'0.8em'} color={'#2b2b2b'}>
+                      {JSON.parse(user.fullName).name} / {JSON.parse(user.fullName).userStep}
+                    </Text>
+                  </div>
+                </SearchRes>
+              ))
+            )}
+          </ModalBottom>
         </ModalInner>
       </ModalWrapper>
     </BackgroundStyle>,
@@ -106,39 +106,17 @@ const ModalInner = styled.div`
   width: 70%;
   min-width: 320px;
   max-width: 520px;
-  height: 70%;
-  min-height: 500px;
   background-color: white;
-  display: flex;
   @media (max-width: 768px) {
     font-size: 16px;
   }
 `
 
-const ModalBody = styled.div`
-  background-color: lightgray;
-  width: 100%;
-  margin: 0 32px;
-`
-
-const ModalTop = styled.div`
-  background-color: darkgray;
-  min-height: 10%;
-`
-
-const ModalMiddle = styled.div`
-  background-color: rgba(0, 0, 0, 0.1);
-  padding: 24px;
-  height: 40%;
-  margin: 0 32px;
-  overflow: hidden;
-  overflow-y: auto;
-`
 const ModalBottom = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   padding: 24px;
-  height: 50%;
-  margin: 0 32px;
+  width: 100%;
+  height: 240px;
   overflow: hidden;
   overflow-y: auto;
 `
@@ -147,6 +125,11 @@ const SearchRes = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+`
+
+const Div1 = styled.div`
+  width: 100%;
+  margin: 0 auto;
 `
 
 export default FriendModal
