@@ -54,16 +54,18 @@ const UnitContentsContainerStyle = styled.div`
   justify-content: center;
   align-items: center;
   width: 80%;
-  height: 80vh;
+  height: 110%;
   background-color: transparent;
   margin: auto;
 `
 
 const UnitWrapper = styled.div`
+  position: relative;
+  top: -30px;
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 80%;
+  height: 100%;
   text-align: center;
   font-size: 50px;
   background-color: none;

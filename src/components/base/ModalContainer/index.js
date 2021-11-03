@@ -4,8 +4,8 @@ import { useMemo, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 const ModalContainer = ({
-  width = 300,
-  height = 300,
+  width,
+  height,
   color = 'white',
   modalHandler,
   showModal = false,
@@ -26,14 +26,8 @@ const ModalContainer = ({
     backgroundColor: color,
   }
 
-  //pureChannnelPostsIdArray -> 해당 채널의 포스트 Id가 들어있는 배열
-  //purePostArray -> 좋아요를 누른 포스트 객체가 들어있는 배열
   const pureChannnelPostsIdArray = channelInfo[unitId - 1].posts
   const purePostArray = likedPosts.map((postObject) => postObject.post)
-
-  // console.log('pureChannnelPostsIdArray', pureChannnelPostsIdArray)
-  // console.log('purePostArray', purePostArray)
-
   const el = useMemo(() => document.createElement('div'), [])
 
   useEffect(() => {
@@ -49,15 +43,13 @@ const ModalContainer = ({
         {...props}
         style={{ ...props.style, ...innerStyle }}
         onClick={(e) => e.stopPropagation()}>
-        <ul>
+        <PostContainer>
           {purePostArray
             .filter((favoredPost) => pureChannnelPostsIdArray.includes(favoredPost._id))
-            .map((post, index) => (
-              <li key={index}>
-                <div>{post.title}</div>
-              </li>
-            ))}
-        </ul>
+            .map((post, index) => {
+              return <PostTitle key={index}>{post.title}</PostTitle>
+            })}
+        </PostContainer>
       </ModalInner>
     </ModalWrapper>,
     el,
@@ -84,23 +76,34 @@ const ModalWrapper = styled.div`
 `
 
 const ModalInner = styled.div`
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  overflow-y: scroll;
 `
-// const CloseButton = styled.button`
-//   position: fixed;
-//   top: 0;
-//   right: 0;
-//   margin: 10px;
-//   border: none;
-//   border-radius: 5px;
-//   color: white;
-//   background-color: gray;
-//   :hover {
-//     background-color: red;
-//   }
-// `
+
+const PostTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 300px;
+  background-color: #f3f3f5;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  overflow-y: scroll;
+`
+const PostContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+`
