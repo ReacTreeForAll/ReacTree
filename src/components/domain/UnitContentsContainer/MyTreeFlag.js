@@ -9,10 +9,10 @@ const MyTreeFlag = ({ name, step, ...props }) => {
     '충분히 잘 크고 있음',
     '관심이 필요함',
     '당신의 의지로 충만함',
-    '리아님의 가호로 충만함',
-    '기동님의 사랑을 받고있음',
-    '새 가지가 나오려고 함',
+    '리아님이 응원함',
+    '기동님이 지켜봄',
     '새 가지가 나왔음',
+    '새 가지가 자랐음',
   ]
   const currentMessage = messageList[step % 10]
 
@@ -28,11 +28,13 @@ const MyTreeFlag = ({ name, step, ...props }) => {
 export default MyTreeFlag
 
 const Container = styled.div`
-  position: relative;
-  width: 50%;
-  height: 60px;
-  text-align: center;
-  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: keep-all;
+  width: 70%;
+  height: 80px;
+  font-size: 1.8rem;
   background-color: white;
   border-radius: 50px;
   box-sizing: border-box;
@@ -40,8 +42,9 @@ const Container = styled.div`
   padding: 15px;
   box-shadow: 1px 3px 5px #9e9e9e;
 `
+
 const User = styled.span`
-  color: blue;
+  color: #14bd7e;
   font-weight: 700;
 `
 
