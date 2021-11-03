@@ -28,7 +28,7 @@ const BackgroundWrapper = styled.div`
 
 const IntroContainer = styled.div`
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   width: 100%;
   height: 60%;
@@ -37,6 +37,7 @@ const IntroContainer = styled.div`
   flex-direction: column;
   align-items: center;
   @media (max-width: 768px) {
+    top: 50%;
     font-size: 12px;
   }
 `
