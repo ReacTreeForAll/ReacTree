@@ -136,14 +136,21 @@ const Comment = ({ postId, userInfo }) => {
       <CardMain>
         <Text
           block={true}
-          fontWeight={700}
           color={'#2b2b2b'}
           fontSize={'0.6em'}
-          style={{ padding: '16px' }}>
+          style={{
+            padding: '32px',
+            overflow: 'hidden',
+            overflowY: 'auto',
+            whiteSpace: 'break-spaces',
+            textAlign: 'center',
+            wordBreak: 'keep-all',
+            lineHeight: '1.2',
+          }}>
           {postBody}
         </Text>
         {author && (
-          <Text block={true} color={'#2b2b2b'} fontSize={'0.4em'}>
+          <Text block={true} color={'#2b2b2b'} fontSize={'0.4em'} style={{ marginTop: '8px' }}>
             {author.authorName} / {author.email}
           </Text>
         )}
