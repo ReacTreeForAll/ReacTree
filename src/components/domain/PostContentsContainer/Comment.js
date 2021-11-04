@@ -177,7 +177,9 @@ const Comment = ({ postId, userInfo }) => {
                 <CommentContents>
                   <span style={{ fontWeight: '700' }}>{JSON.parse(data.author.fullName).name}</span>
                   <span>{data.comment}</span>
-                  <span style={{ fontSize: '10px' }}>{displayTime(data.createdAt)}</span>
+                  <span style={{ fontSize: '10px', minWidth: '50px' }}>
+                    {displayTime(data.createdAt)}
+                  </span>
                 </CommentContents>
                 {data.author.email === userState.email ? (
                   <Icon onClick={() => deleteComment(data._id)} className="material-icons">
@@ -297,6 +299,7 @@ const CommentContents = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.3em;
+  word-break: keep-all;
   span:not(last-child) {
     margin-right: 15px;
   }
