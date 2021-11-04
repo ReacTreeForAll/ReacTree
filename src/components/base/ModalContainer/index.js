@@ -43,6 +43,7 @@ const ModalContainer = ({
         {...props}
         style={{ ...props.style, ...innerStyle }}
         onClick={(e) => e.stopPropagation()}>
+        <ModalTitle>Channel {unitId}에서 내가 좋아한 포스트</ModalTitle>
         <PostContainer>
           {purePostArray
             .filter((favoredPost) => pureChannnelPostsIdArray.includes(favoredPost._id))
@@ -74,6 +75,18 @@ const ModalWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1000;
 `
+const ModalTitle = styled.div`
+  position: sticky;
+  top: 1.5em;
+  left: 9%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.3em;
+  line-height: 1.3em;
+  width: 400px;
+  background-color: #f3f3f5;
+`
 
 const ModalInner = styled.div`
   position: absolute;
@@ -93,7 +106,10 @@ const PostTitle = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: 300px;
+  height: 200px;
+  text-align: center;
+  font-size: 1.2em;
+  line-height: 1.3em;
   background-color: #f3f3f5;
   border-radius: 10px;
   margin-left: 20px;
