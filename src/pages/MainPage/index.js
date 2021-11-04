@@ -122,7 +122,7 @@ const MainPage = React.memo(() => {
       cancelButtonText: '머무르기',
     }).then((result) => {
       if (result.isConfirmed) {
-        history.push(`/feed/${userStep - 1}`)
+        history.push(`/feed/${paramsId}`)
       } else {
         window.location.reload()
       }
