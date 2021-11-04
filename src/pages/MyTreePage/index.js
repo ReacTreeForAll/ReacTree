@@ -47,7 +47,7 @@ const MyTreePage = () => {
     <Div1>
       <Header userInfo={userInfo} />
       <Div2>
-        {userInfo && (
+        {channelInfo && userInfo && (
           <UnitContentsContainer
             userInfo={userInfo}
             channelNameArray={channels}
