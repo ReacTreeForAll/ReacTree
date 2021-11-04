@@ -79,9 +79,7 @@ const SettingContainer = ({ submitSettingForm, userPersonal }) => {
               />
             </UserCoverImg>
             <UserProfileImg>
-              {imageUrl && (
-                <Avatar src={imageUrl} alt="imageFile" size={'150px'} mode={'contain'} />
-              )}
+              {imageUrl && <Avatar src={imageUrl} alt="imageFile" size={150} mode={'contain'} />}
               <AddProfileImage htmlFor="userProfileImage">
                 <span
                   className="material-icons"
@@ -102,17 +100,17 @@ const SettingContainer = ({ submitSettingForm, userPersonal }) => {
         <UserSettingContainer>
           <User>
             <UserInfoItem>
-              <Image src={leafImage} width={'20px'} height={'20px'} />
+              <Image src={leafImage} width={20} height={20} />
               <span>Email: {userPersonal.email}</span>
             </UserInfoItem>
             <UserInfoItem>
-              <Image src={leafImage} width={'20px'} height={'20px'} />
+              <Image src={leafImage} width={20} height={20} />
               <span>
                 FullName: {userPersonal.fullName && JSON.parse(userPersonal.fullName).name}
               </span>
             </UserInfoItem>
             <UserInfoItem>
-              <Image src={leafImage} width={'20px'} height={'20px'} />
+              <Image src={leafImage} width={20} height={20} />
               <span>
                 CurrentStep: {userPersonal.fullName && JSON.parse(userPersonal.fullName).userStep}
               </span>
