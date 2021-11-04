@@ -12,6 +12,5 @@ const Div2 = styled.div`
 const Div3 = styled.div`
   margin: 0 auto;
   padding: 32px;
-  }
 `
 export { Div1, Div2, Div3 }
