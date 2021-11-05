@@ -26,7 +26,10 @@ const Question = ({ children = '', ...props }) => {
         Question
       </Text>
       <QuestionInner>
-        <Text block={true} fontSize={'2em'}>
+        <Text
+          block={true}
+          fontSize={'2em'}
+          style={{ width: '70%', whiteSpace: 'break-spaces', wordBreak: 'keep-all' }}>
           {children}
         </Text>
         <Image src={imgPath} style={{ ...imageStyle }} />
