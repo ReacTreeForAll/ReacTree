@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
-import Header from '../../components/domain/Header'
+import Header from '@domain/Header'
 import Swal from 'sweetalert2'
-import ImgPath from '../../assets/pageMove.png'
-import MainContentsContainer from '../../components/domain/MainContentsContainer'
-import NavChannel from '../../components/domain/NavChannel'
+import ImgPath from '@assets/pageMove.png'
+import MainContentsContainer from '@domain/MainContentsContainer'
+import NavChannel from '@domain/NavChannel'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
-import { Authorization, RequestApi } from '../../utils/Api'
+import { Authorization, RequestApi } from '@utils/Api'
 
 const MainPage = React.memo(() => {
   const [channels, setChannels] = useState([])

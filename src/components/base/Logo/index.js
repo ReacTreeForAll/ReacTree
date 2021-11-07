@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import LogoPath from '../../../assets/Logo.png'
+import LogoPath from '@assets/Logo.png'
 
 const Logo = ({ size = 24, ...props }) => {
   const logoStyle = {

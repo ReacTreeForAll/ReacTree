@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import Comment from './Comment'
-import Text from '../../base/Text'
+import Text from '@base/Text'
 import PropTypes from 'prop-types'
 
 const PostGroup = ({ channels = '', paramsId, userInfo }) => {

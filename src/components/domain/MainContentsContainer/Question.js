@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import Text from '../../base/Text'
-import Image from '../../base/Image'
-import imgPath from '../../../assets/leaf.png'
+import Text from '@base/Text'
+import Image from '@base/Image'
+import imgPath from '@assets/leaf.png'
 import PropTypes from 'prop-types'
 
 const Question = ({ children = '', ...props }) => {
