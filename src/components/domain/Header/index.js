@@ -118,6 +118,7 @@ const MyBtn = styled.button`
   display: block;
   border: none;
   background: none;
+  cursor: pointer;
   :hover {
     color: #14bd7e;
     border-bottom: 3px solid #14bd7e;
