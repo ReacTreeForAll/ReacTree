@@ -1,4 +1,4 @@
-import Alert from '../../components/base/Alert'
+import Alert from '@base/Alert'
 
 export default {
   title: 'Components/base/Alert',

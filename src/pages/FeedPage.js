@@ -1,9 +1,9 @@
-import PostGroup from '../components/domain/PostContentsContainer/PostGroup'
-import Header from '../components/domain/Header'
-import NavChannel from '../components/domain/NavChannel'
+import PostGroup from '@domain/PostGroup'
+import Header from '@domain/Header'
+import NavChannel from '@domain/NavChannel'
 import styled from '@emotion/styled'
 import { useState, useEffect } from 'react'
-import { RequestApi, Authorization } from '../utils/Api'
+import { RequestApi, Authorization } from '@utils/Api'
 import { useRouteMatch } from 'react-router-dom'
 
 const FeedPage = () => {

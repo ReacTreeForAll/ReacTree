@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
-import { Authorization, RequestApi } from '../../../utils/Api'
+import { Authorization, RequestApi } from '@utils/Api'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import Avatar from '../../base/Avatar'
-import Input from '../../base/Input'
-import Button from '../../base/Button'
+import Avatar from '@base/Avatar'
+import Input from '@base/Input'
+import Button from '@base/Button'
 import { useCallback } from 'react'
-import { useUserContext } from '../../../contexts/UserProvider'
-import Text from '../../base/Text'
+import { useUserContext } from '@contexts/UserProvider'
+import Text from '@base/Text'
 
 const Comment = ({ postId, userInfo }) => {
   const [newComment, setNewComment] = useState('')

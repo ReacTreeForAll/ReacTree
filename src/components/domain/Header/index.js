@@ -1,13 +1,13 @@
-import Logo from '../../base/Logo'
-import Text from '../../base/Text'
+import Logo from '@base/Logo'
+import Text from '@base/Text'
 import styled from '@emotion/styled'
-import Divider from '../../base/Divider'
+import Divider from '@base/Divider'
 import { useCallback, useState } from 'react'
 import FriendModal from '../FriendModal'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Authorization } from '../../../utils/Api'
+import { Authorization } from '@utils/Api'
 import { useHistory } from 'react-router-dom'
 
 const Header = ({ userInfo }) => {

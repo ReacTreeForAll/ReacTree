@@ -1,4 +1,4 @@
-import Question from '../../components/domain/MainContentsContainer/Question'
+import Question from '@domain/MainContentsContainer/Question'
 
 export default {
   title: 'Components/base/Question',

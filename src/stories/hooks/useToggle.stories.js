@@ -1,4 +1,4 @@
-import useToggle from '../../hooks/useToggle'
+import useToggle from '@hooks/useToggle'
 
 export default {
   title: 'Hooks/useToggle',
