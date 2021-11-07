@@ -143,13 +143,14 @@ const AnswerSubmitForm = styled.form`
 const Textarea = styled.textarea`
   width: 100%;
   height: 60%;
-  padding: 24px;
+  padding: 40px;
   margin-top: 30px;
   font-size: 18px;
   outline: none;
   border: none;
   resize: none;
   box-sizing: border-box;
+  word-break: keep-all;
   @media (max-width: 1200px) {
     height: 150px;
     min-width: 200px;
