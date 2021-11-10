@@ -59,3 +59,9 @@
 https://reactree.netlify.app
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/13656c42-cf37-4fbc-b559-0a697d2e274b/deploy-status)](https://app.netlify.com/sites/inspiring-heisenberg-eec7e5/deploys)
+
+
+## Contributing
+- 윤승록 [Github](https://github.com/SeungrokYoon)
+- 김다슬 [Github](https://github.com/dasssseul)
+- 문승희 [Github](https://github.com/Muntari29)
