@@ -1,9 +1,9 @@
-import useForm from '../../../hooks/useForm'
-import Button from '../../base/Button'
-import Input from '../../base/Input'
+import useForm from '@hooks/useForm'
+import Button from '@base/Button'
+import Input from '@base/Input'
 import styled from '@emotion/styled'
-import Text from '../../base/Text'
-import Divider from '../../base/Divider'
+import Text from '@base/Text'
+import Divider from '@base/Divider'
 
 const ChangeForm = ({ submitSettingForm }) => {
   const { errors, handleChange, handleSubmit } = useForm({

@@ -1,13 +1,13 @@
 import { Route, Switch } from 'react-router-dom'
-import MainPage from './pages/MainPage'
+import MainPage from '@pages/MainPage'
 import React from 'react'
-import SignUpPage from './pages/SignUpPage'
-import IntroPage from './pages/IntroPage'
-import SignInPage from './pages/SignInPage'
-import MyTreePage from './pages/MyTreePage'
-import FeedPage from './pages/FeedPage'
-import NotFoundPage from './pages/NotFoundPage'
-import SettingPage from './pages/SettingPage'
+import SignUpPage from '@pages/SignUpPage'
+import IntroPage from '@pages/IntroPage'
+import SignInPage from '@pages/SignInPage'
+import MyTreePage from '@pages/MyTreePage'
+import FeedPage from '@pages/FeedPage'
+import NotFoundPage from '@pages/NotFoundPage'
+import SettingPage from '@pages/SettingPage'
 
 function App() {
   return (

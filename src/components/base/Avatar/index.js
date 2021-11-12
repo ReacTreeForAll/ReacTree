@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-import ImgPath from '../../../assets/fail.png'
+import ImgPath from '@assets/fail.png'
 const shapetoCssValue = {
   circle: '50%',
   round: '4px',

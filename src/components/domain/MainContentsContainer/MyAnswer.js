@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import Text from '../../base/Text'
+import Text from '@base/Text'
 import React, { useState, useCallback, useEffect } from 'react'
-import useForm from '../../../hooks/useForm'
-import Button from '../../base/Button'
+import useForm from '@hooks/useForm'
+import Button from '@base/Button'
 import PropTypes from 'prop-types'
 
 const MyAnswer = ({ title, addPost, updatePost, channelId, postId }) => {

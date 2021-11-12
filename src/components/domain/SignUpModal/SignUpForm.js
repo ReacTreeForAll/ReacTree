@@ -1,9 +1,9 @@
-import useForm from '../../../hooks/useForm'
-import Button from '../../base/Button'
+import useForm from '@hooks/useForm'
+import Button from '@base/Button'
 import styled from '@emotion/styled'
 import React from 'react'
-import Text from '../../base/Text'
-import Input from '../../base/Input'
+import Text from '@base/Text'
+import Input from '@base/Input'
 import { Link } from 'react-router-dom'
 
 const FormStyle = styled.form`

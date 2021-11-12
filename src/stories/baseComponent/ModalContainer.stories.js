@@ -1,4 +1,4 @@
-import ModalContainer from '../../components/base/ModalContainer'
+import ModalContainer from '@base/ModalContainer'
 
 export default {
   title: 'Components/base/ModalContainer',

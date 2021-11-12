@@ -1,4 +1,4 @@
-import MyAnswer from '../../components/domain/MainContentsContainer/MyAnswer'
+import MyAnswer from '@domain/MainContentsContainer/MyAnswer'
 
 export default {
   title: 'Components/base/MyAnswer',

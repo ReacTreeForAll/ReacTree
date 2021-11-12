@@ -1,4 +1,4 @@
-import Logo from '../../components/base/Logo'
+import Logo from '@base/Logo'
 import PropTypes from 'prop-types'
 
 export default {

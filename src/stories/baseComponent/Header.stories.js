@@ -1,4 +1,4 @@
-import Header from '../../components/domain/Header'
+import Header from '@domain/Header'
 
 export default {
   title: 'Components/base/Header',

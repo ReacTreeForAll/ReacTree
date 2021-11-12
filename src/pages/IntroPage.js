@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import bgImgPath from '../../src/assets/backgroundImg.png'
-import Text from '../components/base/Text'
-import Logo from '../components/base/Logo'
+import bgImgPath from '@assets/backgroundImg.png'
+import Text from '@base/Text'
+import Logo from '@base/Logo'
 import { useHistory } from 'react-router'
 
 const BackgroundStyle = styled.div`

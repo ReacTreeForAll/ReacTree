@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 import React, { useEffect, useRef, useState, useCallback } from 'react'
-import Image from '../../base/Image'
-import ImgPath from '../../../assets/lock.png'
+import Image from '@base/Image'
+import ImgPath from '@assets/lock.png'
 import PropTypes from 'prop-types'
-import Divider from '../../base/Divider'
+import Divider from '@base/Divider'
 import { Link } from 'react-router-dom'
-import Button from '../../../components/base/Button'
+import Button from '@base/Button'
 
 const NavChannel = React.memo(
   ({ category, viewport = 'browser', userstep = 0, channels, paramsId }) => {

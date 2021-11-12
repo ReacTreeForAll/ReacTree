@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Authorization, RequestApi } from '../utils/Api'
-import SettingContainer from '../components/domain/SettingContainer'
+import { Authorization, RequestApi } from '@utils/Api'
+import SettingContainer from '@domain/SettingContainer'
 import Swal from 'sweetalert2'
-import changeImg from '../assets/pageMove.png'
-import NavChannel from '../components/domain/NavChannel'
-import Header from '../components/domain/Header'
+import changeImg from '@assets/pageMove.png'
+import NavChannel from '@domain/NavChannel'
+import Header from '@domain/Header'
 import styled from '@emotion/styled'
 
 const SettingPage = () => {
