@@ -1,11 +1,11 @@
 import React from 'react'
-import bgImgPath from '../../../assets/backgroundImg.png'
-import Text from '../../base/Text'
-import Logo from '../../base/Logo'
+import bgImgPath from '@assets/backgroundImg.png'
+import Text from '@base/Text'
+import Logo from '@base/Logo'
 import styled from '@emotion/styled'
-import Input from '../../base/Input'
-import Button from '../../base/Button'
-import useForm from '../../../hooks/useForm'
+import Input from '@base/Input'
+import Button from '@base/Button'
+import useForm from '@hooks/useForm'
 import { Link } from 'react-router-dom'
 
 const BackgroundStyle = styled.div`

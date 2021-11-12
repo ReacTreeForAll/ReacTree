@@ -1,9 +1,9 @@
-import Logo from '../components/base/Logo'
-import Button from '../components/base/Button'
+import Logo from '@base/Logo'
+import Button from '@base/Button'
 import React from 'react'
 import { useHistory } from 'react-router'
 import styled from '@emotion/styled'
-import Text from '../components/base/Text'
+import Text from '@base/Text'
 const NotFoundPage = () => {
   const history = useHistory()
   return (

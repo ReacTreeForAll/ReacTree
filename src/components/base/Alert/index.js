@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2'
-import ImgPath from '../../../assets/pageMove.png'
+import ImgPath from '@assets/pageMove.png'
 
 const Alert = () => {
   Swal.fire({
