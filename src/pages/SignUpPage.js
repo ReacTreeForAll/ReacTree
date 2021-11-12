@@ -1,9 +1,9 @@
-import SignUpModal from '../components/domain/SignUpModal'
+import SignUpModal from '@domain/SignUpModal'
 import Swal from 'sweetalert2'
-import successImg from '../../src/assets/success.png'
-import failImg from '../../src/assets/fail.png'
+import successImg from '@assets/success.png'
+import failImg from '@assets/fail.png'
 import { useHistory } from 'react-router'
-import { RequestApi } from '../utils/Api'
+import { RequestApi } from '@utils/Api'
 
 const SignUpPage = () => {
   const history = useHistory()

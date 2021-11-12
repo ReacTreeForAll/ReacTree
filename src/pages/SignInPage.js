@@ -1,9 +1,9 @@
-import SignInModal from '../components/domain/SignInModal'
+import SignInModal from '@domain/SignInModal'
 import Swal from 'sweetalert2'
-import failImg from '../../src/assets/fail.png'
+import failImg from '@assets/fail.png'
 import { useHistory } from 'react-router'
-import { RequestApi } from '../utils/Api'
-import { useUserContext } from '../contexts/UserProvider'
+import { RequestApi } from '@utils/Api'
+import { useUserContext } from '@contexts/UserProvider'
 
 const SignInPage = () => {
   const history = useHistory()

@@ -1,4 +1,4 @@
-import Divider from '../../components/base/Divider'
+import Divider from '@base/Divider'
 
 export default {
   title: 'Components/base/Divider',

@@ -1,4 +1,4 @@
-import SignUpModal from '../../components/domain/SignUpModal'
+import SignUpModal from '@domain/SignUpModal'
 
 export default {
   title: 'Components/domain/SignUpModal',

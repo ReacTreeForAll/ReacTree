@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useDebounce from '../../hooks/useDebounce'
+import useDebounce from '@hooks/useDebounce'
 
 export default {
   title: 'Hooks/useDebounce',

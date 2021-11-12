@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import bgImgPath from '../../../assets/backgroundImg.png'
-import Text from '../../base/Text'
+import bgImgPath from '@assets/backgroundImg.png'
+import Text from '@base/Text'
 import SignUpForm from './SignUpForm'
-import Logo from '../../base/Logo'
+import Logo from '@base/Logo'
 
 const BackgroundStyle = styled.div`
   width: 100%;

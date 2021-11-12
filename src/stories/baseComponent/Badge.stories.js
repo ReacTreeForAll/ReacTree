@@ -1,4 +1,4 @@
-import Badge from '../../components/base/Badge'
+import Badge from '@base/Badge'
 
 export default {
   title: 'Components/base/Badge',
