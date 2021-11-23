@@ -1,17 +1,48 @@
-import PropTypes from 'prop-types'
 import { useRef, useEffect, useState } from 'react'
 
 let observer = null
 const LOAD_IMG_EVENT_NAME = 'loadImage'
 
-const onIntersection = (entries, io) => {
-  entries.forEach((entry) => {
+const onIntersection = (entries: any, io: any) => {
+  entries.forEach((entry: any) => {
     if (entry.isIntersecting) {
       io.unobserve(entry.target)
       entry.target.dispatchEvent(new CustomEvent(LOAD_IMG_EVENT_NAME))
     }
   })
 }
+
+interface IImage {
+  src: string
+  width?: number
+  height?: number
+  mode: 'fill' | 'contain' | 'cover'
+  style?: React.CSSProperties
+  block: Boolean
+  lazy: Boolean
+  threshold: number
+  placeholder: string
+  iscircle: Boolean
+}
+
+// 참고용 주석 연습용 레포니까요!
+// export type AlertProps = Omit<
+//   CombineElementProps<
+//     'img',
+//     {
+//       src: string
+//       width?: number
+//       height?: number
+//       mode: string
+//       block: Boolean
+//       lazy: Boolean
+//       threshold: number
+//       placeholder: string
+//       iscircle: Boolean
+//     }
+//   >,
+//   'children'
+// >
 
 const Image = ({
   src,
@@ -23,17 +54,18 @@ const Image = ({
   threshold = 0.1,
   placeholder,
   iscircle,
-  ...props
-}) => {
+  style,
+}: IImage) => {
   const [loaded, setLoaded] = useState(false)
-  const imgRef = useRef(null)
+  const imgRef = useRef<HTMLImageElement>(null)
 
-  const imageStyle = {
+  const imageStyle: React.CSSProperties = {
     display: block ? 'block' : undefined,
     width,
     height,
-    objectFit: mode || undefined,
+    objectFit: mode,
     borderRadius: iscircle ? '50%' : undefined,
+    ...style,
   }
 
   useEffect(() => {
@@ -64,22 +96,9 @@ const Image = ({
       ref={imgRef}
       src={loaded ? src : placeholder}
       alt="ImgError..."
-      style={{ ...imageStyle, ...props.style }}
-      {...props}
+      style={{ ...imageStyle }}
     />
   )
-}
-
-Image.propTypes = {
-  src: PropTypes.string.isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number,
-  mode: PropTypes.string,
-  block: PropTypes.bool,
-  lazy: PropTypes.bool,
-  threshold: PropTypes.number,
-  placeholder: PropTypes.string,
-  iscircle: PropTypes.bool,
 }
 
 export default Image
